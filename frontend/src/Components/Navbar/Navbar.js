@@ -15,7 +15,7 @@ import LeaderBoardPage from '../Pages/LeaderBoardPage';
 const Navbar = () => {
   const navbarWrapper = document.querySelector('#navbarWrapper');
   const navbar = `
-  <nav class="navbar navbar-expand-lg p-5 fs-3" style="background-color: #9055ee;">
+  <nav class="navbar navbar-expand p-5 fs-3" style="background-color: #9055ee;">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,14 +47,14 @@ function onNavBarClick() {
 
   navItems.forEach((item) => {
     item.addEventListener('click', (e) => {
-      console.log(`click on ${e.target.innerHTML} navbar item`);
-      if (e.target.innerHTML === 'Quizz') {
+      console.log(`click on ${e.target.dataset.uri} navbar item`);
+      if (e.target.dataset.uri === '/quizz') {
         QuizzPage();
-      }else if (e.target.innerHTML === 'Login') {
+      }else if (e.target.dataset.uri === '/login') {
         LoginPage();
-      } else if (e.target.innerHTML === 'Register') {
+      } else if (e.target.dataset.uri === '/register') {
         RegisterPage();
-      }else if (e.target.innerHTML === 'Leaderboard'){
+      }else if (e.target.dataset.uri === '/leaderboard'){
         LeaderBoardPage()
       }
     });
