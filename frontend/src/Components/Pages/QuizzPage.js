@@ -1,5 +1,4 @@
-import Navigate from '../Router/Navigate';
-import { clearPage,render } from '../../utils/render';
+import { clearPage,renderPageTitle  } from '../../utils/render';
 
 
 const QuizzPage = () => {
@@ -14,4 +13,4 @@ function renderQuizzPage() {
     main.innerHTML = 'Quizz Page';
   };
 
-  export default AddMoviePage;
+  export default QuizzPage;
