@@ -1,5 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
+import QuizzPage from '../Pages/QuizzPage';
+import LoginPage from '../Pages/LoginPage';
+import RegisterPage from '../Pages/RegisterPage';
+import LeaderBoardPage from '../Pages/LeaderBoardPage';
 
 /**
  * Render the Navbar which is styled by using Bootstrap
@@ -11,7 +15,7 @@ import { Navbar as BootstrapNavbar } from 'bootstrap';
 const Navbar = () => {
   const navbarWrapper = document.querySelector('#navbarWrapper');
   const navbar = `
-  <nav class="navbar navbar-expand-lg p-5 fs-3" style="background-color: #9055ee;">
+  <nav class="navbar navbar-expand p-5 fs-3" style="background-color: #9055ee;">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,34 +24,41 @@ const Navbar = () => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="#" data-uri="/quizz">Quizz</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
+              <a class="nav-link active" aria-current="page" href="#" data-uri="/login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <a class="nav-link active" aria-current="page" href="#" data-uri="/register">Register</a>
             </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" data-uri="/leaderboard">Leaderboard</a>
+            </li>
         </div>
       </div>
     </nav>`;
   navbarWrapper.innerHTML = navbar;
+  onNavBarClick();
 };
+
+function onNavBarClick() {
+  const navItems = document.querySelectorAll('.nav-link');
+
+  navItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      console.log(`click on ${e.target.dataset.uri} navbar item`);
+      if (e.target.dataset.uri === '/quizz') {
+        QuizzPage();
+      }else if (e.target.dataset.uri === '/login') {
+        LoginPage();
+      } else if (e.target.dataset.uri === '/register') {
+        RegisterPage();
+      }else if (e.target.dataset.uri === '/leaderboard'){
+        LeaderBoardPage()
+      }
+    });
+  });
+}
 
 export default Navbar;
