@@ -10,7 +10,7 @@ const LoginPage = () => {
 
 function renderLoginPage() {
     const main = document.querySelector('main');
-    main.innerHTML = 'Login Page';
+    main.innerHTML = 'Login Page hh';
   };
 
   export default LoginPage;
