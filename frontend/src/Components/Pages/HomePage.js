@@ -1,4 +1,4 @@
-import anime from 'animejs/lib/anime.es.js';
+/* eslint-disable no-unused-vars */
 import { clearPage } from '../../utils/render';
 
 const HomePage = () => {
