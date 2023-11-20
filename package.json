@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "animejs": "^3.2.1",
     "bootstrap": "^5.3.2"
   }
 }
