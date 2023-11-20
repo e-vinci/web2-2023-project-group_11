@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navigate from '../Router/Navigate';
-import anime from 'animejs';
 
 const QuizzPage = () => {
   clearPage();
