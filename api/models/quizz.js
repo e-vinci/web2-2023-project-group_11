@@ -106,10 +106,18 @@ const defaultQuizz = [
     return updatedQuestion;
   }
 
+  function read20Questions(categories) {
+    const tabCateg = categories
+    const quizz = parse(jsonDbPath, defaultQuizz);
+    // faire la methode pour selectioner 20 question
+    
+  }
+
   module.exports = {
     readAllQuestions,
     readOneQuestion,
     createOneQuestion,
     deleteOneQuizz,
-    updateOneQuestion
+    updateOneQuestion,
+    read20Questions
   };
