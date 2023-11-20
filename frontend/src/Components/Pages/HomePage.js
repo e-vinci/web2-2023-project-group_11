@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import anime from 'animejs/lib/anime.es.js';
 import { clearPage } from '../../utils/render';
 
