@@ -10,7 +10,7 @@ const QuizzPage = () => {
 
 function renderQuizzPage() {
   const main = document.querySelector('main');
-  main.innerHTML = '<canvas />';
+  main.innerHTML = 'quizz';
   
 }
 

@@ -3,7 +3,7 @@ import { clearPage } from '../../utils/render';
 
 const HomePage = () => {
   const main = document.querySelector('main');
-  main.innerHTML = '';
+  main.innerHTML = 'Home page';
 };
 
 export default HomePage;

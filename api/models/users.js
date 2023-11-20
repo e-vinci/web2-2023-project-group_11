@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const {
+  
+} = require('../models/users');
+const { authorize, isAdmin } = require('../utils/auths');
 const { parse, serialize } = require('../utils/json');
 
 const jwtSecret = 'ilovemypizza!';
@@ -15,6 +19,16 @@ const defaultUsers = [
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('admin', saltRounds),
+  },
+  {
+    id: 2,
+    username: 'user',
+    password: bcrypt.hashSync('1', saltRounds),
+  },
+  {
+    id: 3,
+    username: 'user',
+    password: bcrypt.hashSync('1', saltRounds),
   },
 ];
 
