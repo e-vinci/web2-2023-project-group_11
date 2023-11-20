@@ -19,6 +19,9 @@ function renderQuizzPage() {
   <div class="p-5 anime-test-2">
   <input type="button" value="Bouton cliquer" />
   </div>
+  <div class="p-5 anime-test-2">
+  <input type="button" value="Bouton cliquer" />
+  </div>
  </div>
  `;
 
@@ -26,7 +29,7 @@ function renderQuizzPage() {
   targets: [".anime-test-1",".anime-test-2"],
   translateX: 70,
   translateY: 170,
-  delay: anime.stagger(300) // increase delay by 100ms for each elements.
+  delay: anime.stagger(200) // increase delay by 100ms for each elements.
 });
 
 }
