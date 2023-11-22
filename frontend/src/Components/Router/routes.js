@@ -7,7 +7,7 @@ import LeaderBoardPage from '../Pages/LeaderBoardPage';
 
 
 const routes = {
-  '/': HomePage,
+  '/home': HomePage,
   '/new': NewPage,
   '/question': QuestionPage,
   '/login':LoginPage,

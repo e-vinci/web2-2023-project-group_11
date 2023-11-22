@@ -1,8 +1,65 @@
 body {
-    background-color: rgb(244, 231, 247);
+    background-color: rgb(255, 255, 255);
 }
 
 #btn{
     display: flex;
     justify-content: center;
 }
+
+.quizz-grid {
+padding-top: 60px;
+}
+
+.quizz-grid .col {
+    padding: 20px;
+    font-size: 18px; 
+    border: 1px solid #ccc;
+    border-radius: 5%;
+}
+
+
+
+
+.quizz-grid .row .col.Sport {
+    width: 25%;
+    margin-right: 120px;
+    margin-left: 190px;
+    margin-bottom: 45px;
+    height: 200px;
+    background-color: rgb(153, 47, 47); 
+}
+
+.quizz-grid .row .col.Boug {
+    width: 25%;
+    margin-right: 120px;
+    margin-left: 120px;
+    height: 200px;
+    background-color: rgb(153, 47, 47); 
+}
+
+.quizz-grid .row .col.Hunt {
+    width: 25%;
+    margin-right: 170px;
+    height: 200px;
+    background-color: rgb(153, 47, 47);
+}
+
+.quizz-grid .row .col.True {
+    width: 25%;
+    margin-right: 170px;
+    height: 200px;
+    background-color: rgb(153, 47, 47);
+}
+
+.quizz-grid .row .col.Bald {
+    height: 200px;
+    background-color: rgb(153, 47, 47); 
+}
+
+.center-form {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;  
+  }
