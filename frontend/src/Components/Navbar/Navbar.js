@@ -1,9 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
-import QuizzPage from '../Pages/QuizzPage';
-import LoginPage from '../Pages/LoginPage';
-import RegisterPage from '../Pages/RegisterPage';
-import LeaderBoardPage from '../Pages/LeaderBoardPage';
+import onNavBarClick from '../Router/Router'
 
 /**
  * Render the Navbar which is styled by using Bootstrap
@@ -42,23 +39,6 @@ const Navbar = () => {
   onNavBarClick();
 };
 
-function onNavBarClick() {
-  const navItems = document.querySelectorAll('.nav-link');
 
-  navItems.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      console.log(`click on ${e.target.dataset.uri} navbar item`);
-      if (e.target.dataset.uri === '/quizz') {
-        QuizzPage();
-      }else if (e.target.dataset.uri === '/login') {
-        LoginPage();
-      } else if (e.target.dataset.uri === '/register') {
-        RegisterPage();
-      }else if (e.target.dataset.uri === '/leaderboard'){
-        LeaderBoardPage()
-      }
-    });
-  });
-}
 
 export default Navbar;
