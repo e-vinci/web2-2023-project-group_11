@@ -48,7 +48,7 @@ function getNextId() {
   return nextId;
 }
 
-function deleteOneQuizz(id) {
+function deleteOneQuestion(id) {
   const idNumber = parseInt(id, 10);
   const quizz = parse(jsonDbPath, defaultQuizz);
   const foundIndex = quizz.findIndex((question) => question.id === idNumber);
@@ -76,12 +76,19 @@ function updateOneQuestion(id, propertiesToUpdate) {
 }
 
 function read20Questions(categories) {
+  console.log('20 question model');
   const count = 20;
-  const tabCateg = categories;
   const quizz = parse(jsonDbPath, defaultQuizz);
   // faire la methode pour selectioner 20 question
+  console.log('nb de toute les question '+quizz.length);
 
-  const filteredQuestions = [...quizz].filter((question) => categories.includes(question.category));
+  
+  console.log(JSON.stringify(categories));
+
+  const filteredQuestions = quizz.filter((question) => !categories ? true : categories.includes(question.category));
+
+
+  console.log('taille possible question ' + filteredQuestions.length);
 
   if (filteredQuestions.length < count) {
     throw new Error('Pas assez de questions dans les catégories spécifiées.');
@@ -102,7 +109,7 @@ module.exports = {
   readAllQuestions,
   readOneQuestion,
   createOneQuestion,
-  deleteOneQuizz,
+  deleteOneQuestion,
   updateOneQuestion,
   read20Questions,
 };
