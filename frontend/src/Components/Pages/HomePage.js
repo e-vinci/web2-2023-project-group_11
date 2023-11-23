@@ -21,15 +21,14 @@ function renderHomePage() {
   <div class="container text-center quizz-grid">
   <form id="form">
     <div class="row firstC-Row">
-      <div class="col categorie col-6">
-
+      <div class="col categorie col-6 Sport">
       <input type="checkbox" value="Sport" id="idSport" class="hiddenInput c-check">
         <label for="idSport" class="c-label">
           Sport
         </label>
 
       </div>
-      <div class="col categorie col-6">
+      <div class="col categorie col-6 Bug">
       <input type="checkbox" value="Bug" id="idBug" class="hiddenInput c-check">
         <label for="idBug" class="c-label"> Bug
         </label>
@@ -53,7 +52,7 @@ function renderHomePage() {
       </div>
 
     </div>
-    <button type="submit">Commencer la partie</button>
+    <button type="submit" class = "startGame">Commencer la partie</button>
   </form>
 </div>
 
