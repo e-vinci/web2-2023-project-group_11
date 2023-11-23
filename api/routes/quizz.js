@@ -1,18 +1,25 @@
 const express = require('express');
 const {
-    readAllQuestions,
-    readOneQuestion,
-    createOneQuestion,
-    deleteOneQuizz,
-    updateOneQuestion,
-    read20Questions
+  readAllQuestions,
+  readOneQuestion,
+  createOneQuestion,
+  deleteOneQuizz,
+  updateOneQuestion,
+  read20Questions,
 } = require('../models/quizz');
 const { authorize, isAdmin } = require('../utils/auths');
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  console.log('entre /quizz route');
+  const allQuestion = readAllQuestions(req?.query?.order);
+
+  return res.json(allQuestion);
+});
+
 // Return 20 questions des categorie selectionnées
-router.post('/20',(req,res) => {
+router.post('/20', (req, res) => {
   const categories = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
 
   const vingtQuestions = read20Questions(categories);
@@ -20,23 +27,25 @@ router.post('/20',(req,res) => {
 });
 
 // Create a question to be added to the list of qiestion.
-router.post('/', authorize, isAdmin, (req, res) => {
-    const question = req?.body?.question?.length !== 0 ? req.body.question : undefined;
-    const answers = req?.body?.answers?.length !== 0 ? req.body.answers : undefined;
-    const categorie = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
-  
-    if (!question || !answers || !categorie) return res.sendStatus(400); // error code '400 Bad request'
-  
-    const createdQuestion = createOneQuestion(question, answers,categorie);
-  
-    return res.json(createdQuestion);
-  });
-  
-  // Delete a question from the list of qiestion based on its id
-  router.delete('/:id', authorize, isAdmin, (req, res) => {
-    const deletedQuestion = deleteOneQuizz(req.params.id);
-  
-    if (!deletedQuestion) return res.sendStatus(404);
-  
-    return res.json(deletedQuestion);
-  });
+router.post('/addQuestion', authorize, isAdmin, (req, res) => {
+  const question = req?.body?.question?.length !== 0 ? req.body.question : undefined;
+  const answers = req?.body?.answers?.length !== 0 ? req.body.answers : undefined;
+  const categorie = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
+
+  if (!question || !answers || !categorie) return res.sendStatus(400); // error code '400 Bad request'
+
+  const createdQuestion = createOneQuestion(question, answers, categorie);
+
+  return res.json(createdQuestion);
+});
+
+// Delete a question from the list of qiestion based on its id
+router.delete('/:id', authorize, isAdmin, (req, res) => {
+  const deletedQuestion = deleteOneQuizz(req.params.id);
+
+  if (!deletedQuestion) return res.sendStatus(404);
+
+  return res.json(deletedQuestion);
+});
+
+module.exports = router;

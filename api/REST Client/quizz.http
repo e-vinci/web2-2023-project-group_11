@@ -1,0 +1,8 @@
+######### NORMAL OPERATION  ###########
+
+### Read all question
+GET http://localhost:3000/quizz
+
+### Read all question with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/quizz
