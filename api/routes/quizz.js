@@ -11,14 +11,23 @@ const { authorize, isAdmin } = require('../utils/auths');
 
 const router = express.Router();
 
+// Return 20 questions des categorie selectionnées
+router.post('/20',(req,res) => {
+  const categories = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
+
+  const vingtQuestions = read20Questions(categories);
+  return res.json(vingtQuestions);
+});
+
 // Create a question to be added to the list of qiestion.
 router.post('/', authorize, isAdmin, (req, res) => {
     const question = req?.body?.question?.length !== 0 ? req.body.question : undefined;
     const answers = req?.body?.answers?.length !== 0 ? req.body.answers : undefined;
+    const categorie = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
   
-    if (!question || !answers) return res.sendStatus(400); // error code '400 Bad request'
+    if (!question || !answers || !categorie) return res.sendStatus(400); // error code '400 Bad request'
   
-    const createdQuestion = createOneQuestion(question, answers);
+    const createdQuestion = createOneQuestion(question, answers,categorie);
   
     return res.json(createdQuestion);
   });
