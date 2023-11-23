@@ -8,4 +8,4 @@ GET http://localhost:3000/quizz
 GET {{baseUrl}}/quizz
 
 ### Read 20 question whith all categorie
-GET {{baseUrl}}/pizzas/20
+POST {{baseUrl}}/quizz/20

@@ -3,7 +3,7 @@ const {
   readAllQuestions,
   readOneQuestion,
   createOneQuestion,
-  deleteOneQuizz,
+  deleteOneQuestion,
   updateOneQuestion,
   read20Questions,
 } = require('../models/quizz');
@@ -20,7 +20,9 @@ router.get('/', (req, res) => {
 
 // Return 20 questions des categorie selectionnées
 router.post('/20', (req, res) => {
+  console.log('entre 20 question');
   const categories = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
+  console.log(categories);
 
   const vingtQuestions = read20Questions(categories);
   return res.json(vingtQuestions);
