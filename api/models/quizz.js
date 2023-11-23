@@ -10,6 +10,7 @@ const defaultQuizz = [
     {
       id: 1,
       question: 'Quelle couleur est le ciel ?',
+      categorie: 'Trivia',
       answers: [
         {
           text: "bleu",
@@ -24,8 +25,8 @@ const defaultQuizz = [
           isCorrect: false
         },
         {
-            text: "orange",
-            isCorrect: false
+          text: "orange",
+          isCorrect: false
         }
       ]
     },
@@ -54,12 +55,13 @@ const defaultQuizz = [
     
   }
 
-  function createOneQuestion(question, answers) {
+  function createOneQuestion(question, answers,categorie) {
     const quizz = parse(jsonDbPath, defaultQuizz);
   
     const newQuestion = {
       id: getNextId(),
       question: escape(question),
+      categorie: escape(categorie),
       answers: escape(answers),
     };
   
