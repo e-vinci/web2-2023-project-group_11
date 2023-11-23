@@ -20,8 +20,15 @@ padding-top: 60px;
 
 
 
+.hiddenInput{
+    opacity: 0.1;
+}
 
-.quizz-grid .row .col.Sport {
+.categorie  {
+
+}
+
+.categorie .c-label {
     width: 25%;
     margin-right: 120px;
     margin-left: 190px;
@@ -30,7 +37,20 @@ padding-top: 60px;
     background-color: rgb(153, 47, 47); 
 }
 
-.quizz-grid .row .col.Boug {
+.c-check:checked + .c-label {
+    border : 1px solid blue;
+  }
+
+.quizz-grid .Sport {
+    width: 25%;
+    margin-right: 120px;
+    margin-left: 190px;
+    margin-bottom: 45px;
+    height: 200px;
+    background-color: rgb(153, 47, 47); 
+}
+
+.quizz-grid .Bug {
     width: 25%;
     margin-right: 120px;
     margin-left: 120px;
