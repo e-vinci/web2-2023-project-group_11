@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(65, 65, 65);
 }
 
 #btn{
@@ -7,75 +7,52 @@ body {
     justify-content: center;
 }
 
+/* Home Page CSS */
+
 .quizz-grid {
 padding-top: 60px;
 }
 
-.quizz-grid .col {
-    padding: 20px;
-    font-size: 18px; 
-    border: 1px solid #ccc;
-    border-radius: 5%;
+.quizz-grid .firstC-row {
+    margin-left: 40px;
 }
 
-
+.quizz-grid .col {
+    font-size: 18px;
+    background-color:aliceblue;
+    border: 1px solid #ccc;
+    margin-bottom: 120px;
+    padding: 100px;
+    margin: 20px;
+    width: 29%;
+    border-radius: 20px;
+}
 
 .hiddenInput{
-    opacity: 0.1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .categorie  {
-
+   
 }
 
 .categorie .c-label {
-    width: 25%;
-    margin-right: 120px;
-    margin-left: 190px;
-    margin-bottom: 45px;
-    height: 200px;
-    background-color: rgb(153, 47, 47); 
+    width: 50%;
+    user-select: none;
 }
 
-.c-check:checked + .c-label {
-    border : 1px solid blue;
+.c-check:checked ~ .c-label {
+    color: aqua;
+}
+
+  .col {
+    position: relative;
   }
-
-.quizz-grid .Sport {
-    width: 25%;
-    margin-right: 120px;
-    margin-left: 190px;
-    margin-bottom: 45px;
-    height: 200px;
-    background-color: rgb(153, 47, 47); 
-}
-
-.quizz-grid .Bug {
-    width: 25%;
-    margin-right: 120px;
-    margin-left: 120px;
-    height: 200px;
-    background-color: rgb(153, 47, 47); 
-}
-
-.quizz-grid .row .col.Hunt {
-    width: 25%;
-    margin-right: 170px;
-    height: 200px;
-    background-color: rgb(153, 47, 47);
-}
-
-.quizz-grid .row .col.True {
-    width: 25%;
-    margin-right: 170px;
-    height: 200px;
-    background-color: rgb(153, 47, 47);
-}
-
-.quizz-grid .row .col.Bald {
-    height: 200px;
-    background-color: rgb(153, 47, 47); 
-}
 
 .center-form {
     position: absolute;
@@ -83,3 +60,5 @@ padding-top: 60px;
     right: 0;
     margin: auto;  
   }
+
+  /* Home Page CSS */

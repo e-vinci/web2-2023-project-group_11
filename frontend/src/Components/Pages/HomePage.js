@@ -20,14 +20,19 @@ function renderHomePage() {
   main.innerHTML = `
   <div class="container text-center quizz-grid">
   <form id="form">
-    <div class="row">
+    <div class="row firstC-Row">
       <div class="col categorie col-6">
-        <input type="checkbox" value="Sport" id="idSport" class="hiddenInput c-check"></input>
-        <label for="idSport" class="c-label">Sport</label>
+
+      <input type="checkbox" value="Sport" id="idSport" class="hiddenInput c-check">
+        <label for="idSport" class="c-label">
+          Sport
+        </label>
+
       </div>
       <div class="col categorie col-6">
-        <input type="checkbox" value="Bug" id="idBug" class="hiddenInput c-check"></input>
-        <label for="idBug" class="c-label">Bug</label>
+      <input type="checkbox" value="Bug" id="idBug" class="hiddenInput c-check">
+        <label for="idBug" class="c-label"> Bug
+        </label>
       </div>
     </div>
 
@@ -35,16 +40,16 @@ function renderHomePage() {
     <div class="row">
 
       <div class="col categorie col-6">
-        <input type="checkbox" value="Hunt" id="idHunt" class="hiddenInput c-check"></input>
-        <label for="idHunt" class="c-label">Hunt</label>
+      <input type="checkbox" value="Hunt" id="idHunt" class="hiddenInput c-check">
+        <label for="idHunt" class="c-label"></input>Hunt</label>
       </div>
       <div class="col categorie col-6">
-        <input type="checkbox" value="Hunt" id="idHunt" class="hiddenInput c-check"></input>
-        <label for="idHunt" class="c-label">Hunt</label>
+      <input type="checkbox" value="True" id="idTrue" class="hiddenInput c-check"></input>
+        <label for="idTrue" class="c-label">True</label>
       </div>
       <div class="col categorie col-6">
-        <input type="checkbox" value="Bald" id="idBald" class="hiddenInput c-check"></input>
-        <label for="idBald" class="c-label">Bald</label>
+      <input type="checkbox" value="Bald" id="idBald" class="hiddenInput c-check">
+      <label for="idBald" class="c-label">Bald</label>
       </div>
 
     </div>
@@ -61,9 +66,12 @@ function renderHomePage() {
 
 function  onFormSubmit(e) {
 e.preventDefault();
-const sport = document.getElementById('idSport').checked;
+const Sport = document.getElementById('idSport').checked;
 const Bug = document.getElementById('idBug').checked;
-  console.log("Sport = ",sport , "Bug = ",Bug);
+const Hunt = document.getElementById('idHunt').checked;
+const True = document.getElementById('idTrue').checked;
+const Bald = document.getElementById('idBald').checked;
+  console.log("Sport = ",Sport , "Bug = ",Bug , " Hunt = ",Hunt, "Bald = ",Bald, "True = " ,True);
   NavigateWithParameter("/question",{id :"nathan"})
 }
 
