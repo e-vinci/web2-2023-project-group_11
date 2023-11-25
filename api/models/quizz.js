@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 const path = require('node:path');
 const escape = require('escape-html');
 const { parse, serialize } = require('../utils/json');
@@ -80,15 +81,14 @@ function read20Questions(categories) {
   const count = 20;
   const quizz = parse(jsonDbPath, defaultQuizz);
   // faire la methode pour selectioner 20 question
-  console.log('nb de toute les question '+quizz.length);
+  console.log(`nb de toute les question ${quizz.length}`);
 
-  
   console.log(JSON.stringify(categories));
 
-  const filteredQuestions = quizz.filter((question) => !categories ? true : categories.includes(question.category));
+  // eslint-disable-next-line max-len
+  const filteredQuestions = quizz.filter((question) => (!categories ? true : categories.includes(question.category)));
 
-
-  console.log('taille possible question ' + filteredQuestions.length);
+  console.log(`taille possible question ${filteredQuestions.length}`);
 
   if (filteredQuestions.length < count) {
     throw new Error('Pas assez de questions dans les catégories spécifiées.');
@@ -96,6 +96,7 @@ function read20Questions(categories) {
 
   const selectedQuestions = [];
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < count; i++) {
     const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
     const selectedQuestion = filteredQuestions.splice(randomIndex, 1)[0];

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const {
   readAllQuestions,
@@ -43,7 +45,7 @@ router.post('/addQuestion', authorize, isAdmin, (req, res) => {
 
 // Delete a question from the list of qiestion based on its id
 router.delete('/:id', authorize, isAdmin, (req, res) => {
-  const deletedQuestion = deleteOneQuizz(req.params.id);
+  const deletedQuestion = deleteOneQuestion(req.params.id);
 
   if (!deletedQuestion) return res.sendStatus(404);
 
