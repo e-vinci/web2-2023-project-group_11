@@ -5,8 +5,8 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-    "username":"unknown",
-    "password":"admin"
+    "username":"user",
+    "password":"user"
 }
 
 ### Login the default admin
@@ -36,3 +36,6 @@ Content-Type: application/json
     "username":"manager",
     "password":"manager"
 }
+
+### Get the registered users
+GET {{baseUrl}}/users
