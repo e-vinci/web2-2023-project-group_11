@@ -1,6 +1,4 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
-import {NavigateWithParameter} from '../Router/Navigate';
-
 
 const HomePage = () => {
   clearPage();
@@ -8,9 +6,9 @@ const HomePage = () => {
   renderHomePage();
 
   const form = document.getElementById('form');
-if(form != null){
-  form.addEventListener('submit',onFormSubmit) 
-}
+  if (form != null) {
+    form.addEventListener('submit', onFormSubmit)
+  }
 
 };
 
@@ -63,16 +61,32 @@ function renderHomePage() {
 
 };
 
-function  onFormSubmit(e) {
-e.preventDefault();
-const Sport = document.getElementById('idSport').checked;
-const Bug = document.getElementById('idBug').checked;
-const Hunt = document.getElementById('idHunt').checked;
-const True = document.getElementById('idTrue').checked;
-const Bald = document.getElementById('idBald').checked;
-  console.log("Sport = ",Sport , "Bug = ",Bug , " Hunt = ",Hunt, "Bald = ",Bald, "True = " ,True);
-  NavigateWithParameter("/question",{id :"nathan"})
+async function onFormSubmit(e) {
+  e.preventDefault();
+
+  const Sport = document.getElementById('idSport').checked;
+  const Bug = document.getElementById('idBug').checked;
+  const Hunt = document.getElementById('idHunt').checked;
+  const True = document.getElementById('idTrue').checked;
+  const Bald = document.getElementById('idBald').checked;
+  clearPage();
+  console.log("Sport = ", Sport, "Bug = ", Bug, " Hunt = ", Hunt, "Bald = ", Bald, "True = ", True);
+  try {
+    const response = await fetch('/api/quizz/20');
+
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+    const start = await response.json();
+
+    return start;
+  }
+  catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+  
 }
+
 
 
 
