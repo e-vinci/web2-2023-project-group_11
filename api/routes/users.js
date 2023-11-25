@@ -1,10 +1,15 @@
 const express = require('express');
 
+const {
+  readAllUsers,
+} = require('../models/users');
+
 const router = express.Router();
 
 /* GET users listing. */
 router.get('/', (req, res) => {
-  res.json({ users: [{ name: 'e-baron' }] });
+  const allUsers = readAllUsers();
+  res.json(allUsers);
 });
 
 module.exports = router;
