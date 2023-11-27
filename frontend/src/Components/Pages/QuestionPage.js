@@ -72,30 +72,31 @@ function renderQuestionPage() {
 
   const startQuizz = () => {
     startGame.removeEventListener('click', startQuizz);
-    for (const question in questions) {
-      let idRep = 0;
-       clearPage();
-       main.innerHTML = 
-       `
-       <div class="titleDiv">
-         <p> ${question.title} </p>
-       <div>
-       <container>
-        <div>
-          <p> ${question.answers}</p>
-        <div>
-        <div>
-          <p> </p>
-        <div>
-        <div>
-          <p> </p>
-        <div>
-       <container>
-       `
-    }
-  }
+    renderQuestion(0);
+  };
 
   startGame.addEventListener('click', startQuizz);
+
+  function renderQuestion (id) {
+    clearPage();
+    main.innerHTML = 
+    `
+    <div class="titleDiv">
+      <p> ${question.title} </p>
+    <div>
+    <container>
+     <div>
+       <p> ${question.answers}</p>
+     <div>
+     <div>
+       <p> </p>
+     <div>
+     <div>
+       <p> </p>
+     <div>
+    <container>
+    `
+  };
 }
 
 export default QuestionPage;
