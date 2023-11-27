@@ -8,4 +8,10 @@ GET http://localhost:3000/quizz
 GET {{baseUrl}}/quizz
 
 ### Read 20 question whith all categorie
-POST {{baseUrl}}/quizz/20
+GET {{baseUrl}}/quizz/20
+
+### Read 20 question whith all categorie
+GET {{baseUrl}}/quizz/20?categorie=Géographie
+
+### Read all question with File variable
+GET {{baseUrl}}/quizz/20?categorie=Trivia,Mathématiques

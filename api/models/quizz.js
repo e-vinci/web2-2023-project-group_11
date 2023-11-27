@@ -83,16 +83,23 @@ function read20Questions(categories) {
   // faire la methode pour selectioner 20 question
   console.log(`nb de toute les question ${quizz.length}`);
 
-  console.log(JSON.stringify(categories));
+  console.log(categories);
 
   // eslint-disable-next-line max-len
-  const filteredQuestions = quizz.filter((question) => (!categories ? true : categories.includes(question.category)));
+  const filteredQuestions = quizz.filter((question) => {
+    return (!categories ? true : question.categorie === categories)
+  });
 
   console.log(`taille possible question ${filteredQuestions.length}`);
 
-  if (filteredQuestions.length < count) {
+  if (filteredQuestions.length < 10) {
     throw new Error('Pas assez de questions dans les catégories spécifiées.');
   }
+
+  /* if (filteredQuestions.length < count) {
+    throw new Error('Pas assez de questions dans les catégories spécifiées.');
+  }
+  */
 
   const selectedQuestions = [];
 
@@ -100,8 +107,12 @@ function read20Questions(categories) {
   for (let i = 0; i < count; i++) {
     const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
     const selectedQuestion = filteredQuestions.splice(randomIndex, 1)[0];
+    if(selectedQuestions.includes(selectedQuestion)){
+
+    }else{
     selectedQuestions.push(selectedQuestion);
   }
+}
 
   return selectedQuestions;
 }
@@ -894,6 +905,98 @@ const defaultQuizz = [
       },
       {
         text: 'Leonardo da Vinci',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 36,
+    question: 'Combien de continents y a-t-il sur Terre ?',
+    categorie: 'Géographie',
+    answers: [
+      {
+        text: '5',
+        isCorrect: false,
+      },
+      {
+        text: '6',
+        isCorrect: false,
+      },
+      {
+        text: '7',
+        isCorrect: true,
+      },
+      {
+        text: '8',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 37,
+    question: 'Combien de continents y a-t-il sur Terre ?',
+    categorie: 'Géographie',
+    answers: [
+      {
+        text: '5',
+        isCorrect: false,
+      },
+      {
+        text: '6',
+        isCorrect: false,
+      },
+      {
+        text: '7',
+        isCorrect: true,
+      },
+      {
+        text: '8',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 38,
+    question: 'Combien de continents y a-t-il sur Terre ?',
+    categorie: 'Géographie',
+    answers: [
+      {
+        text: '5',
+        isCorrect: false,
+      },
+      {
+        text: '6',
+        isCorrect: false,
+      },
+      {
+        text: '7',
+        isCorrect: true,
+      },
+      {
+        text: '8',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 39,
+    question: 'Combien de continents y a-t-il sur Terre ?',
+    categorie: 'Géographie',
+    answers: [
+      {
+        text: '5',
+        isCorrect: false,
+      },
+      {
+        text: '6',
+        isCorrect: false,
+      },
+      {
+        text: '7',
+        isCorrect: true,
+      },
+      {
+        text: '8',
         isCorrect: false,
       },
     ],
