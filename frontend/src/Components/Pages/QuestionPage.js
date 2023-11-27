@@ -5,13 +5,18 @@ import { start } from '@popperjs/core';
 
 let questionId;
 
-const questions = [{ id: 1, 
-  title: 'Quelle couleur est le ciel ?',
- answers: [{ text: "bleu", isCorrect: true }, 
- { 
-  text: "vert",
-  isCorrect: false }, { text: "rouge", isCorrect: false }, 
- { text: "orange", isCorrect: false }] },];
+const questions = [
+  { 
+    id: 0, 
+    title: 'Quelle couleur est le ciel ?',
+    answers: [
+      { text: "bleu", isCorrect: true }, 
+      { text: "vert", isCorrect: false }, 
+      { text: "rouge", isCorrect: false }, 
+      { text: "orange", isCorrect: false }
+    ] 
+  },
+];
 
 const QuestionPage = () => {
   clearPage();
@@ -72,31 +77,92 @@ function renderQuestionPage() {
 
   const startQuizz = () => {
     startGame.removeEventListener('click', startQuizz);
-    renderQuestion(0);
+    renderQuestion(1);
   };
 
   startGame.addEventListener('click', startQuizz);
 
-  function renderQuestion (id) {
+  async function fetchQuestion(id) {
+    return new Promise((resolve, reject) => {
+      // délai pour trouver la question
+      setTimeout(() => {
+        const question = questions.find(q => q.id === id);
+        if (question) {
+          resolve(question);
+        } else {
+          reject(new Error('Question non existante'));
+        }
+      }, 500);
+    });
+  }
+  
+  async function renderQuestion(id) {
+    // suppression de la question précédente
     clearPage();
-    main.innerHTML = 
-    `
-    <div class="titleDiv">
-      <p> ${question.title} </p>
-    <div>
-    <container>
-     <div>
-       <p> ${question.answers}</p>
-     <div>
-     <div>
-       <p> </p>
-     <div>
-     <div>
-       <p> </p>
-     <div>
-    <container>
-    `
-  };
+
+    try {
+      //en attente de la recherche
+      const question = await fetchQuestion(id);
+  
+      //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
+      const answersHTML = question.answers.map((answer, index) => {
+        return `<button class="answer-button" id="answer${index + 1}">${index + 1}. ${answer}</button>`;
+      }).join('');
+  
+
+      //ajout de la variable dans le main
+      main.innerHTML = `
+        <div class="titleDiv">
+          <p>${question.title}</p>
+        </div>
+        <container>
+          ${answersHTML}
+        </container>
+      `;
+
+      //itération des differentes réponses avec un event au click
+      question.answers.forEach((answer, index) => {
+        const answerButton = document.getElementById(`answer${index + 1}`);
+        answerButton.addEventListener('click', () => answerClick(id, index + 1));
+      });
+
+    } catch (error) {
+      // si question pas trouvée
+      console.error('Render de la question échoué', error);
+    }
+  }
+
+  function handleAnswerClick(questionId, selectedAnswerIndex) {
+    if(question){
+      console.log(`Question ${questionId} : Réponse choisie : ${selectedAnswerIndex}`);
+    }
+    else {
+      console.error('Question innexistante');
+    }
+    if(questions[questionId].answers[selectedAnswerIndex].isCorrect){
+      console.log('truc');
+    }
+    
+  }
 }
+
+/*
+FETCH AVEC API
+
+async function fetchQuestion(id) {
+  try {
+    const response = await fetch(`YOUR_API_ENDPOINT/questions/${id}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch question. Status: ${response.status}`);
+    }
+    const question = await response.json();
+    return question;
+  } catch (error) {
+    console.error('Error fetching question:', error);
+    throw error;
+  }
+}
+
+*/ 
 
 export default QuestionPage;
