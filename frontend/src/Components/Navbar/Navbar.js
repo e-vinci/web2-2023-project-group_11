@@ -15,7 +15,7 @@ const Navbar = () => {
   const navbar = `
   <nav class="navbar navbar-expand p-5 fs-3" style="background-color: #9055ee;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#" data-uri = "/"><img src="${logoAsset}" alt="logo site" class="logo_img"></a>
+        <a class="navbar-brand" href="#" data-uri = "/"><img src="${logoAsset}" alt="logo site" class="logo-img"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
