@@ -5,7 +5,6 @@ const LoginPage = () => {
     clearPage();
     renderPageTitle('Register');
     renderLoginPage();
-
   };
 
 function renderLoginPage() {
