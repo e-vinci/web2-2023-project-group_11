@@ -13,7 +13,7 @@ import logoAsset from "../../img/logo.png";
 const Navbar = () => {
   const navbarWrapper = document.querySelector('#navbarWrapper');
   const navbar = `
-  <nav class="navbar navbar-expand p-5 fs-3" style="background-color: #9055ee;">
+  <nav class="navbar navbar-expand p-5 fs-3" style="background-color: blue;">
       <div class="container-fluid">
         <a class="navbar-brand" href="#" data-uri = "/"><img src="${logoAsset}" alt="logo site" class="logo-img"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
