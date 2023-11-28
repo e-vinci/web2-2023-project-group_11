@@ -14,4 +14,9 @@ GET {{baseUrl}}/quizz/20
 GET {{baseUrl}}/quizz/20?categorie=Géographie
 
 ### Read all question with File variable
-GET {{baseUrl}}/quizz/20?categorie=Trivia,Mathématiques
+POST {{baseUrl}}/quizz/20
+Content-Type: application/json
+
+{
+    "categorie":["Géographie","Art"]
+}
