@@ -1,17 +1,5 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navigate from '../Router/Navigate';
-import anime from 'animejs';
-import { start } from '@popperjs/core';
-
-let questionId;
-
-const questions = [{ id: 1, 
-  title: 'Quelle couleur est le ciel ?',
- answers: [{ text: "bleu", isCorrect: true }, 
- { 
-  text: "vert",
-  isCorrect: false }, { text: "rouge", isCorrect: false }, 
- { text: "orange", isCorrect: false }] },];
 
 const QuestionPage = () => {
   clearPage();
