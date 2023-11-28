@@ -1,5 +1,4 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
-import Navigate from '../Router/Navigate';
 
 const QuestionPage = () => {
   clearPage();
@@ -7,17 +6,13 @@ const QuestionPage = () => {
   renderQuestionPage();
 };
 
-if (!questionId) {
-  Navigate('/home');
-}
-
 function renderQuestionPage() {
 
   const main = document.querySelector('main');
 
   const banniere = document.createElement('div');
   banniere.className = "banner"
-  banniere.innerHTML
+  
 
   const textElement = document.createElement('span');
   textElement.className = "text-element";
@@ -58,33 +53,6 @@ function renderQuestionPage() {
   main.appendChild(answer4Div);
   main.innerHTML = '<canvas />';
 
-  const startQuizz = () => {
-    startGame.removeEventListener('click', startQuizz);
-    renderQuestion(0);
-  };
-
-  startGame.addEventListener('click', startQuizz);
-
-  function renderQuestion (id) {
-    clearPage();
-    main.innerHTML = 
-    `
-    <div class="titleDiv">
-      <p> ${question.title} </p>
-    <div>
-    <container>
-     <div>
-       <p> ${question.answers}</p>
-     <div>
-     <div>
-       <p> </p>
-     <div>
-     <div>
-       <p> </p>
-     <div>
-    <container>
-    `
-  };
 }
 
 export default QuestionPage;
