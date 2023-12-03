@@ -93,9 +93,14 @@ function getNextId() {
   const nextId = lastId + 1;
   return nextId;
 }
+function readAllUsers() {
+  const allUsers = parse(jsonDbPath, defaultUsers);
+  return allUsers;
+}
 
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
+  readAllUsers,
 };
