@@ -1,7 +1,13 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable spaced-comment */
+// eslint-disable-next-line no-unused-vars
 import { clearPage, renderPageTitle } from '../../utils/render';
-import Navigate from '../Router/Navigate';
-import anime from 'animejs';
-import { start } from '@popperjs/core';
+// eslint-disable-next-line spaced-comment
+//import Navigate from '../Router/Navigate';
+// eslint-disable-next-line spaced-comment
+//import anime from 'animejs';
+// eslint-disable-next-line spaced-comment
+//import { start } from '@popperjs/core';
 
 
 const questions = [
@@ -20,6 +26,11 @@ const questions = [
 const QuestionPage = () => {
   clearPage();
 
+  const main = document.querySelector('main');
+
+  const startGame = document.createElement('button');
+  startGame.className = "start-button";
+  startGame.innerText = "Commencer";
 
  const startQuizz = () => {
   startGame.removeEventListener('click', startQuizz);
@@ -47,13 +58,19 @@ const QuestionPage = () => {
   clearPage();
 
   try {
+    // eslint-disable-next-line spaced-comment
     //en attente de la recherche
     const question = await fetchQuestion(id);
 
+    // index de la bonne réponse
+    const correctAnswerIndex = question.answers.findIndex(answer => answer.isCorrect);
+
     //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
     const answersHTML = question.answers.map((answer, index) => {
-      return `<button class="answer-button" id="answer${index + 1}">${index + 1}. ${answer}</button>`;
+      const buttonId = `answer${question.id}_${index + 1}`;
+      return `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer}</button>`;
     }).join('');
+    
 
 
     //ajout de la variable dans le main
@@ -69,15 +86,15 @@ const QuestionPage = () => {
     //itération des differentes réponses avec un event au click
     question.answers.forEach((answer, index) => {
       const answerButton = document.getElementById(`answer${index + 1}`);
-      answerButton.addEventListener('click', () => answerClick(id, index + 1));
+      answerButton.addEventListener('click', () => handleAnswerClick(question.id,correctAnswerIndex, index + 1));
     });
   } catch (error) {
     // si question pas trouvée
     console.error('Render de la question échoué', error);
   }
-function renderQuestionPage() {
 
-  const main = document.querySelector('main');
+
+function renderQuestionPage() {
 
   const banniere = document.createElement('div');
   banniere.className = "banner"
@@ -86,9 +103,9 @@ function renderQuestionPage() {
   const textElement = document.createElement('span');
   textElement.className = "text-element";
 
-  const startGame = document.createElement('button');
-  startGame.className = "start-button";
-  startGame.innerText = "Commencer";
+  //const startGame = document.createElement('button');
+  //startGame.className = "start-button";
+ // startGame.innerText = "Commencer";
 
   const questionDiv = document.createElement("div");
   questionDiv.className = "question-div";
@@ -98,6 +115,7 @@ function renderQuestionPage() {
 
   const answer1Div = document.createElement('div');
   answer1Div.className = "answer1-container";
+  //answer1Div.id = 
 
   const answer2Div = document.createElement('div');
   answer2Div.className = "answer2-container";
@@ -124,18 +142,44 @@ function renderQuestionPage() {
 
 }
 
-function handleAnswerClick(questionId, selectedAnswerIndex) {
-  if(question){
-    console.log(`Question ${questionId} : Réponse choisie : ${selectedAnswerIndex}`);
+function handleAnswerClick(question_id, correctAnswerIndex, selectedAnswerIndex) {
+  if(selectedAnswerIndex){
+    console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
   }
   else {
-    console.error('Question innexistante');
+    console.error('Pas de réponse choisie');
   }
-  if(questions[questionId].answers[selectedAnswerIndex].isCorrect){
-    console.log('truc');
+  if(correctAnswerIndex===selectedAnswerIndex){
+    document.getElementById(`answer${question_id}_${correctAnswerIndex}`).style.backgroundColor = 'green';
+   }
+  else{
+    document.getElementById(`answer${question_id}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
+  } 
+  for (let i = 1; i <= 4; i++) {
+    if (i !== selectedAnswerIndex) {
+      document.getElementById(`answer${question_id}_${i}`).style.backgroundColor = 'red';
+    }
+  }
   }
 
  }
+
+
+
+
+//const answersHTML = questions[questionId].answers.map((answer, index) => {
+ // const isCorrect = index === correctAnswerIndex;
+ // const buttonClass = isCorrect ? 'correct-answer' : 'incorrect-answer';
+ // return `<button class="answer-button ${buttonClass}" data-index="${index}">${index + 1}. ${answer.text}</button>`;
+//}).join('');
+
+// Append the HTML to your container
+// (Assuming you have a container element with id 'answers-container')
+//document.getElementById('answers-container').innerHTML = answersHTML;
+
+
+
+
 }
 }
 export default QuestionPage;
