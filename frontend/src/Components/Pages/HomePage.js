@@ -1,10 +1,14 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
+import ArtImage from  '../../img/bochicchio 04.png'
+import LitteratureImage from '../../img/great-literature-scaled.jpg'
+import GeographieImage from '../../img/carte-du-monde-voyage-geographie-autocollant.jpg'
+import AstronomieImage  from '../../img/spacex-crew-dragon-1-1024x682-1.jpg'
+import MathematicsImage from '../../img/math-background-jbcyizvw0ckuvcro.jpg'
 
 const HomePage = () => {
   clearPage();
   renderPageTitle('HomePage');
   renderHomePage();
-
   const form = document.getElementById('form');
   if (form != null) {
     form.addEventListener('submit', onFormSubmit)
@@ -19,34 +23,34 @@ function renderHomePage() {
   <div class="container text-center quizz-grid">
   <form id="form">
     <div class="row firstC-Row">
-      <div class="col categorie col-6 Sport">
-      <input type="checkbox" value="Sport" id="idSport" class="hiddenInput c-check">
-        <label for="idSport" class="c-label">
-          Sport
-        </label>
+      <div class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
+      <input type="checkbox" value="Art" id="idArt" class="hiddenInput c-check">
+        <label for="idArt" class="c-label">Art</label>
 
       </div>
-      <div class="col categorie col-6 Bug">
-      <input type="checkbox" value="Bug" id="idBug" class="hiddenInput c-check">
-        <label for="idBug" class="c-label"> Bug
-        </label>
+      <div class="col categorie col-6 Géographie" style="background-image: url(${GeographieImage});">
+      <input type="checkbox" value="Géographie" id="idGéographie" class="hiddenInput c-check">
+      <label for="idGéographie" class="c-label">Géographie</label>
+     
       </div>
     </div>
 
 
     <div class="row">
 
-      <div class="col categorie col-6">
-      <input type="checkbox" value="Hunt" id="idHunt" class="hiddenInput c-check">
-        <label for="idHunt" class="c-label"></input>Hunt</label>
+      <div class="col categorie col-6" style="background-image: url(${LitteratureImage});">
+      <input type="checkbox" value="Littérature" id="idLittérature" class="hiddenInput c-check">
+        <label for="idLittérature" class="c-label"></input>Littérature</label>
       </div>
-      <div class="col categorie col-6">
-      <input type="checkbox" value="True" id="idTrue" class="hiddenInput c-check"></input>
-        <label for="idTrue" class="c-label">True</label>
+
+      <div class="col categorie col-6" style="background-image: url(${MathematicsImage});">
+      <input type="checkbox" value="Mathématique" id="idMathématique" class="hiddenInput c-check"></input>
+        <label for="idTMathématique" class="c-label">Mathématique</label>
       </div>
-      <div class="col categorie col-6">
-      <input type="checkbox" value="Bald" id="idBald" class="hiddenInput c-check">
-      <label for="idBald" class="c-label">Bald</label>
+
+      <div class="col categorie col-6" style="background-image: url(${AstronomieImage});">
+      <input type="checkbox" value="Astronomie" id="idAstronomie" class="hiddenInput c-check">
+      <label for="idAstronomie" class="c-label">Astronomie</label>
       </div>
 
     </div>
@@ -68,8 +72,11 @@ async function onFormSubmit(e) {
   const Hunt = document.getElementById('idHunt').checked;
   const True = document.getElementById('idTrue').checked;
   const Bald = document.getElementById('idBald').checked;
+
   clearPage();
+
   console.log("Sport = ", Sport, "Bug = ", Bug, " Hunt = ", Hunt, "Bald = ", Bald, "True = ", True);
+
   try {
     const response = await fetch('/api/quizz/20');
 
@@ -79,14 +86,14 @@ async function onFormSubmit(e) {
 
     return start;
   }
+
   catch (error) {
     console.error('Error:', error);
     throw error;
   }
-  
+
+
 }
-
-
 
 
 export default HomePage;

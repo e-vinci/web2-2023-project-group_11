@@ -20,29 +20,30 @@ padding-top: 60px;
 .quizz-grid .col {
     font-size: 18px;
     background-color:rgb(26, 26, 26);
-    border: 1px solid #ccc;
     margin-bottom: 120px;
     padding: 100px;
     margin: 20px;
     margin-left: 33px;
+    background-size: 100%;
     width: 29%;
     border-radius: 20px;
     user-select: none;
 }
 
-.quizz-grid .Sport {
+.quizz-grid .Art {
     font-size: 18px;
-    border: 1px solid #ccc;
     margin-left: 215px;
+    background-size: 100%;
     padding: 100px;
     width: 28%;
     border-radius: 20px;
 }
 
-.quizz-grid .Hunt {
+.quizz-grid .Géographie {
     font-size: 18px;
     background-color:aliceblue;
-    border: 1px solid #ccc;
+    background-size: 98%;
+    background-position-y: -44px;
     margin-left: 215px;
     padding: 100px;
     width: 28%;
@@ -70,10 +71,12 @@ padding-top: 60px;
 .categorie .c-label {
     width: 50%;
     user-select: none;
+    background-size: 12px;
 }
 .c-check:checked ~ .c-label {
     color: aqua;
     user-select: none;
+    background-size: 12px;
 }
 
   .col {
