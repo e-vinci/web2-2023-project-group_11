@@ -98,7 +98,9 @@ async function renderQuestion(question) {
     //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
     const answersHTML = question.answers.map((answer, index) => {
       const buttonId = `answer${question.id}_${index + 1}`;
-      return `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
+      const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
+      //answerButton.addEventListener('click', handleAnswerClick());
+      return answerButton;
     }).join('');
 
 
