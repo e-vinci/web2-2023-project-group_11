@@ -22,7 +22,7 @@ function renderHomePage() {
   main.innerHTML = `
   <div class="container text-center quizz-grid">
   <form id="form">
-    <div class="row firstC-Row">
+    <div class="row row1 firstC-Row">
       <div class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
       <input type="checkbox" value="Art" id="idArt" class="hiddenInput c-check">
         <label for="idArt" class="c-label">Art</label>

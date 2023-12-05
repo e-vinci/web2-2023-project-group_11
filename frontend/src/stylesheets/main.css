@@ -13,43 +13,42 @@ body {
 padding-top: 60px;
 }
 
-.quizz-grid .firstC-row {
-    margin-left: 40px;
-}
-
-.quizz-grid .col {
-    font-size: 18px;
-    background-color:rgb(26, 26, 26);
-    margin-bottom: 120px;
-    padding: 100px;
-    margin: 20px;
-    margin-left: 33px;
-    background-size: 100%;
-    width: 29%;
-    border-radius: 20px;
-    user-select: none;
+.row1 .firstC-row {
+  margin-left: 12rem;
 }
 
 .quizz-grid .Art {
-    font-size: 18px;
-    margin-left: 215px;
-    background-size: 100%;
-    padding: 100px;
-    width: 28%;
-    border-radius: 20px;
+  font-size: 18px;
+  margin-left: 9rem;
+  background-size: 100%;
+  padding: 6rem;
+  width: 23rem;
+  border-radius: 1.4rem;
 }
 
 .quizz-grid .Géographie {
-    font-size: 18px;
-    background-color:aliceblue;
-    background-size: 98%;
-    background-position-y: -44px;
-    margin-left: 215px;
-    padding: 100px;
-    width: 28%;
-    border-radius: 20px;
-
+  font-size: 18px;
+  background-size: 100%;
+  padding: 6rem;
+  width: 23rem;
+  border-radius: 1.4rem;
+  background-position-y: -4rem;
 }
+
+.quizz-grid .col {
+  font-size: 18px;
+  background-color: rgb(26, 26, 26);
+  margin-bottom: 120px;
+  padding: 6REM;
+  margin: 2rem;
+  margin-left: 2REM;
+  background-size: 100%;
+  width: 23rem;
+  border-radius: 1.4rem;
+  user-select: none;
+}
+
+
 
 .hiddenInput{
     width: 100%;
@@ -58,6 +57,10 @@ padding-top: 60px;
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.hiddenInput:checked{
+border: 1px solid red;
 }
 
 .hiddenInputVid{
