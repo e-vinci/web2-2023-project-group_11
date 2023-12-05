@@ -58,7 +58,6 @@ function renderHomePage() {
   </form>
 </div>
 
-<iframe width="560" height="315" class="hiddenInputVid" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=QvoTMIl4jzmecRu3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
  `;
 
 
@@ -67,15 +66,15 @@ function renderHomePage() {
 async function onFormSubmit(e) {
   e.preventDefault();
 
-  const Sport = document.getElementById('idSport').checked;
-  const Bug = document.getElementById('idBug').checked;
-  const Hunt = document.getElementById('idHunt').checked;
-  const True = document.getElementById('idTrue').checked;
-  const Bald = document.getElementById('idBald').checked;
+  const Art = document.getElementById('idArt').checked;
+  const Géographie = document.getElementById('idGéographie').checked;
+  const Littérature = document.getElementById('idLittérature').checked;
+  const Mathématique = document.getElementById('idMathématique').checked;
+  const Astronomie = document.getElementById('idAstronomie').checked;
 
   clearPage();
 
-  console.log("Sport = ", Sport, "Bug = ", Bug, " Hunt = ", Hunt, "Bald = ", Bald, "True = ", True);
+  console.log("Art = ", Art, "Géographie = ", Géographie, " Littérature = ", Littérature, "Mathématique = ", Mathématique, "Astronomie = ", Astronomie);
 
   try {
     const response = await fetch('/api/quizz/20');
