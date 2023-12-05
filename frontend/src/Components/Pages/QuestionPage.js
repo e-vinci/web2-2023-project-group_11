@@ -100,10 +100,15 @@ async function renderQuestion(question) {
       const buttonId = `answer${question.id}_${index + 1}`;
       const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
       //answerButton.addEventListener('click', handleAnswerClick());
+      //answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
       return answerButton;
     }).join('');
 
-
+  //itération des differentes réponses avec un event au click
+  question.answers.forEach((answer, index) => {
+    const answerButton = document.getElementById(`answer${index + 1}`);
+    answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
+  });
 
     //ajout de la variable dans le main
     main.innerHTML = `
@@ -114,12 +119,6 @@ async function renderQuestion(question) {
         ${answersHTML}
       </container>
     `;
-
-    //itération des differentes réponses avec un event au click
-    question.answers.forEach((answer, index) => {
-      const answerButton = document.getElementById(`answer${index + 1}`);
-      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-    });
   } catch (error) {
     // si question pas trouvée
     console.error('Render de la question échoué', error);
