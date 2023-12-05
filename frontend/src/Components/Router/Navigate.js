@@ -15,6 +15,17 @@
    window.history.pushState({}, '', usePathPrefix(toUri));
    const popStateEvent = new PopStateEvent('popstate', { state: {} });
    dispatchEvent(popStateEvent);
+
+  };
+
+
+   export const NavigateWithParameter = (toUri,data) => {
+    const fromUri = window.location.pathname;
+    if (fromUri === toUri) return;
+  
+    window.history.pushState(data, '', usePathPrefix(toUri));
+    const popStateEvent = new PopStateEvent('popstate', { state: {} });
+    dispatchEvent(popStateEvent);
  };
  
  export default Navigate;
