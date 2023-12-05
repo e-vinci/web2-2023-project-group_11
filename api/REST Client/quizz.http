@@ -11,15 +11,7 @@ GET {{baseUrl}}/quizz
 GET {{baseUrl}}/quizz/20
 
 ### Read 20 question whith all categorie
-GET {{baseUrl}}/quizz/20?categorie=Géographie
-
-### Read all question with File variable
-POST {{baseUrl}}/quizz/20
-Content-Type: application/json
-
-{
-    "categorie":["Géographie","Art"]
-}
+GET {{baseUrl}}/quizz/20?categorie=Géographie,Art,Trivia
 
 ### Create a pizza by using the admin account
 #### First login as the admin
