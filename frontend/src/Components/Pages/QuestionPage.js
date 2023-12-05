@@ -34,6 +34,7 @@ let startGame = null;
 let main = null;
 
 const QuestionPage = () => {
+  console.log("debut du quizz");
   clearPage();
   main = document.querySelector('main');
 
@@ -49,15 +50,15 @@ const QuestionPage = () => {
 
 async function fetchQuestions() {
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20`, {
-      method: 'GET',
+    const response = await fetch(`${process.env.API_BASE_URL}/quizz`
+     /* method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         categorie: ['Géographie', 'Art'],
-      }),
-    });
+      }), */
+    );
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -74,15 +75,18 @@ async function fetchQuestions() {
 }
 
 async function startQuizz() {
+  console.log("début du quizz");
   startGame.removeEventListener('click', startQuizz);
   questionsArray = await fetchQuestions();
   renderNextQuestion();
+  console.log()
 }
 
 async function renderQuestion(question) {
+  
   // suppression de la question précédente
   clearPage();
-
+  console.log("render de la question");
   try {
     // eslint-disable-next-line spaced-comment
     //en attente de la recherche
@@ -94,7 +98,7 @@ async function renderQuestion(question) {
     //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
     const answersHTML = question.answers.map((answer, index) => {
       const buttonId = `answer${question.id}_${index + 1}`;
-      return `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer}</button>`;
+      return `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
     }).join('');
 
 
@@ -102,7 +106,7 @@ async function renderQuestion(question) {
     //ajout de la variable dans le main
     main.innerHTML = `
       <div class="titleDiv">
-        <p>${question.title}</p>
+        <p>${question.question}</p>
       </div>
       <container>
         ${answersHTML}
@@ -170,6 +174,7 @@ async function renderQuestion(question) {
 }
 
 function renderNextQuestion() {
+  console.log("envoie de la question");
   if (currentQuestionIndex < questionsArray.length) {
     const nextQuestion = questionsArray[currentQuestionIndex];
     currentQuestionIndex+=1;
@@ -181,6 +186,7 @@ function renderNextQuestion() {
 }
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
+  console.log("réponse choisie");
   if (selectedAnswerIndex) {
     console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
   }
