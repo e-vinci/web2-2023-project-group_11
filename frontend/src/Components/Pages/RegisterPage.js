@@ -1,6 +1,5 @@
 import { clearPage,renderPageTitle  } from '../../utils/render';
 
-
 const RegisterPage = () => {
     clearPage();
     renderPageTitle('Register');
@@ -24,8 +23,9 @@ function renderRegisterPage() {
         <input type="password" class="form-control" id="registerPassword" placeholder="Password">
         <small id="emailHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
       </div>
-      <div class="form-group p-3"><button type="submit" class="btn btn-primary">S'inscrire</button></div>
+      <div class="form-group p-3"><button type="submit" class="btn btn-primary" value="Register">S'inscrire</button></div>
     </form></div>
   `;
+  const form = main.querySelector('form')
 };
   export default RegisterPage;

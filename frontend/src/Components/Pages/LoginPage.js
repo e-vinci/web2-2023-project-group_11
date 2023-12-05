@@ -9,7 +9,8 @@ const LoginPage = () => {
 
 function renderLoginPage() {
     const main = document.querySelector('main');
-    main.innerHTML = `<h1 class="text-center">Connectez vous pour enregistrer votre score !</h1>
+    main.innerHTML = 
+    `<h1 class="text-center">Connectez vous pour enregistrer votre score !</h1>
     <form>
     <div class="form-group w-50 p-3">
       <label for="exampleInputEmail1">Email address</label>
@@ -23,6 +24,7 @@ function renderLoginPage() {
     <div class="form-group p-3"><button type="submit" class="btn btn-primary " >Se connecter</button>
     </div>
   </form>`;
+  const form = main.querySelector('form');
   };
 
   export default LoginPage;
