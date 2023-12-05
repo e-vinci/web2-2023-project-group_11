@@ -4,7 +4,7 @@
 GET http://localhost:3000/quizz
 
 ### Read all question with File variable
-@baseUrl = https://rafael-millor-vinci-web2.azurewebsites.net/
+@baseUrl = http://localhost:3000
 GET {{baseUrl}}/quizz
 
 ### Read 20 question whith all categorie
