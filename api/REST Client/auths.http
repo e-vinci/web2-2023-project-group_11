@@ -37,9 +37,5 @@ Content-Type: application/json
     "password":"manager"
 }
 
-<<<<<<< HEAD
 ### Get the registered users
-=======
-### GET ALL USERS
->>>>>>> 25f217654bbca95aecbf29b1fd60ed3cf0480810
 GET {{baseUrl}}/users
