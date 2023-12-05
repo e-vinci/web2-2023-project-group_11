@@ -40,6 +40,8 @@ const QuestionPage = () => {
   startGame = document.createElement('button');
   startGame.className = "start-button";
   startGame.innerText = "Commencer";
+  
+  main.appendChild(startGame);
 
   startGame.addEventListener('click', startQuizz);
 
@@ -48,12 +50,12 @@ const QuestionPage = () => {
 async function fetchQuestions() {
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/quizz/20`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        categorie: ['categorie1', 'categorie2'],
+        categorie: ['Géographie', 'Art'],
       }),
     });
 
