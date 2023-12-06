@@ -88,27 +88,54 @@ async function renderQuestion(question) {
   clearPage();
   console.log("render de la question");
   try {
-    // eslint-disable-next-line spaced-comment
-    //en attente de la recherche
-    //const question = await fetchQuestion(id);
+
+     const answersHTML = `
+  <button class="answer-button" id="answer${question.id}_1">${question.answers[0].text}</button>
+  <button class="answer-button" id="answer${question.id}_2">${question.answers[1].text}</button>
+  <button class="answer-button" id="answer${question.id}_3">${question.answers[2].text}</button>
+  <button class="answer-button" id="answer${question.id}_4">${question.answers[3].text}</button>
+`;
+
+   // Création du conteneur
+    const answersContainer = document.createElement('div');
+    answersContainer.className = 'answers-container';
+
+     // Ajout des boutons au conteneur
+     answersContainer.innerHTML = answersHTML;
 
     // index de la bonne réponse
     const correctAnswerIndex = question.answers.findIndex(answer => answer.isCorrect);
 
     //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
-    const answersHTML = question.answers.map((answer, index) => {
+   /* const answersHTML = question.answers.map((answer, index) => {
+  
       const buttonId = `answer${question.id}_${index + 1}`;
-      const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
-      //answerButton.addEventListener('click', handleAnswerClick());
-      //answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-      return answerButton;
-    }).join('');
+  
+      // création d'un bouton
+      const answerButton = document.createElement('button');
+      answerButton.className = 'answer-button';
+      answerButton.id = buttonId;
+      answerButton.innerHTML = `${index + 1}. ${answer.text}`;
+  
+      console.log(`question id : ${question.id}`);
+      console.log('Correct answer index:', correctAnswerIndex);
+      console.log('Selected answer index:', index + 1);
+   
+      // ajout d'un gestionnaire d'événements au bouton
+      answerButton.addEventListener('click', () => console.log('Button clicked!'));
+      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
+      
+
+      // retourne l'élément DOM sous forme de chaîne
+       return answerButton.outerHTML;
+    }).join('');  */
 
   //itération des differentes réponses avec un event au click
-  question.answers.forEach((answer, index) => {
+  /*question.answers.forEach((answer, index) => {
     const answerButton = document.getElementById(`answer${index + 1}`);
+    console.log(`answerbutton :${answerButton}`);
     answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-  });
+  });*/
 
     //ajout de la variable dans le main
     main.innerHTML = `
@@ -119,6 +146,11 @@ async function renderQuestion(question) {
         ${answersHTML}
       </container>
     `;
+
+    for (let i = 1; i <= 4; i+=1) {
+      const answerButton = document.getElementById(`answer${question.id}_${i}`);
+      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, i));
+    }
   } catch (error) {
     // si question pas trouvée
     console.error('Render de la question échoué', error);
@@ -236,7 +268,10 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 // (Assuming you have a container element with id 'answers-container')
 //document.getElementById('answers-container').innerHTML = answersHTML;
 
-
+ /* const buttonId = `answer${question.id}_${index + 1}`;
+      const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
+      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
+      return answerButton; */ 
 
 
 export default QuestionPage;
