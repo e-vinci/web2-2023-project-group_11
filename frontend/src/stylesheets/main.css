@@ -1,5 +1,7 @@
 body {
     background-color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
 }
 
 #btn{
@@ -133,6 +135,76 @@ padding-top: 60px;
     font-size: 10px;
     border-radius: 5px;
   }
+
+  .start-button {
+    font-size: 36px;
+    margin-top: 300px;
+    margin-left: 600px;
+    padding: 40px 130px;
+    background-color: black;
+    color: white;
+    border: solid 0.5px gray;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: pulse1 1s infinite alternate;
+  }
+
+  .answer-button {
+    height: 100px;
+    justify-content: center;
+    background-color:coral;
+    font-size: 40px;
+    animation: pulse2 1s infinite alternate;
+    margin-left: 400px;
+    margin-top: 70px;
+    transition: background-color 0.3s ease;
+  }
+
+  .titleDiv {
+    margin-top: 30px;
+    margin-left: 400px;
+    font-size: 50px;
+  }
+
+  .score {
+    font-size: 30px;
+  }
+
+  .bestScore {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 30px;
+  }
+
+  @keyframes pulse1 {
+    to {
+      transform: scale(1.2); /* Grow the button */
+    }
+  }
+
+  @keyframes pulse2 {
+    to {
+      transform: scale(1.08); /* Grow the button */
+    }
+  }
+
+  .correct-answer {
+    background-color: #4CAF50; /* Green color for correct answer */
+  }
+
+  .answer-button.correct-answer {
+    background-color: green !important;
+    color: white;
+  }
+  
+  .answer-button.wrong-answer {
+    background-color: red !important;
+    color: white;
+  }
+
 
   /* Home Page CSS */
  /* hiddenInput{

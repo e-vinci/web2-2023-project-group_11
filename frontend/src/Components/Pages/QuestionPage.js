@@ -28,6 +28,7 @@ let questionsArray = null;
 let currentQuestionIndex = 0;
 
 let score = 0;
+const bestScore = 200;
 
 let startGame = null;
 
@@ -90,10 +91,10 @@ async function renderQuestion(question) {
   try {
 
      const answersHTML = `
-  <button class="answer-button" id="answer${question.id}_1">${question.answers[0].text}</button>
-  <button class="answer-button" id="answer${question.id}_2">${question.answers[1].text}</button>
-  <button class="answer-button" id="answer${question.id}_3">${question.answers[2].text}</button>
-  <button class="answer-button" id="answer${question.id}_4">${question.answers[3].text}</button>
+  <button class="answer-button" id="answer${question.id}_0">${question.answers[0].text}</button>
+  <button class="answer-button" id="answer${question.id}_1">${question.answers[1].text}</button>
+  <button class="answer-button" id="answer${question.id}_2">${question.answers[2].text}</button>
+  <button class="answer-button" id="answer${question.id}_3">${question.answers[3].text}</button>
 `;
 
    // Création du conteneur
@@ -105,8 +106,121 @@ async function renderQuestion(question) {
 
     // index de la bonne réponse
     const correctAnswerIndex = question.answers.findIndex(answer => answer.isCorrect);
+    console.log(`BONNE REPONSE : ${question.answers[correctAnswerIndex].text}`);
 
-    //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
+    //ajout de la variable dans le main
+    main.innerHTML = `
+       <div class="score">
+         <p> Votre score : </p>
+         <p> ${score} </p>
+       </div>
+      <div class="titleDiv">
+        <p>${question.question}</p>
+      </div>
+      <container>
+        ${answersHTML}
+      </container>
+    `;
+
+    for (let i = -1; i <= 2; i+=1) {
+      const answerButton = document.getElementById(`answer${question.id}_${i+1}`);
+      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, i+1));
+    }
+  } catch (error) {
+    // si question pas trouvée
+    console.error('Render de la question échoué', error);
+  }
+
+}
+
+function renderNextQuestion() {
+  console.log();
+  console.log("envoie de la question");
+  if (currentQuestionIndex < questionsArray.length) {
+    const nextQuestion = questionsArray[currentQuestionIndex];
+    currentQuestionIndex+=1;
+    renderQuestion(nextQuestion);
+    return;
+  }
+  console.log('No more questions.');
+   // endQuizz();
+}
+
+function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
+  console.log(`réponse choisie : ${selectedAnswerIndex} bonne réponse : ${correctAnswerIndex}`);
+  console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
+
+  if (correctAnswerIndex === selectedAnswerIndex) {
+    score += 10;
+    console.log('bonne réponse!');
+  }
+  else {
+    console.log('mauvaise reponse');
+    //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
+  }
+
+  for (let i = 0; i <= 3; i+=1) {
+    const answerButton = document.getElementById(`answer${questionid}_${i}`)
+    if (i !== correctAnswerIndex) {
+      answerButton.classList.add('wrong-answer');
+      console.log(answerButton.classList);
+    }
+    else if (i === correctAnswerIndex) {
+      answerButton.classList.add('correct-answer');
+      console.log(answerButton.classList);
+    }
+  }
+  setTimeout(() => {
+    resetAnswerStyles();
+    // Call the function to render the next question here
+  }, 1000); // Adjust the delay time as needed
+  renderNextQuestion();
+}
+
+function resetAnswerStyles() {
+  const answerButtons = document.querySelectorAll('.answer-button');
+  answerButtons.forEach(button => {
+    button.classList.remove('correct-answer', 'wrong-answer');
+  });
+}
+
+function updateScore() {
+
+}
+
+
+/* async function fetchQuestion(id) {
+ return new Promise((resolve, reject) => {
+   // délai pour trouver la question
+   setTimeout(() => {
+     const question = questions.find(q => q.id === id);
+     if (question) {
+       resolve(question);
+     } else {
+       reject(new Error('Question non existante'));
+     }
+   }, 500);
+ }); */
+
+//const answersHTML = questions[questionId].answers.map((answer, index) => {
+// const isCorrect = index === correctAnswerIndex;
+// const buttonClass = isCorrect ? 'correct-answer' : 'incorrect-answer';
+// return `<button class="answer-button ${buttonClass}" data-index="${index}">${index + 1}. ${answer.text}</button>`;
+//}).join('');
+
+// Append the HTML to your container
+// (Assuming you have a container element with id 'answers-container')
+//document.getElementById('answers-container').innerHTML = answersHTML;
+
+
+// RENDERQUESTIONOLDCODE
+
+ /* const buttonId = `answer${question.id}_${index + 1}`;
+      const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
+      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
+      return answerButton; */ 
+
+      //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
    /* const answersHTML = question.answers.map((answer, index) => {
   
       const buttonId = `answer${question.id}_${index + 1}`;
@@ -137,24 +251,7 @@ async function renderQuestion(question) {
     answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
   });*/
 
-    //ajout de la variable dans le main
-    main.innerHTML = `
-      <div class="titleDiv">
-        <p>${question.question}</p>
-      </div>
-      <container>
-        ${answersHTML}
-      </container>
-    `;
 
-    for (let i = 1; i <= 4; i+=1) {
-      const answerButton = document.getElementById(`answer${question.id}_${i}`);
-      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, i));
-    }
-  } catch (error) {
-    // si question pas trouvée
-    console.error('Render de la question échoué', error);
-  }
 
   /* function renderQuestionPage() {
   
@@ -204,74 +301,12 @@ async function renderQuestion(question) {
    
   }*/
 
-}
 
-function renderNextQuestion() {
-  console.log("envoie de la question");
-  if (currentQuestionIndex < questionsArray.length) {
-    const nextQuestion = questionsArray[currentQuestionIndex];
-    currentQuestionIndex+=1;
-    renderQuestion(nextQuestion);
-    return;
-  }
-  console.log('No more questions.');
-   // endQuizz();
-}
-
-function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
-  console.log("réponse choisie");
-  if (selectedAnswerIndex) {
-    console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
-  }
-  else {
-    console.error('Pas de réponse choisie');
-  }
-  if (correctAnswerIndex === selectedAnswerIndex) {
-    document.getElementById(`answer${questionid}_${correctAnswerIndex}`).style.backgroundColor = 'green';
-    score += 10;
-  }
-  else {
-    document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
-  }
-  for (let i = 1; i <= 4; i+=1) {
-    if (i !== correctAnswerIndex) {
-      document.getElementById(`answer${questionid}_${i}`).style.backgroundColor = 'red';
-    }
-    else if (i === correctAnswerIndex) {
-      document.getElementById(`answer${questionid}_${i}`).style.backgroundColor = 'green';
-    }
-  }
-  renderNextQuestion();
-}
-
-
-/* async function fetchQuestion(id) {
- return new Promise((resolve, reject) => {
-   // délai pour trouver la question
-   setTimeout(() => {
-     const question = questions.find(q => q.id === id);
-     if (question) {
-       resolve(question);
-     } else {
-       reject(new Error('Question non existante'));
-     }
-   }, 500);
- }); */
-
-//const answersHTML = questions[questionId].answers.map((answer, index) => {
-// const isCorrect = index === correctAnswerIndex;
-// const buttonClass = isCorrect ? 'correct-answer' : 'incorrect-answer';
-// return `<button class="answer-button ${buttonClass}" data-index="${index}">${index + 1}. ${answer.text}</button>`;
-//}).join('');
-
-// Append the HTML to your container
-// (Assuming you have a container element with id 'answers-container')
-//document.getElementById('answers-container').innerHTML = answersHTML;
-
- /* const buttonId = `answer${question.id}_${index + 1}`;
-      const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
-      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-      return answerButton; */ 
-
+  /*
+  <div class="bestScore">
+         <p> Meilleur score </p>
+         <p> ${bestScore} </p>
+       </div>
+       */
 
 export default QuestionPage;
