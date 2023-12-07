@@ -16,6 +16,11 @@ const HomePage = () => {
 
 };
 
+function navigateToQuizzPage() {
+  // Rediriger vers la page de quiz
+  window.location.href = '/quizz';
+}
+
 
 function renderHomePage() {
   const main = document.querySelector('main');
@@ -54,11 +59,16 @@ function renderHomePage() {
       </div>
 
     </div>
-    <button type="submit" class = "startGame">Commencer la partie</button>
+    <button type="submit" class = "startGame" id="readyButton">Commencer la partie</button>
   </form>
 </div>
 
  `;
+
+const startButton = document.getElementById('readyButton');
+startButton.textContent = 'Prêt';
+startButton.addEventListener('click', navigateToQuizzPage);
+main.appendChild(startButton);
 
 
 };

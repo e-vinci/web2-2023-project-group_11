@@ -125,7 +125,7 @@ border: 1px solid red;
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Bangers', cursive;
 }
 
 .navbar.navbar-expand.p-4 {
@@ -185,13 +185,15 @@ border: 1px solid red;
     padding: 40px 130px;
     background-color: black;
     color: white;
-    border: solid 0.5px gray;
+    border: none;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     animation: pulse1 1s infinite alternate;
+    background-color: rgb(62, 3, 62);
+    font-family: 'Bangers', cursive;
   }
 
   .answer-button {
@@ -205,6 +207,11 @@ border: 1px solid red;
     margin-top: 70px;
     transition: background-color 0.3s ease;
     animation: slideIn2 1s ease-in-out;
+    font-family: 'Bangers', cursive;
+  }
+
+  .answer-button:hover{
+    transform: scale(1.05);
   }
 
   .leaderboard{
@@ -226,6 +233,7 @@ border: 1px solid red;
     font-size: 50px;
     color:azure;
     animation: slideIn 1s ease-in-out;
+    font-family: 'Bangers', cursive;
   }
 
   @keyframes slideIn {
@@ -258,9 +266,45 @@ border: 1px solid red;
 
 
   .score {
-    font-size: 30px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #4CAF50;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 350px;
+    float:left;
+    font-size: 60px;
     color: azure;
   }
+
+  .score.right {
+    font-size: 80px;
+    animation: bounce2 0.05s infinite;
+    color: #0b400d;
+  }
+
+  .score.wrong {
+    font-size: 100px;
+    background-color: red;
+    color: rgb(117, 11, 11);
+  }
+
+  @keyframes bounce2 {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(20px);
+    }
+    60% {
+        transform: translateX(10px);
+    }
+}
+
+
 
   .bestScore {
     text-align: right;
@@ -270,7 +314,7 @@ border: 1px solid red;
 
   @keyframes pulse1 {
     to {
-      transform: scale(1.2); /* Grow the button */
+      transform: scale(1.2); 
     }
   }
 
@@ -285,24 +329,37 @@ border: 1px solid red;
   }
 
   .answer-button.correct-answer {
-    background-color: green !important;
+    background-color: rgb(4, 57, 4) !important;
     color: white;
+    animation: pulse1 1s infinite alternate;
   }
   
   .answer-button.wrong-answer {
-    background-color: red !important;
+    background-color: rgb(90, 10, 10) !important;
     color: white;
   }
 
+  .answer-button.wrong-reply {
+    background-color: rgb(90, 10, 10) !important;
+    color: white;
+    animation: bounce 1s infinite;;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(-30px);
+    }
+    60% {
+        transform: translateX(-15px);
+    }
+}
+
   @keyframes pulse3 {
     0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(3);
-    }
-    100% {
-      transform: scale(1);
+      transform: scale(1.2);
     }
   }
   

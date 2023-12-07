@@ -110,8 +110,7 @@ async function renderQuestion(question) {
 
     //ajout de la variable dans le main
     main.innerHTML = `
-       <div class="score">
-         <p> Votre score : </p>
+       <div class="score" id="score2">
          <p> ${score} </p>
        </div>
       <div class="titleDiv">
@@ -154,14 +153,19 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     score += 10;
     console.log('bonne réponse!');
     // Animation pour le score
-    const scoreElement = document.querySelector('.score');
-    scoreElement.classList.add('pulse3');
-    setTimeout(() => {
-      scoreElement.classList.remove('pulse3');
-    }, 500);
+    const scoreElement = document.getElementById('score2');
+    scoreElement.classList.add('right');
+    scoreElement.innerHTML = `<span class="score-change">+10</span>`;
   }
   else {
     console.log('mauvaise reponse');
+    if(score>=5)
+      score-=5;
+    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
+    answerButton.classList.add('wrong-reply');
+    const scoreElement = document.getElementById('score2');
+    scoreElement.classList.add('wrong');
+    scoreElement.innerHTML = `<span class="score-change">-5</span>`;
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
   }
 
@@ -178,15 +182,17 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   }
   setTimeout(() => {
     resetAnswerStyles();
+    renderNextQuestion();
     // Call the function to render the next question here
-  }, 1000); // Adjust the delay time as needed
-  renderNextQuestion();
+  }, 2000); // Adjust the delay time as needed
 }
 
 function resetAnswerStyles() {
+  const scoreDiv = document.getElementById("score2");
+  scoreDiv.classList.remove('pulse3');
   const answerButtons = document.querySelectorAll('.answer-button');
   answerButtons.forEach(button => {
-    button.classList.remove('correct-answer', 'wrong-answer');
+    button.classList.remove('correct-answer', 'wrong-answer', 'wrong-reply');
   });
 }
 
