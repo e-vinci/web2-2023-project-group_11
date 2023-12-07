@@ -153,6 +153,12 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   if (correctAnswerIndex === selectedAnswerIndex) {
     score += 10;
     console.log('bonne réponse!');
+    // Animation pour le score
+    const scoreElement = document.querySelector('.score');
+    scoreElement.classList.add('pulse3');
+    setTimeout(() => {
+      scoreElement.classList.remove('pulse3');
+    }, 500);
   }
   else {
     console.log('mauvaise reponse');

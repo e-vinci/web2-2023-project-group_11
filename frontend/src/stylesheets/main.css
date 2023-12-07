@@ -2,6 +2,21 @@ body {
     background-color: rgb(255, 255, 255);
     align-items: center;
     justify-content: center;
+    background: url('background.jpg') center center fixed; 
+    background-size: 2000px;
+    margin: 0;
+    padding: 0;
+    animation: moveBackground 6s linear infinite;
+}
+
+
+@keyframes moveBackground {
+  from {
+      background-position: 0 0;
+  }
+  to {
+      background-position: 100% 100%;
+  }
 }
 
 #btn{
@@ -103,6 +118,30 @@ padding-top: 60px;
     background-size: 12px;
 }
 
+.nav-link{
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar.navbar-expand.p-4 {
+  background: linear-gradient(to right, #4CAF50, #2196F3);
+  color: white;
+  font-family: 'Roboto', sans-serif; /* Change the font to your preference */
+}
+
+.navbar.navbar-expand.p-4 a.nav-link {
+  color: white;
+  font-size: 18px;
+  margin-right: 15px; /* Adjust the margin as needed */
+  transition: transform 0.3s ease-in-out; /* Add smooth transition */
+}
+
+.navbar.navbar-expand.p-4 a.nav-link:hover {
+  transform: scale(1.1);
+}
+
   .col {
     position: relative;
   }
@@ -155,22 +194,69 @@ padding-top: 60px;
   .answer-button {
     height: 100px;
     justify-content: center;
-    background-color:coral;
+    background-color:rgb(41, 4, 71);
     font-size: 40px;
+    color: white;
     animation: pulse2 1s infinite alternate;
     margin-left: 400px;
     margin-top: 70px;
     transition: background-color 0.3s ease;
+    animation: slideIn2 1s ease-in-out;
+  }
+
+  .leaderboard{
+    width: 60%;
+    height: 40%;
+    color: white;
+    justify-content: center;
+    margin-left: 340px;
+    margin-top: 150px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 70px;
+    animation: slideUp 1s ease-in-out;
   }
 
   .titleDiv {
     margin-top: 30px;
     margin-left: 400px;
     font-size: 50px;
+    color:azure;
+    animation: slideIn 1s ease-in-out;
   }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideIn2 {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+
 
   .score {
     font-size: 30px;
+    color: azure;
   }
 
   .bestScore {
@@ -203,6 +289,22 @@ padding-top: 60px;
   .answer-button.wrong-answer {
     background-color: red !important;
     color: white;
+  }
+
+  @keyframes pulse3 {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .pulse3 {
+    animation: pulse 1s ease-in-out;
   }
 
 
