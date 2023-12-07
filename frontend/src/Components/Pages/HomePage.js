@@ -5,6 +5,9 @@ import GeographieImage from '../../img/carte-du-monde-voyage-geographie-autocoll
 import AstronomieImage  from '../../img/spacex-crew-dragon-1-1024x682-1.jpg'
 import MathematicsImage from '../../img/math-background-jbcyizvw0ckuvcro.jpg'
 
+
+const main = document.querySelector('main');
+
 const HomePage = () => {
   clearPage();
   renderPageTitle('HomePage');
@@ -13,12 +16,15 @@ const HomePage = () => {
   if (form != null) {
     form.addEventListener('submit', onFormSubmit)
   }
-
 };
+
+function navigateToQuizzPage() {
+  // Rediriger vers la page de quiz
+  window.location.href = '/quizz';
+}
 
 
 function renderHomePage() {
-  const main = document.querySelector('main');
   main.innerHTML = `
   <div class="container text-center quizz-grid">
   <form id="form">
@@ -54,13 +60,16 @@ function renderHomePage() {
       </div>
 
     </div>
-    <button type="submit" class = "startGame">Commencer la partie</button>
+    <button type="submit" id="readyButton" class = "startGame">Commencer la partie</button>
   </form>
 </div>
 
  `;
 
-
+ const startButton = document.getElementById('readyButton');
+ startButton.textContent = 'Prêt';
+ startButton.addEventListener('click', navigateToQuizzPage);
+ main.appendChild(startButton);
 };
 
 async function onFormSubmit(e) {
