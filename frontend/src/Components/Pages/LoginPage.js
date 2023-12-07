@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { clearPage,renderPageTitle  } from '../../utils/render';
 
 
@@ -24,7 +25,9 @@ function renderLoginPage() {
     <div class="form-group p-3"><button type="submit" class="btn btn-primary " >Se connecter</button>
     </div>
   </form>`;
+ 
   const form = main.querySelector('form');
+  main.appendChild(form);
   };
 
   export default LoginPage;

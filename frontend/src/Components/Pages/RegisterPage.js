@@ -26,6 +26,7 @@ function renderRegisterPage() {
       <div class="form-group p-3"><button type="submit" class="btn btn-primary" value="Register">S'inscrire</button></div>
     </form></div>
   `;
+  // eslint-disable-next-line no-unused-vars
   const form = main.querySelector('form')
 };
   export default RegisterPage;
