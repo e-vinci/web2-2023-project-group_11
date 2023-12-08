@@ -34,6 +34,10 @@ let startGame = null;
 
 let main = null;
 
+let started = false;
+
+let titleStartButton = 'Commencer';
+
 const QuestionPage = () => {
   console.log("debut du quizz");
   clearPage();
@@ -41,8 +45,9 @@ const QuestionPage = () => {
 
   startGame = document.createElement('button');
   startGame.className = "start-button";
-  startGame.innerText = "Commencer";
-  
+  // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
+  startGame.innerText = `${titleStartButton}`;
+
   main.appendChild(startGame);
 
   startGame.addEventListener('click', startQuizz);
@@ -79,6 +84,8 @@ async function startQuizz() {
   console.log("début du quizz");
   startGame.removeEventListener('click', startQuizz);
   questionsArray = await fetchQuestions();
+  started=true;
+  titleStartButton = `Continuer`
   renderNextQuestion();
   console.log()
 }

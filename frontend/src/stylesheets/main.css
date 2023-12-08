@@ -84,8 +84,14 @@ border: 1px solid red;
     opacity: 0;
 }
 
-.categorie  {
-   
+.col.categorie.col-6 {
+  float: left;
+  width: 350px;
+  cursor: pointer;
+}
+
+.col.categorie.col-6.clicked {
+   width: 380px;
 }
 
 .answer-button {
@@ -96,6 +102,7 @@ border: 1px solid red;
   align-items: center;
   justify-content: center;
   margin: 20px;
+  margin-left: 120px;
 }
 
 .answers-container {
@@ -157,31 +164,32 @@ border: 1px solid red;
   }
 
   .startGame {
-    padding: 16px 32px;
+    padding: 30px 70px;
     background-color: black;
     color: white;
     border: solid 0.5px gray;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 10px;
+    font-size: 20px;
     border-radius: 5px;
+    float:left;
+    margin-left: 750px;
+    font-family: 'Bangers', cursive;
   }
 
   .startGame:hover {
-    padding: 16px 32px;
-    background-color: rgb(113, 252, 252);
-    color: rgb(0, 0, 0);
+    background-color: rgb(58, 22, 92);
+    color: rgb(199, 20, 175);
     border: solid 0.5px gray;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 10px;
     border-radius: 5px;
   }
 
   .start-button {
     font-size: 36px;
     margin-top: 300px;
-    margin-left: 600px;
+    margin-left: 700px;
     padding: 40px 130px;
     background-color: black;
     color: white;
@@ -203,11 +211,15 @@ border: 1px solid red;
     font-size: 40px;
     color: white;
     animation: pulse2 1s infinite alternate;
-    margin-left: 400px;
+    margin-left: 450px;
     margin-top: 70px;
     transition: background-color 0.3s ease;
     animation: slideIn2 1s ease-in-out;
     font-family: 'Bangers', cursive;
+  }
+
+  .answer-button.started {
+     margin-left: 350px;
   }
 
   .answer-button:hover{
