@@ -21,9 +21,9 @@ router.get('/', (req, res) => {
 });
 
 // Return 20 questions des categorie selectionnées
-router.post('/20', (req, res) => {
+router.get('/20', (req, res) => {
   console.log('entre 20 question');
-  const categories = req?.body?.categorie?.length !== 0 ? req.body.categorie : undefined;
+  const categories = req?.query?.categorie?.length !== 0 ? req.query.categorie : undefined;
   console.log(categories);
 
   const vingtQuestions = read20Questions(categories);
