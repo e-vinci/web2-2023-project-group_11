@@ -1,33 +1,41 @@
 body {
-    background-color: rgb(255, 255, 255);
-    align-items: center;
-    justify-content: center;
-    background: url('background.jpg') center center fixed; 
-    background-size: 2000px;
-    margin: 0;
-    padding: 0;
-    animation: moveBackground 6s linear infinite;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  justify-content: center;
+  background: url('background.jpg') center center fixed;
+  background-size: 2000px;
+  margin: 0;
+  padding: 0;
+  animation: moveBackground 6s linear infinite;
 }
 
 
 @keyframes moveBackground {
   from {
-      background-position: 0 0;
+    background-position: 0 0;
   }
+
   to {
-      background-position: 100% 100%;
+    background-position: 100% 100%;
   }
 }
 
-#btn{
-    display: flex;
-    justify-content: center;
+#btn {
+  display: flex;
+  justify-content: center;
 }
 
 /* Home Page CSS */
 
+.hpWelcome {
+  font-size: 40px;
+  color: white;
+}
+label{
+  display: inline;
+}
 .quizz-grid {
-padding-top: 60px;
+  padding-top: 2rem;
 }
 
 .row1 .firstC-row {
@@ -41,63 +49,93 @@ padding-top: 60px;
   padding: 6rem;
   width: 23rem;
   border-radius: 1.4rem;
+  position: relative;
 }
 
 .quizz-grid .Géographie {
-  font-size: 18px;
-  background-size: 100%;
-  padding: 6rem;
-  width: 23rem;
-  border-radius: 1.4rem;
   background-position-y: -4rem;
 }
 
 .quizz-grid .col {
-  font-size: 18px;
-  background-color: rgb(26, 26, 26);
+  font-size: 25px;
+  background-color: rgb(99, 99, 99);
   margin-bottom: 120px;
   padding: 6REM;
   margin: 2rem;
+  color: rgb(0, 0, 0);
+  height: 13rem;
   margin-left: 2REM;
   background-size: 100%;
   width: 23rem;
   border-radius: 1.4rem;
   user-select: none;
+  position: relative;
 }
 
-
-
-.hiddenInput{
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
+.quizz-grid .col:hover {
+  transform: scale(1.1);
+  transition: transform .2s;
 }
 
-.hiddenInput:checked{
-border: 1px solid red;
+.hiddenInput {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.hiddenInputVid{
-    opacity: 0;
+.hiddenInput {
+  border: 1px solid red;
 }
 
-.col.categorie.col-6 {
-  float: left;
-  width: 350px;
-  cursor: pointer;
+.c-check:checked~.c-label {
+  color: aqua;
+  width: 50%;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  opacity: 4;
+  border-radius: 15px;
+  border: 3px solid rgb(154, 4, 241);
+  position: absolute;
+  top: 0px;
+  left: 0;
+  padding-top: 90px;
 }
 
-.col.categorie.col-6.clicked {
-   width: 380px;
+.hiddenInputVid {
+  opacity: 0;
+}
+
+.categorie .c-label {
+  width: 50%;
+  user-select: none;
+  background-size: 12px;
+}
+
+.c-check:checked~.c-label {
+  color: rgba(255, 0, 0, 0);
+  user-select: none;
+  background-size: 12px;
+}
+
+.col {
+  position: relative;
+}
+
+.center-form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .answer-button {
-  width: 50%; 
-  height: 50%; 
-  font-size: 36px; 
+  width: 50%;
+  height: 50%;
+  font-size: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,27 +146,22 @@ border: 1px solid red;
 .answers-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Espace entre les boutons */
-  align-content: space-between; /* Espace entre les boutons */
-  height: 100vh; /* Hauteur de l'écran */
-  width: 100vw; /* Largeur de l'écran */
+  justify-content: space-between;
+  /* Espace entre les boutons */
+  align-content: space-between;
+  /* Espace entre les boutons */
+  height: 100vh;
+  /* Hauteur de l'écran */
+  width: 100vw;
+  /* Largeur de l'écran */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
 }
 
-.categorie .c-label {
-    width: 50%;
-    user-select: none;
-    background-size: 12px;
-}
-.c-check:checked ~ .c-label {
-    color: rgb(255, 0, 0);
-    user-select: none;
-    background-size: 12px;
-}
 
-.nav-link{
+
+.nav-link {
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 20px;
@@ -138,250 +171,274 @@ border: 1px solid red;
 .navbar.navbar-expand.p-4 {
   background: linear-gradient(to right, #4CAF50, #2196F3);
   color: white;
-  font-family: 'Roboto', sans-serif; /* Change the font to your preference */
+  font-family: 'Roboto', sans-serif;
+  /* Change the font to your preference */
 }
 
 .navbar.navbar-expand.p-4 a.nav-link {
   color: white;
   font-size: 18px;
-  margin-right: 15px; /* Adjust the margin as needed */
-  transition: transform 0.3s ease-in-out; /* Add smooth transition */
+  margin-right: 15px;
+  /* Adjust the margin as needed */
+  transition: transform 0.3s ease-in-out;
+  /* Add smooth transition */
 }
 
 .navbar.navbar-expand.p-4 a.nav-link:hover {
   transform: scale(1.1);
 }
 
-  .col {
-    position: relative;
-  }
+.col {
+  position: relative;
+}
 
 .center-form {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;  
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.startGame {
+  background-color: black;
+  color: white;
+  border: solid 0.5px gray;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  border-radius: 5px;
+  float: left;
+  height: 3rem;
+  margin-left: 25rem;
+  font-family: 'Bangers', cursive;
+  user-select: none;
+}
+
+.startGame:hover {
+  background-color: rgb(58, 22, 92);
+  color: rgb(199, 20, 175);
+  border: solid 0.5px gray;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 5px;
+}
+
+.start-button {
+  font-size: 36px;
+  margin-top: 300px;
+  margin-left: 700px;
+  padding: 40px 130px;
+  background-color: black;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: pulse1 1s infinite alternate;
+  background-color: rgb(62, 3, 62);
+  font-family: 'Bangers', cursive;
+}
+
+.answer-button {
+  height: 100px;
+  justify-content: center;
+  background-color: rgb(41, 4, 71);
+  font-size: 40px;
+  color: white;
+  animation: pulse2 1s infinite alternate;
+  margin-left: 450px;
+  margin-top: 70px;
+  transition: background-color 0.3s ease;
+  animation: slideIn2 1s ease-in-out;
+  font-family: 'Bangers', cursive;
+}
+
+.answer-button.started {
+  margin-left: 350px;
+}
+
+.answer-button:hover {
+  transform: scale(1.05);
+}
+
+.leaderboard {
+  width: 60%;
+  height: 40%;
+  color: white;
+  justify-content: center;
+  margin-left: 340px;
+  margin-top: 150px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 70px;
+  animation: slideUp 1s ease-in-out;
+}
+
+.titleDiv {
+  margin-top: 30px;
+  margin-left: 400px;
+  font-size: 50px;
+  color: azure;
+  animation: slideIn 1s ease-in-out;
+  font-family: 'Bangers', cursive;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
   }
 
-  .startGame {
-    padding: 30px 70px;
-    background-color: black;
-    color: white;
-    border: solid 0.5px gray;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 20px;
-    border-radius: 5px;
-    float:left;
-    margin-left: 750px;
-    font-family: 'Bangers', cursive;
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(-100%);
   }
 
-  .startGame:hover {
-    background-color: rgb(58, 22, 92);
-    color: rgb(199, 20, 175);
-    border: solid 0.5px gray;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 5px;
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideIn2 {
+  from {
+    transform: translateX(100%);
   }
 
-  .start-button {
-    font-size: 36px;
-    margin-top: 300px;
-    margin-left: 700px;
-    padding: 40px 130px;
-    background-color: black;
-    color: white;
-    border: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    animation: pulse1 1s infinite alternate;
-    background-color: rgb(62, 3, 62);
-    font-family: 'Bangers', cursive;
+  to {
+    transform: translateX(0);
   }
-
-  .answer-button {
-    height: 100px;
-    justify-content: center;
-    background-color:rgb(41, 4, 71);
-    font-size: 40px;
-    color: white;
-    animation: pulse2 1s infinite alternate;
-    margin-left: 450px;
-    margin-top: 70px;
-    transition: background-color 0.3s ease;
-    animation: slideIn2 1s ease-in-out;
-    font-family: 'Bangers', cursive;
-  }
-
-  .answer-button.started {
-     margin-left: 350px;
-  }
-
-  .answer-button:hover{
-    transform: scale(1.05);
-  }
-
-  .leaderboard{
-    width: 60%;
-    height: 40%;
-    color: white;
-    justify-content: center;
-    margin-left: 340px;
-    margin-top: 150px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size: 70px;
-    animation: slideUp 1s ease-in-out;
-  }
-
-  .titleDiv {
-    margin-top: 30px;
-    margin-left: 400px;
-    font-size: 50px;
-    color:azure;
-    animation: slideIn 1s ease-in-out;
-    font-family: 'Bangers', cursive;
-  }
-
-  @keyframes slideIn {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      transform: translateY(-100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideIn2 {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-
-
-  .score {
-    width: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    background-color: #4CAF50;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 350px;
-    float:left;
-    font-size: 60px;
-    color: azure;
-  }
-
-  .score.right {
-    font-size: 80px;
-    animation: bounce2 0.05s infinite;
-    color: #0b400d;
-  }
-
-  .score.wrong {
-    font-size: 100px;
-    background-color: red;
-    color: rgb(117, 11, 11);
-  }
-
-  @keyframes bounce2 {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(0);
-    }
-    40% {
-        transform: translateX(20px);
-    }
-    60% {
-        transform: translateX(10px);
-    }
 }
 
 
 
-  .bestScore {
-    text-align: right;
-    margin-right: 20px;
-    font-size: 30px;
-  }
-
-  @keyframes pulse1 {
-    to {
-      transform: scale(1.2); 
-    }
-  }
-
-  @keyframes pulse2 {
-    to {
-      transform: scale(1.08); /* Grow the button */
-    }
-  }
-
-  .correct-answer {
-    background-color: #4CAF50; /* Green color for correct answer */
-  }
-
-  .answer-button.correct-answer {
-    background-color: rgb(4, 57, 4) !important;
-    color: white;
-    animation: pulse1 1s infinite alternate;
-  }
-  
-  .answer-button.wrong-answer {
-    background-color: rgb(90, 10, 10) !important;
-    color: white;
-  }
-
-  .answer-button.wrong-reply {
-    background-color: rgb(90, 10, 10) !important;
-    color: white;
-    animation: bounce 1s infinite;;
-  }
-
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(0);
-    }
-    40% {
-        transform: translateX(-30px);
-    }
-    60% {
-        transform: translateX(-15px);
-    }
+.score {
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background-color: #4CAF50;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 350px;
+  float: left;
+  font-size: 60px;
+  color: azure;
 }
 
-  @keyframes pulse3 {
-    0% {
-      transform: scale(1.2);
-    }
-  }
-  
-  .pulse3 {
-    animation: pulse 1s ease-in-out;
+.score.right {
+  font-size: 80px;
+  animation: bounce2 0.05s infinite;
+  color: #0b400d;
+}
+
+.score.wrong {
+  font-size: 100px;
+  background-color: red;
+  color: rgb(117, 11, 11);
+}
+
+@keyframes bounce2 {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
   }
 
+  40% {
+    transform: translateX(20px);
+  }
 
-  /* Home Page CSS */
- /* hiddenInput{
+  60% {
+    transform: translateX(10px);
+  }
+}
+
+
+
+.bestScore {
+  text-align: right;
+  margin-right: 20px;
+  font-size: 30px;
+}
+
+@keyframes pulse1 {
+  to {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pulse2 {
+  to {
+    transform: scale(1.08);
+    /* Grow the button */
+  }
+}
+
+.correct-answer {
+  background-color: #4CAF50;
+  /* Green color for correct answer */
+}
+
+.answer-button.correct-answer {
+  background-color: rgb(4, 57, 4) !important;
+  color: white;
+  animation: pulse1 1s infinite alternate;
+}
+
+.answer-button.wrong-answer {
+  background-color: rgb(90, 10, 10) !important;
+  color: white;
+}
+
+.answer-button.wrong-reply {
+  background-color: rgb(90, 10, 10) !important;
+  color: white;
+  animation: bounce 1s infinite;
+  ;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+
+  40% {
+    transform: translateX(-30px);
+  }
+
+  60% {
+    transform: translateX(-15px);
+  }
+}
+
+@keyframes pulse3 {
+  0% {
+    transform: scale(1.2);
+  }
+}
+
+.pulse3 {
+  animation: pulse 1s ease-in-out;
+}
+
+
+/* Home Page CSS */
+/* hiddenInput{
     width: 100%;
     height: 100%;
     opacity: 0;
