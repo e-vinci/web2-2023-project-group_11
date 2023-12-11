@@ -84,6 +84,7 @@ async function startQuizz() {
   console.log("début du quizz");
   startGame.removeEventListener('click', startQuizz);
   questionsArray = await fetchQuestions();
+  console.log(questionsArray);
   started=true;
   titleStartButton = `Continuer`
   renderNextQuestion();

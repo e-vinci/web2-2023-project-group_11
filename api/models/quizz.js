@@ -119,92 +119,92 @@ module.exports = {
 const defaultQuizz = [
   {
     id: 1,
-    question: 'Quelle couleur est le ciel ?',
-    categorie: 'Trivia',
+    question: 'Un nombre exclusivement positif est un...',
+    categorie: 'Mathématiques',
     answers: [
       {
-        text: 'bleu',
+        text: 'Nombre réel',
+        isCorrect: false,
+      },
+      {
+        text: 'Nombre naturel',
+        isCorrect: false,
+      },
+      {
+        text: 'Nombre entier',
         isCorrect: true,
       },
       {
-        text: 'vert',
-        isCorrect: false,
-      },
-      {
-        text: 'rouge',
-        isCorrect: false,
-      },
-      {
-        text: 'orange',
+        text: 'Nombre rationnel',
         isCorrect: false,
       },
     ],
   },
   {
     id: 2,
-    question: 'test question 2  trivia?',
-    categorie: 'Trivia',
+    question: 'Quelle est la bonne écriture de Pi',
+    categorie: 'Mathématiques',
     answers: [
       {
-        text: 'bleu',
+        text: '3,1415',
         isCorrect: true,
       },
       {
-        text: 'vert',
+        text: '3,1492',
         isCorrect: false,
       },
       {
-        text: 'rouge',
+        text: '3,1465',
         isCorrect: false,
       },
       {
-        text: 'orange',
+        text: '3,1592',
         isCorrect: false,
       },
     ],
   },
   {
     id: 3,
-    question: "Quelle est la capitale de l'Espagne ?",
+    question: "Quelle est la capitale du Maroc ?",
     categorie: 'Géographie',
     answers: [
       {
-        text: 'Paris',
+        text: 'Casablanca',
         isCorrect: false,
       },
       {
-        text: 'Berlin',
+        text: 'Marrakech',
         isCorrect: false,
       },
       {
-        text: 'Madrid',
+        text: 'Rabat',
         isCorrect: true,
       },
       {
-        text: 'Londres',
+        text: 'Agadir',
         isCorrect: false,
       },
     ],
   },
   {
     id: 4,
-    question: 'Combien de côtés a un triangle ?',
+    question: 'Comment appelle-t-on une figure avec 14 cotés ?',
     categorie: 'Mathématiques',
     answers: [
       {
-        text: '3',
+        text: 'Tétradécagone',
         isCorrect: true,
       },
       {
-        text: '4',
+        text: 'Hexadécagone',
         isCorrect: false,
       },
       {
-        text: '5',
+        text: 'Dodécagone',
         isCorrect: false,
       },
       {
-        text: '6',
+        text: 'Octodécagone',
         isCorrect: false,
       },
     ],
@@ -234,23 +234,23 @@ const defaultQuizz = [
   },
   {
     id: 6,
-    question: 'Qui a peint la Joconde ?',
+    question: 'Quel artiste musical a vendu le plus de disques de tout les temps ?',
     categorie: 'Art',
     answers: [
       {
-        text: 'Vincent van Gogh',
+        text: 'Madonna',
         isCorrect: false,
       },
       {
-        text: 'Leonardo da Vinci',
+        text: 'Elvis Presley',
         isCorrect: true,
       },
       {
-        text: 'Pablo Picasso',
+        text: 'Mickael Jackson',
         isCorrect: false,
       },
       {
-        text: 'Claude Monet',
+        text: 'John Lennon',
         isCorrect: false,
       },
     ],
@@ -326,26 +326,26 @@ const defaultQuizz = [
   },
   {
     id: 10,
-    question: 'Combien de continents y a-t-il sur Terre ?',
-    categorie: 'Géographie',
-    answers: [
-      {
-        text: '5',
-        isCorrect: false,
-      },
-      {
-        text: '6',
-        isCorrect: false,
-      },
-      {
-        text: '7',
-        isCorrect: true,
-      },
-      {
-        text: '8',
-        isCorrect: false,
-      },
-    ],
+question: 'Combien de pays y a-t-il en Afrique ?',
+categorie: 'Géographie',
+answers: [
+  {
+    text: '39',
+    isCorrect: false,
+  },
+  {
+    text: '43',
+    isCorrect: false,
+  },
+  {
+    text: '54',
+    isCorrect: true,
+  },
+  {
+    text: '49',
+    isCorrect: false
+  }
+]
   },
   {
     id: 11,
@@ -647,27 +647,27 @@ const defaultQuizz = [
     ],
   },
   {
-    id: 24,
-    question: 'Combien de continents y a-t-il sur Terre ?',
-    categorie: 'Géographie',
-    answers: [
-      {
-        text: '5',
-        isCorrect: false,
-      },
-      {
-        text: '6',
-        isCorrect: false,
-      },
-      {
-        text: '7',
-        isCorrect: true,
-      },
-      {
-        text: '8',
-        isCorrect: false,
-      },
-    ],
+    id: 2,
+question: 'Quel est le plus grand pays Asiatique ?',
+categorie: 'Géographie',
+answers: [
+  {
+    text: 'Chine',
+    isCorrect: false,
+  },
+  {
+    text: 'Russie',
+    isCorrect: true,
+  },
+  {
+    text: 'Inde',
+    isCorrect: false,
+  },
+  {
+    text: 'Japon',
+    isCorrect: false
+  }
+]
   },
   {
     id: 26,
@@ -901,70 +901,70 @@ const defaultQuizz = [
   },
   {
     id: 36,
-    question: 'Combien de continents y a-t-il sur Terre ?',
+    question: 'Comment appelle t-on les habitants du Liechtenstein',
     categorie: 'Géographie',
     answers: [
       {
-        text: '5',
+        text: 'Liechtensteinais',
         isCorrect: false,
       },
       {
-        text: '6',
+        text: 'Liechtensteiniens',
         isCorrect: false,
       },
       {
-        text: '7',
+        text: 'Liechtensteinois',
         isCorrect: true,
       },
       {
-        text: '8',
+        text: 'Liechtenstois',
         isCorrect: false,
       },
     ],
   },
   {
     id: 37,
-    question: 'Combien de continents y a-t-il sur Terre ?',
+    question: 'Tegucigalpa est la capitale de ... ?',
     categorie: 'Géographie',
     answers: [
       {
-        text: '5',
+        text: 'Nicaragua',
         isCorrect: false,
       },
       {
-        text: '6',
+        text: 'Venezuela',
         isCorrect: false,
       },
       {
-        text: '7',
+        text: 'Honduras',
         isCorrect: true,
       },
       {
-        text: '8',
+        text: 'Bolivie',
         isCorrect: false,
       },
     ],
   },
   {
     id: 38,
-    question: 'Combien de continents y a-t-il sur Terre ?',
+    question: 'Quel opays a subit le plus de tremblements de terre les 30 dernières années ?',
     categorie: 'Géographie',
     answers: [
       {
-        text: '5',
+        text: 'Iran',
         isCorrect: false,
       },
       {
-        text: '6',
+        text: 'Japon',
         isCorrect: false,
       },
       {
-        text: '7',
+        text: 'Indonésie',
+        isCorrect: false,
+      },
+      {
+        text: 'Chine',
         isCorrect: true,
-      },
-      {
-        text: '8',
-        isCorrect: false,
       },
     ],
   },
@@ -991,4 +991,281 @@ const defaultQuizz = [
       },
     ],
   },
+  {
+    id: 40,
+    question: `Quelle est la formule pour calculer la densité d'un objet ?`,
+    categorie: 'Mathématiques',
+    answers: [
+  {
+    text: 'Densité = Masse / Volume',
+    isCorrect: true,
+  },
+  {
+    text: 'Densité = Volume / Masse',
+    isCorrect: false,
+  },
+  {
+    text: 'Densité = Force / Surface',
+    isCorrect: false,
+  },
+  {
+    text: 'Densité = Pression / Volume',
+    isCorrect: false
+  }
+ ],
+},
+{
+  id: 41,
+  question: 'Quel est le plus petit nombre premier ?',
+  categorie: 'Mathématiques',
+  answers: [
+    {
+      text: '2',
+      isCorrect: true,
+    },
+    {
+      text: '1',
+      isCorrect: false,
+    },
+    {
+      text: '3',
+      isCorrect: false,
+    },
+    {
+      text: '5',
+      isCorrect: false
+    }
+  ],
+},
+{
+  id: 42,
+question: 'Quel est le plus petit élément chimique ?',
+categorie: 'Mathématiques',
+answers: [
+  {
+    text: 'Azote',
+    isCorrect: false,
+  },
+  {
+    text: 'Oxygène',
+    isCorrect: false,
+  },
+  {
+    text: 'Hydrogène',
+    isCorrect: true,
+  },
+  {
+    text: 'Carbone',
+    isCorrect: false
+  }
+ ],
+},
+{
+  id: 43,
+  question: 'Quelle musique à le plus de vues sur YouTube ?',
+  categorie: 'Art',
+  answers: [
+    {
+      text: 'PSY - GANGNAM STYLE ',
+      isCorrect: false,
+    },
+    {
+      text: 'PINKFONG - Baby Shark',
+      isCorrect: true,
+    },
+    {
+      text: 'Luis Fonsi - Despacito ft. Daddy Yankee',
+      isCorrect: false,
+    },
+    {
+      text: 'Wiz Khalifa - See You Again ft. Charlie Puth',
+      isCorrect: false,
+    },
+  ],
+},
+{
+  id: 44,
+  question: 'Quelle est la musique la plus vendue de tous les temps ?',
+  categorie: 'Art',
+  answers: [
+    {
+      text: 'Queen - Dont stop me now',
+      isCorrect: false,
+    },
+    {
+      text: 'Queen - Bohemian Rhapsody',
+      isCorrect: false,
+    },
+    {
+      text: 'Mickael Jackson - Billie Jean',
+      isCorrect: false,
+    },
+    {
+      text: 'Mickael Jackson - Thriller',
+      isCorrect: true,
+    },
+  ],
+},
+{
+  id: 45,
+  question: 'Comment est fabriqué le bronze',
+  categorie: 'Art',
+  answers: [
+    {
+      text: 'Cuivre + Etain',
+      isCorrect: true,
+    },
+    {
+      text: 'Cuivre + Zinc + Etain',
+      isCorrect: false,
+    },
+    {
+      text: 'Cuivre + Zinc',
+      isCorrect: false,
+    },
+    {
+      text: 'Zinc + Etain',
+      isCorrect: false,
+    },
+  ],
+},
+{
+  id: 46,
+  question: 'Quelle couleur était Hulk dans les premier comics',
+  categorie: 'Littérature',
+  answers: [
+    {
+      text: 'Noir',
+      isCorrect: false,
+    },
+    {
+      text: 'Gris',
+      isCorrect: true,
+    },
+    {
+      text: 'Rouge',
+      isCorrect: false,
+    },
+    {
+      text: 'Vert',
+      isCorrect: false,
+    },
+  ],
+},
+{
+  id: 47,
+question: 'Dans le roman "Madame Bovary" de Gustave Flaubert, quel est le nom du personnage principal ?',
+categorie: 'Littérature',
+answers: [
+  {
+    text: 'Emma Bovary',
+    isCorrect: true,
+  },
+  {
+    text: 'Charles Bovary',
+    isCorrect: false,
+  },
+  {
+    text: 'Léon Dupuis',
+    isCorrect: false,
+  },
+  {
+    text: 'Rodolphe Boulanger',
+    isCorrect: false
+  },
+ ],
+},
+{
+  id: 48,
+question: 'Dans le roman "Les Misérables" de Victor Hugo, quel est le nom du personnage principal ?',
+categorie: 'Littérature',
+answers: [
+  {
+    text: 'Jean Valjean',
+    isCorrect: true,
+  },
+  {
+    text: 'Javert',
+    isCorrect: false,
+  },
+  {
+    text: 'Cosette',
+    isCorrect: false,
+  },
+  {
+    text: 'Fantine',
+    isCorrect: false
+  },
+ ],
+},
+{
+  id: 49,
+question: 'Dans le roman "Le Petit Prince" d\'Antoine de Saint-Exupéry, quelle est la planète d\'origine du Petit Prince ?',
+categorie: 'Littérature',
+answers: [
+  {
+    text: 'Aquaeous A230C',
+    isCorrect: false,
+  },
+  {
+    text: 'Myriad III',
+    isCorrect: false,
+  },
+  {
+    text: 'Frion I',
+    isCorrect: false,
+  },
+  {
+    text: 'Asteroid B-612',
+    isCorrect: true
+  },
+ ],
+},
+{
+  id: 50,
+question: 'Dans Naruto, comment sappelle le frère de Sasuke ?',
+categorie: 'Littérature',
+answers: [
+  {
+    text: 'Kakashi',
+    isCorrect: false,
+  },
+  {
+    text: 'Shikamaru',
+    isCorrect: false,
+  },
+  {
+    text: 'Itachi',
+    isCorrect: true,
+  },
+  {
+    text: 'Madara',
+    isCorrect: false
+  },
+ ],
+},
+{
+  id: 51,
+question: 'A qui appartient la célèbre phrase : "ZA WARUDO"',
+categorie: 'Littérature',
+answers: [
+  {
+    text: 'Luffy',
+    isCorrect: false,
+  },
+  {
+    text: 'Jotaro Kujo',
+    isCorrect: false,
+  },
+  {
+    text: 'Dio Brando',
+    isCorrect: true,
+  },
+  {
+    text: 'Sangoku',
+    isCorrect: false
+  },
+ ],
+},
+
 ];
