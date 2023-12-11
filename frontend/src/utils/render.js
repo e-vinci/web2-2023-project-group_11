@@ -1,3 +1,4 @@
+
 const clearPage = () => {
   const main = document.querySelector('main');
   main.innerHTML = '';
@@ -10,5 +11,6 @@ const renderPageTitle = (title) => {
   pageTitle.innerText = title;
   main.appendChild(pageTitle);
 };
+
 
 export { clearPage, renderPageTitle };

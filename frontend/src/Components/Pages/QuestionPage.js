@@ -9,6 +9,7 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 // eslint-disable-next-line spaced-comment
 //import { start } from '@popperjs/core';
 
+import { getParameters } from './HomePage';
 
 const questions = [
   {
@@ -42,7 +43,6 @@ const QuestionPage = () => {
   console.log("debut du quizz");
   clearPage();
   main = document.querySelector('main');
-
   startGame = document.createElement('button');
   startGame.className = "start-button";
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
@@ -55,8 +55,10 @@ const QuestionPage = () => {
 }
 
 async function fetchQuestions() {
+  const param = getParameters();
+
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=Géographie,Art,Trivia`
+    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=${param}`
      /* method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ async function fetchQuestions() {
         categorie: ['Géographie', 'Art'],
       }), */
     );
-
+      console.log(response);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
