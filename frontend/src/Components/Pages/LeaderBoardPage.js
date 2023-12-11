@@ -1,22 +1,36 @@
-import { clearPage,renderPageTitle  } from '../../utils/render';
+import { clearPage, renderPageTitle } from '../../utils/render';
 
-const leaderboardData = [
-  { rank: 1, name: 'Lucas The Goat', score: 200 },
-  { rank: 2, name: 'Raf the sheep', score: 190 },
-  { rank: 3, name: 'Nate the rat', score: 130 },
-  // Add more data as needed
-];
+const dataNonTrie = await fetchUsers();
+const leaderboardData = dataNonTrie.sort(
+  ((a, b) =>
+    (a.score / a.nbPartie === 0 ? 1 : a.nbPartie) - (b.score / b.nbPartie === 0 ? 1 : b.nbPartie)),
+);
+async function fetchUsers() {
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/users`);
 
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching questions:', error);
+  }
+  return [];
+
+}
 const LeaderBoardPage = () => {
-    clearPage();
-    renderPageTitle('Register');
-    renderLeaderBoardPage();
-
-  };
+  clearPage();
+  renderPageTitle('Register');
+  renderLeaderBoardPage();
+};
 
 function renderLeaderBoardPage() {
-    const main = document.querySelector('main');
-    main.innerHTML = `
+  const main = document.querySelector('main');
+  let rank = 0;
+  main.innerHTML = `
     <table class="leaderboard">
         <thead>
             <tr>
@@ -26,15 +40,20 @@ function renderLeaderBoardPage() {
             </tr>
         </thead>
         <tbody>
-            ${leaderboardData.map(player => `
+            ${leaderboardData
+              .map((player) => {
+                rank += 1;
+                return `
                 <tr>
-                    <td>${player.rank}</td>
+                    <td>${rank}</td>
                     <td>${player.name}</td>
-                    <td>${player.score}</td>
+                    <td>${player.score / player.nbPartie === 0 ? 1 : player.nbPartie}</td>
                 </tr>
-            `).join('')}
+            `;
+              })
+              .join('')}
         </tbody>
     </table>`;
-  };
+}
 
-  export default LeaderBoardPage;
+export default LeaderBoardPage;

@@ -56,7 +56,7 @@ const QuestionPage = () => {
 
 async function fetchQuestions() {
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=Géographie,Art,Trivia`
+    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=Art`
      /* method: 'GET',
       headers: {
         'Content-Type': 'application/json',
