@@ -1,121 +1,197 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
-import ArtImage from  '../../img/histoire.jpg'
-import LitteratureImage from '../../img/litterature.jpg'
-import GeographieImage from '../../img/geo.jpg'
-import AstronomieImage  from '../../img/astronomie.jpg'
-import MathematicsImage from '../../img/math.jpg'
+import Navigate from '../Router/Navigate';
+import ArtImage from  '../../img/9b9629cfd3d1e41c1866605b0dce0d4f.jpg'
+import LitteratureImage from '../../img/great-literature-scaled.jpg'
+import GeographieImage from '../../img/d9241ee4e7f0e89c54704904eac8b230.jpg'
+import AstronomieImage  from '../../img/69f71c1df7fde8069e91a52903ab9659.jpg'
+import MathematicsImage from '../../img/b543ba9e98d55c4341a7f5e1a34101dc.jpg'
 
 const HomePage = () => {
   clearPage();
   renderPageTitle('HomePage');
   renderHomePage();
+
   const form = document.getElementById('form');
   if (form != null) {
     form.addEventListener('submit', onFormSubmit)
   }
-
+  
 };
 
-function navigateToQuizzPage() {
-  // Rediriger vers la page de quiz
-  window.location.href = '/quizz';
-}
-
-function clickedCategorie(event){
-  const clickedDiv = event.target;
-  console.log(event);
-  clickedDiv.classList.toggle("changedStyle");
-}
 
 function renderHomePage() {
   const main = document.querySelector('main');
   main.innerHTML = `
   <div class="container text-center quizz-grid">
   <form id="form">
-    <div class="row row1 firstC-Row">
-      <div class="col categorie col-6 Art" id="catButtonArt" style="background-image: url(${ArtImage});">
-      <input type="checkbox" value=" " id="idArt" class="hiddenInput c-check">
-        <label for="idArt" class="c-label"> </label>
+    <div class="row d-flex align-items-center justify-content-center row1 firstC-Row">
+    <span class="hpWelcome">Vous pouvez selectionnez plusieurs cactegories!</span>
+      <div class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
+      <input type="checkbox" value="Art" id="idArt" class="hiddenInput c-check">
+        <label for="idArt" class="c-label">Art</label>
 
       </div>
-      <div class="col categorie col-6 Géographie" id="catButtonGeo" style="background-image: url(${GeographieImage});">
-      <input type="checkbox" value=" " id="idGéographie" class="hiddenInput c-check">
-      <label for="idGéographie" class="c-label"> </label>
-     
+    
+      <div class="col categorie col-6 Géographie" style="background-image: url(${GeographieImage});">
+      <input type="checkbox" value="Géographie" id="idGéographie" class="hiddenInput c-check">
+      <label for="idGéographie" class="c-label">Géographie</label>
       </div>
+      
     </div>
 
 
-    <div class="row">
+    <div class="row d-flex align-items-center justify-content-center">
 
-      <div class="col categorie col-6" id="catButtonLit"style="background-image: url(${LitteratureImage});""> 
-      <input type="checkbox" value=" " id="idLittérature" class="hiddenInput c-check">
-        <label for="idLittérature" class="c-label"></input> </label>
+      <div class="col categorie col-6" style="background-image: url(${LitteratureImage});">
+      <input type="checkbox" value="Littérature" id="idLittérature" class="hiddenInput c-check">
+        </input><label for="idLittérature" class="c-label">Littérature</label>
       </div>
 
-      <div class="col categorie col-6" id="catButtonMath"style="background-image: url(${MathematicsImage});">
-      <input type="checkbox" value=" " id="idMathématique" class="hiddenInput c-check"></input>
-        <label for="idTMathématique" class="c-label"> </label>
+      <div class="col categorie col-6" style="background-image: url(${MathematicsImage});">
+      <input type="checkbox" value="Mathématique" id="idMathématique" class="hiddenInput c-check"></input>
+        <label for="idMathématique" class="c-label">Mathématique</label>
       </div>
 
-      <div class="col categorie col-6" id="catButtonAstro" style="background-image: url(${AstronomieImage});">
-      <input type="checkbox" value=" " id="idAstronomie" class="hiddenInput c-check">
-      <label for="idAstronomie" class="c-label"> </label>
+      <div class="col categorie col-6" style="background-image: url(${AstronomieImage});">
+      <input type="checkbox" value="Astronomie" id="idAstronomie" class="hiddenInput c-check">
+      <label for="idAstronomie" class="c-label">Astronomie</label>
       </div>
-
+      <div class="d-flex align-items-center justify-content-center" style="height: 25px;">
+      <button type="submit" class = "p-2 m-2  startGame">Commencer la partie</button>
     </div>
-    <button type="submit" class = "startGame" id="readyButton">Commencer la partie</button>
+    </div>
   </form>
 </div>
 
  `;
-
-const startButton = document.getElementById('readyButton');
-startButton.textContent = 'Valider les paramètres';
-startButton.addEventListener('click', navigateToQuizzPage);
-main.appendChild(startButton);
-
-
 };
+
+
+
+function getParameters() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const parameters = {};
+
+  queryParams.forEach((value, key) => {
+    parameters[key] = value;
+  });
+
+  return parameters;
+}
+
+
+/* function updateForm(parameters) {
+  document.getElementById('idArt').checked = parameters.Art === 'true';
+  document.getElementById('idGéographie').checked = parameters['Géographie'] === 'true';
+  document.getElementById('idLittérature').checked = parameters['Littérature'] === 'true';
+  document.getElementById('idMathématique').checked = parameters['Mathématique'] === 'true';
+  document.getElementById('idAstronomie').checked = parameters.Astronomie === 'true';
+}
+
+
+function initializeFormFromURL() {
+  const parameters = getParameters();
+  updateForm(parameters);
+}
+
+*/
+
+const parameters = getParameters();
+console.log('URL Parameters:', parameters);
 
 async function onFormSubmit(e) {
   e.preventDefault();
 
-  const artDiv = document.getElementById('idArt').checked;
-  const geoDiv = document.getElementById('idGéographie').checked;
-  const litteratureDiv = document.getElementById('idLittérature').checked;
-  const mathDiv = document.getElementById('idMathématique').checked;
-  const astroDiv = document.getElementById('idAstronomie').checked;
-
-  artDiv.addEventListener('click', clickedCategorie);
-  geoDiv.addEventListener('click', clickedCategorie);
-  mathDiv.addEventListener('click', clickedCategorie);
-  astroDiv.addEventListener('click', clickedCategorie);
-  litteratureDiv.addEventListener('click', clickedCategorie);
-
-  document.querySelectorAll("col.categorie.col-6").forEach(div => div.addEventListener("click", clickedCategorie));
+  const Art = document.getElementById('idArt').checked;
+  const Géographie = document.getElementById('idGéographie').checked;
+  const Littérature = document.getElementById('idLittérature').checked;
+  const Mathématique = document.getElementById('idMathématique').checked;
+  const Astronomie = document.getElementById('idAstronomie').checked;
 
   clearPage();
 
-  console.log("Art = ", artDiv, "Géographie = ", geoDiv, " Littérature = ", litteratureDiv, "Mathématique = ", mathDiv, "Astronomie = ", astroDiv);
+  console.log("Art = ", Art, "Géographie = ", Géographie, " Littérature = ", Littérature, "Mathématique = ", Mathématique, "Astronomie = ", Astronomie);
 
-  try {
-    const response = await fetch('/api/quizz/20');
+  // les multiples parametres du site
+  const categories = [];
+  if (Art) categories.push('Art');
+  if (Géographie) categories.push('Géographie');
+  if (Littérature) categories.push('Littérature');
+  if (Mathématique) categories.push('Mathématique');
+  if (Astronomie) categories.push('Astronomie');
 
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+  const categoriesString = categories.join(',');
 
-    const start = await response.json();
+  // ecrit l'url du site
+  const queryParams = new URLSearchParams();
+  queryParams.append('categorie', categoriesString);
+  
+  console.log("Selected categories: ",categoriesString);
 
-    return start;
-  }
+  Navigate("/quizz")
+  const currentUrl = window.location.href.split('?')[0]; 
+  const newUrl = `${currentUrl}?${queryParams.toString()}`;
 
-  catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
+  console.log("Current URL", currentUrl);
 
+  console.log('New URL with parameters:', newUrl);
+
+  window.location.href = newUrl;
 
 }
 
+/* function getParameters() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const parameters = {};
+  
+    for (const [key, value] of queryParams.entries()) {
+      parameters[key] = value;
+    }
+  
+    return parameters;
+  }
+  function updateForm(parameters) {
+    // Assuming your checkboxes have the following IDs
+    document.getElementById('idArt').checked = parameters['Art'] === 'true';
+    document.getElementById('idGéographie').checked = parameters['Géographie'] === 'true';
+    document.getElementById('idLittérature').checked = parameters['Littérature'] === 'true';
+    document.getElementById('idMathématique').checked = parameters['Mathématique'] === 'true';
+    document.getElementById('idAstronomie').checked = parameters['Astronomie'] === 'true';
+  }
+  
+  // Call this function when your page loads to initialize the form based on URL parameters
+  function initializeFormFromURL() {
+    const parameters = getParameters();
+    updateForm(parameters);
+  }
+  
+  // Example usage in someone else's code
+  const parameters = getParameters();
+  console.log('URL Parameters:', parameters);
+  // You can now use the parameters in their code as needed. */
+
+
+
+
+
+
+  /*
+Si je veux direct aller sur le lien 
+const queryParams = new URLSearchParams();
+queryParams.set('Art', Art.toString());
+queryParams.set('Géographie', Géographie.toString());
+queryParams.set('Littérature', Littérature.toString());
+queryParams.set('Mathématique', Mathématique.toString());
+queryParams.set('Astronomie', Astronomie.toString());
+
+const currentUrl = window.location.href.split('?')[0]; 
+const newUrl = `${currentUrl}?${queryParams.toString()}`;
+
+console.log('New URL with parameters:', newUrl);
+
+ window.location.href = newUrl;
+
+clearPage();
+*/
 
 export default HomePage;
