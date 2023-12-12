@@ -1,4 +1,4 @@
-import HomePage from '../Pages/HomePage';
+import { HomePage } from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import NewPage from '../Pages/NewPage';
 import QuestionPage from '../Pages/QuestionPage';

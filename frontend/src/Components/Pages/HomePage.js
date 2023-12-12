@@ -1,10 +1,11 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navigate from '../Router/Navigate';
-import ArtImage from  '../../img/9b9629cfd3d1e41c1866605b0dce0d4f.jpg'
+import ArtImage from '../../img/9b9629cfd3d1e41c1866605b0dce0d4f.jpg'
 import LitteratureImage from '../../img/great-literature-scaled.jpg'
 import GeographieImage from '../../img/d9241ee4e7f0e89c54704904eac8b230.jpg'
-import AstronomieImage  from '../../img/69f71c1df7fde8069e91a52903ab9659.jpg'
+import AstronomieImage from '../../img/69f71c1df7fde8069e91a52903ab9659.jpg'
 import MathematicsImage from '../../img/b543ba9e98d55c4341a7f5e1a34101dc.jpg'
+import TriviaImage from '../../img/istockphoto-1267191865-612x612.jpg'
 
 const HomePage = () => {
   clearPage();
@@ -15,7 +16,7 @@ const HomePage = () => {
   if (form != null) {
     form.addEventListener('submit', onFormSubmit)
   }
-  
+
 };
 
 
@@ -26,10 +27,10 @@ function renderHomePage() {
   <form id="form">
     <div class="row d-flex align-items-center justify-content-center row1 firstC-Row">
     <span class="hpWelcome">Vous pouvez selectionnez plusieurs cactegories!</span>
+      
       <div class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
       <input type="checkbox" value="Art" id="idArt" class="hiddenInput c-check">
         <label for="idArt" class="c-label">Art</label>
-
       </div>
     
       <div class="col categorie col-6 Géographie" style="background-image: url(${GeographieImage});">
@@ -37,11 +38,14 @@ function renderHomePage() {
       <label for="idGéographie" class="c-label">Géographie</label>
       </div>
       
+      <div class="col categorie col-6 Trivia" style="background-image: url(${TriviaImage});">
+      <input type="checkbox" value="Trivia" id="idTrivia" class="hiddenInput c-check">
+        <label for="idTrivia" class="c-label">Trivia</label>
+      </div>
     </div>
 
 
     <div class="row d-flex align-items-center justify-content-center">
-
       <div class="col categorie col-6" style="background-image: url(${LitteratureImage});">
       <input type="checkbox" value="Littérature" id="idLittérature" class="hiddenInput c-check">
         </input><label for="idLittérature" class="c-label">Littérature</label>
@@ -70,13 +74,15 @@ function renderHomePage() {
 
 function getParameters() {
   const queryParams = new URLSearchParams(window.location.search);
-  const parameters = {};
+  console.log("URLLLLL ", queryParams);
+  const parameterValues = [];
 
-  queryParams.forEach((value, key) => {
-    parameters[key] = value;
+  queryParams.forEach((value) => {
+    parameterValues.push(value);
+    console.log("CHAQUE  PPARR", value);
   });
 
-  return parameters;
+  return parameterValues;
 }
 
 
@@ -107,10 +113,11 @@ async function onFormSubmit(e) {
   const Littérature = document.getElementById('idLittérature').checked;
   const Mathématique = document.getElementById('idMathématique').checked;
   const Astronomie = document.getElementById('idAstronomie').checked;
-
+  const Trivia = document.getElementById('idTrivia').checked;
+  
   clearPage();
 
-  console.log("Art = ", Art, "Géographie = ", Géographie, " Littérature = ", Littérature, "Mathématique = ", Mathématique, "Astronomie = ", Astronomie);
+  console.log("Art = ", Art, "Géographie = ", Géographie, " Littérature = ", Littérature, "Mathématique = ", Mathématique, "Astronomie = ", Astronomie,"Trivia = ",Trivia);
 
   // les multiples parametres du site
   const categories = [];
@@ -119,17 +126,18 @@ async function onFormSubmit(e) {
   if (Littérature) categories.push('Littérature');
   if (Mathématique) categories.push('Mathématique');
   if (Astronomie) categories.push('Astronomie');
+  if (Trivia) categories.push('Trivia');
 
   const categoriesString = categories.join(',');
 
   // ecrit l'url du site
   const queryParams = new URLSearchParams();
   queryParams.append('categorie', categoriesString);
-  
-  console.log("Selected categories: ",categoriesString);
 
-  Navigate("/quizz")
-  const currentUrl = window.location.href.split('?')[0]; 
+  console.log("Selected categories: ", categoriesString);
+
+  Navigate("/quizz");
+  const currentUrl = window.location.href.split('?')[0];
   const newUrl = `${currentUrl}?${queryParams.toString()}`;
 
   console.log("Current URL", currentUrl);
@@ -175,7 +183,7 @@ async function onFormSubmit(e) {
 
 
 
-  /*
+/*
 Si je veux direct aller sur le lien 
 const queryParams = new URLSearchParams();
 queryParams.set('Art', Art.toString());
@@ -189,9 +197,10 @@ const newUrl = `${currentUrl}?${queryParams.toString()}`;
 
 console.log('New URL with parameters:', newUrl);
 
- window.location.href = newUrl;
+window.location.href = newUrl;
 
 clearPage();
 */
 
-export default HomePage;
+
+export { HomePage, getParameters };
