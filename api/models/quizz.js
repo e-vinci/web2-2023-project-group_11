@@ -1339,7 +1339,7 @@ answers: [
 },
 {
   id: 56,
-question: 'Quel est l´unique pays possède des autoroutes sans limitations de vitesse ?',
+question: 'Quel est l´unique pays possèdant des autoroutes sans limitations de vitesse ?',
 categorie: 'Géographie',
 answers: [
   {

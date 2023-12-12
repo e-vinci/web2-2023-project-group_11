@@ -35,6 +35,7 @@ const bestScore = 200;
 let startGame = null;
 let main = null;
 let started = false;
+let questionAnswered = false;
 let titleStartButton = 'Commencer';
 let timerInterval = null;
 let remainingTime;
@@ -102,19 +103,21 @@ function startCountdown(secondes) {
 
     remainingTime -= 1;
 
-    if(remainingTime<=0)
+    if(remainingTime<=-1)
      timeUp=true;
 
     if (timeUp) {
       clearInterval(timerInterval);
       stopTimerAudio();
-      document.body.removeChild(countdownElement); // retire le timer quand c'est fini
+      if(countdownElement){
+        document.body.removeChild(countdownElement); // retire le timer quand c'est fini
+      }
     }
     if(timeUp){
       handleTimeUp(); 
       timeUp=false;
     }
-  }, 200);
+  }, 1000);
 }
 
 function playAudio(isCorrect) {
@@ -145,7 +148,9 @@ function handleTimeUp() {
  
    // Appeler la fonction pour passer à la prochaine question après 2 secondes
    setTimeout(() => {
-     document.body.removeChild(timeoutElement);
+    if(timeoutElement){
+      document.body.removeChild(timeoutElement);
+    }
      renderNextQuestion();
      timeUp = false;
    }, 3000);
@@ -260,33 +265,36 @@ function renderNextQuestion() {
 }
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
+  if(questionAnswered)
+    return;
+  questionAnswered = true;
   timeUp=false;
   stopTimerAudio();
   console.log(`réponse choisie : ${selectedAnswerIndex} bonne réponse : ${correctAnswerIndex}`);
   console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
 
-  if (remainingTime >= 0) {
+  if (remainingTime >= 0 && countdownElement) {
     // reset timer lorsque la réponse est donnée avant la fin du temps imparti
     document.body.removeChild(countdownElement);
   }
 
   if (correctAnswerIndex === selectedAnswerIndex) {
-    score += 10;
+    score += 10 + remainingTime*2.5;
     console.log('bonne réponse!');
     // Animation pour le score
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('right');
-    scoreElement.innerHTML = `<span class="score-change">+10</span>`;
+    scoreElement.innerHTML = `<span class="score-change">+${10 + remainingTime * 2.5}</span>`;
   }
   else {
     console.log('mauvaise reponse');
-    if(score>=5)
-      score-=5;
+    if(score>=0.1)
+      score -= score%10;
     const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
     answerButton.classList.add('wrong-reply');
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('wrong');
-    scoreElement.innerHTML = `<span class="score-change">-5</span>`;
+    scoreElement.innerHTML = `<span class="score-change">-${score/10}</span>`;
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
   }
 
@@ -307,6 +315,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     resetAnswerStyles();
     renderNextQuestion();
     timeUp = false;
+    questionAnswered = false;
     // Call the function to render the next question here
   }, 2000); // Adjust the delay time as needed
 }

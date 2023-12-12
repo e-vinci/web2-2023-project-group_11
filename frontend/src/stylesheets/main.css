@@ -384,7 +384,9 @@ label{
 
 
 .score {
-  width: 120px;
+  top: 20px;
+  left: 20px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -392,10 +394,26 @@ label{
   background-color: #4CAF50;
   padding: 10px;
   border-radius: 8px;
-  margin-top: 350px;
   float: left;
   font-size: 60px;
   color: azure;
+  position: fixed;
+}
+
+#countdownElement {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgb(42, 8, 53);
+  color: rgb(138, 11, 11);
+  width:  180px;
+  font-size: 74px;
+  border: 2px solid #ccc;
+ /* z-index: 1000; /* au dessus du reste */
+  display: inline-block;
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  box-sizing: border-box;
 }
 
 .score.right {
@@ -405,7 +423,7 @@ label{
 }
 
 .score.wrong {
-  font-size: 100px;
+  font-size: 80px;
   background-color: red;
   color: rgb(117, 11, 11);
 }
