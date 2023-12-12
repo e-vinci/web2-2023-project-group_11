@@ -15,6 +15,8 @@ const defaultUsers = [
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('admin', saltRounds),
+    score: 0,
+    nbPartie: 0,
   },
 ];
 
@@ -71,11 +73,15 @@ async function createOneUser(username, password) {
   const users = parse(jsonDbPath, defaultUsers);
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const scoreDefault = 0;
+  const nbPartieDefault = 0;
 
   const createdUser = {
     id: getNextId(),
     username,
     password: hashedPassword,
+    score: scoreDefault,
+    nbPartie: nbPartieDefault,
   };
 
   users.push(createdUser);

@@ -1,7 +1,7 @@
 /* eslint-disable spaced-comment */
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
-import onNavBarClick from '../Router/Router'
+//import onNavBarClick from '../Router/Router'
 
 /**
  * Render the Navbar which is styled by using Bootstrap
@@ -21,7 +21,7 @@ const Navbar = () => {
       <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
           <ul class="navbar-nav">
               <li class="nav-item">
-                  <a class="nav-link active mr-3" aria-current="page" href="#" data-uri="/quizz" style="color: white; font-size: 45px;">Quiz</a>
+                  <a class="nav-link active mr-3" aria-current="page" href="#" data-uri="/" style="color: white; font-size: 45px;">Quiz</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link active mr-3" aria-current="page" href="#" data-uri="/login" style="color: white; font-size: 45px;">Login</a>
@@ -64,7 +64,7 @@ const Navbar = () => {
       </div>
     </nav>`;*/
   navbarWrapper.innerHTML = navbar;
-  onNavBarClick();
+  //onNavBarClick();
 };
 
 
