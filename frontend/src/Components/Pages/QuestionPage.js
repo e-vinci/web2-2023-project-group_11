@@ -107,17 +107,22 @@ function startCountdown(secondes) {
      timeUp=true;
 
     if (timeUp) {
-      clearInterval(timerInterval);
+      clearTimer();
       stopTimerAudio();
-      if(countdownElement){
-        document.body.removeChild(countdownElement); // retire le timer quand c'est fini
-      }
     }
     if(timeUp){
       handleTimeUp(); 
       timeUp=false;
     }
   }, 1000);
+}
+
+function clearTimer() {
+  clearInterval(timerInterval);
+  if (countdownElement && document.body.contains(countdownElement)) {
+    document.body.removeChild(countdownElement);
+    countdownElement = null;
+  }
 }
 
 function playAudio(isCorrect) {
@@ -267,6 +272,7 @@ function renderNextQuestion() {
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
   if(questionAnswered)
     return;
+  clearTimer();
   questionAnswered = true;
   timeUp=false;
   stopTimerAudio();
@@ -285,6 +291,15 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('right');
     scoreElement.innerHTML = `<span class="score-change">+${10 + remainingTime * 2.5}</span>`;
+
+    /*const scoreBonusDiv = document.createElement('div');
+    scoreBonusDiv.className = 'score-bonus';
+    scoreBonusDiv.innerHTML = `+${10 + remainingTime * 2.5}`;
+    document.body.appendChild(scoreBonusDiv);
+
+    setTimeout(() => {
+      document.body.removeChild(scoreBonusDiv);
+    }, 2000);  */
   }
   else {
     console.log('mauvaise reponse');
@@ -295,6 +310,16 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('wrong');
     scoreElement.innerHTML = `<span class="score-change">-${score/10}</span>`;
+
+    /*const scoreMalusDiv = document.createElement('div');
+    scoreMalusDiv.className = 'score-malus';
+    scoreMalusDiv.innerHTML = `-${score / 10}`;
+    document.body.appendChild(scoreMalusDiv);
+
+
+    setTimeout(() => {
+      document.body.removeChild(scoreMalusDiv);
+    }, 2000); */
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
   }
 
