@@ -3,7 +3,7 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 const dataNonTrie = await fetchUsers();
 const leaderboardData = dataNonTrie.sort(
   ((a, b) =>
-    (a.score / a.nbPartie === 0 ? 1 : a.nbPartie) - (b.score / b.nbPartie === 0 ? 1 : b.nbPartie)),
+     (b.score / b.nbPartie === 0 ? 1 : b.nbPartie)- (a.score / a.nbPartie === 0 ? 1 : a.nbPartie)),
 );
 async function fetchUsers() {
   try {
@@ -46,8 +46,8 @@ function renderLeaderBoardPage() {
                 return `
                 <tr>
                     <td>${rank}</td>
-                    <td>${player.name}</td>
-                    <td>${player.score / player.nbPartie === 0 ? 1 : player.nbPartie}</td>
+                    <td>${player.username}</td>
+                    <td>${(player.score/(player.nbPartie === 0 ? 1 : player.nbPartie))}</td>
                 </tr>
             `;
               })
