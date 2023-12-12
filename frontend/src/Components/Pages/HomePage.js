@@ -26,7 +26,7 @@ function renderHomePage() {
   <div class="container text-center quizz-grid">
   <form id="form">
     <div class="row d-flex align-items-center justify-content-center row1 firstC-Row">
-    <span class="hpWelcome">Vous pouvez selectionnez plusieurs cactegories!</span>
+    <span class="hpWelcome">Vous pouvez séSlectionner plusieurs catégories!</span>
       
       <div class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
       <input type="checkbox" value="Art" id="idArt" class="hiddenInput c-check">

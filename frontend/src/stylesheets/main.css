@@ -6,7 +6,7 @@ body {
   background-size: 2000px;
   margin: 0;
   padding: 0;
-  animation: moveBackground 6s linear infinite;
+  animation: moveBackground 9s linear infinite;
 }
 
 
@@ -26,10 +26,14 @@ body {
 }
 
 /* Home Page CSS */
+.logoAsset{
+  width: 5rem;
+}
 
 .hpWelcome {
   font-size: 40px;
   color: white;
+  background-size: 100%;
 }
 label{
   display: inline;
@@ -219,7 +223,9 @@ label{
   grid-template-rows: repeat(2, 1fr);
 }
 
-
+#navbarSupportedContent{
+  user-select: none;
+}
 
 .nav-link {
   margin-left: 100px;
