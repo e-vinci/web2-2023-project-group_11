@@ -395,29 +395,6 @@ answers: [
     ],
   },
   {
-    id: 13,
-    question: 'Quel est le plus grand désert du monde ?',
-    categorie: 'Géographie',
-    answers: [
-      {
-        text: 'Désert de Gobi',
-        isCorrect: false,
-      },
-      {
-        text: 'Désert du Sahara',
-        isCorrect: true,
-      },
-      {
-        text: "Désert d'Atacama",
-        isCorrect: false,
-      },
-      {
-        text: 'Désert de Kalahari',
-        isCorrect: false,
-      },
-    ],
-  },
-  {
     id: 14,
     question: 'Qui a peint la Joconde ?',
     categorie: 'Art',
@@ -948,7 +925,7 @@ answers: [
   },
   {
     id: 38,
-    question: 'Quel opays a subit le plus de tremblements de terre les 30 dernières années ?',
+    question: 'Quel pays a subit le plus de tremblements de terre les 30 dernières années ?',
     categorie: 'Géographie',
     answers: [
       {

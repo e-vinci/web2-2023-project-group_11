@@ -86,6 +86,66 @@ label{
   left: 0;
 }
 
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) ;
+  background-color: #0b400d;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#countdownElement {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgb(42, 8, 53);
+  color: rgb(138, 11, 11);
+  width:  180px;
+  font-size: 74px;
+  border: 2px solid #ccc;
+ /* z-index: 1000; /* au dessus du reste */
+  display: inline-block;
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  box-sizing: border-box;
+}
+
+#timeoutElement {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(102, 12, 12); /* Fond rouge semi-transparent */
+  color: #fff;
+  padding-top: 40px;
+  width: 1200px;
+  height: 250px;
+  font-size: 90px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1000; /* Au-dessus des autres éléments */
+  font-family: 'Bangers', cursive;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+#timerSpan{
+  font-size: 24px;
+  color: #2196F3;
+}
+
 .hiddenInput {
   border: 1px solid red;
 }

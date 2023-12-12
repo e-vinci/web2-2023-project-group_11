@@ -39,19 +39,89 @@ let started = false;
 
 let titleStartButton = 'Commencer';
 
+let timerInterval = null;
+
+let remainingTime;
+
+let countdownElement = null;
+
+let timeUp = false;
+
 const QuestionPage = () => {
   console.log("debut du quizz");
   clearPage();
   main = document.querySelector('main');
+
+  //const timer = '<div id="timer">Temps restant : <span id="countdown">10</span> secondes</div>';
   startGame = document.createElement('button');
   startGame.className = "start-button";
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
   startGame.innerText = `${titleStartButton}`;
 
-  main.appendChild(startGame);
+  const timerDiv = document.createElement('div');    //container
+  timerDiv.id = 'timerModel';
+  timerDiv.className = "modal";
+  timerDiv.innerText = 'AAAAAAAAAAAA'
 
+  const timerSpan = document.createElement('span');    //span
+  timerSpan.id = 'timerSpan';
+  timerDiv.innerText = 'BBBBBBBBBBB'
+  timerDiv.appendChild(timerSpan);
+
+  document.body.appendChild(timerDiv);
+
+  main.appendChild(startGame);
+  //main.appendChild(timer);
   startGame.addEventListener('click', startQuizz);
 
+}
+
+// Function to start the countdown
+function startCountdown(secondes) {
+  remainingTime = secondes;
+  timerInterval = setInterval(() => {
+    document.getElementById('timerSpan').innerText = remainingTime;
+
+    
+    countdownElement = document.createElement('div');
+    countdownElement.id = 'countdownElement';
+    countdownElement.className = 'countdown-number';
+    countdownElement.innerText = remainingTime;
+
+    document.body.appendChild(countdownElement);
+   
+
+    remainingTime -= 1;
+
+    if(remainingTime<=0)
+     timeUp=true;
+
+    if (remainingTime < 0) {
+      clearInterval(timerInterval);
+      document.body.removeChild(countdownElement); // retire le timer quand c'est fini
+    }
+    if(timeUp){
+      handleTimeUp(); 
+    }
+  }, 1000);
+}
+
+function handleTimeUp() {
+   console.log('Temps écoulé');
+
+   timeUp = true;
+   
+   const timeoutElement = document.createElement('div');
+   timeoutElement.id = 'timeoutElement';
+   timeoutElement.innerText = 'Temps écoulé';
+   document.body.appendChild(timeoutElement);
+ 
+   // Appeler la fonction pour passer à la prochaine question après 2 secondes
+   setTimeout(() => {
+     document.body.removeChild(timeoutElement);
+     renderNextQuestion();
+     timeUp = false;
+   }, 3000);
 }
 
 async function fetchQuestions() {
@@ -89,6 +159,8 @@ async function startQuizz() {
   console.log(questionsArray);
   started=true;
   titleStartButton = `Continuer`
+
+  startCountdown(10);
   renderNextQuestion();
   console.log()
 }
@@ -143,12 +215,13 @@ async function renderQuestion(question) {
 }
 
 function renderNextQuestion() {
-  console.log();
   console.log("envoie de la question");
+  clearInterval(timerInterval);
   if (currentQuestionIndex < questionsArray.length) {
     const nextQuestion = questionsArray[currentQuestionIndex];
     currentQuestionIndex+=1;
     renderQuestion(nextQuestion);
+    startCountdown(10);
     return;
   }
   console.log('No more questions.');
@@ -156,8 +229,14 @@ function renderNextQuestion() {
 }
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
+  timeUp=false;
   console.log(`réponse choisie : ${selectedAnswerIndex} bonne réponse : ${correctAnswerIndex}`);
   console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
+
+  if (remainingTime >= 0) {
+    // reset timer lorsque la réponse est donnée avant la fin du temps imparti
+    document.body.removeChild(countdownElement);
+  }
 
   if (correctAnswerIndex === selectedAnswerIndex) {
     score += 10;
@@ -193,6 +272,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   setTimeout(() => {
     resetAnswerStyles();
     renderNextQuestion();
+    timeUp = false;
     // Call the function to render the next question here
   }, 2000); // Adjust the delay time as needed
 }
