@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('node:path');
 const { parse, serialize } = require('../utils/json');
+const { error } = require('node:console');
 
 const jwtSecret = 'ilovemypizza!';
 const lifetimeJwt = 24 * 60 * 60 * 1000; // in ms : 24 * 60 * 60 * 1000 = 24h
@@ -42,6 +43,16 @@ async function login(username, password) {
 async function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
+  if(password.length < 8){
+    sessionStorage.setItem(error,'weak_password');
+  }
+
+  if(username.length < 1){
+    sessionStorage.setItem(error,'empty_username');
+  }
+
+
+
 
   await createOneUser(username, password);
 

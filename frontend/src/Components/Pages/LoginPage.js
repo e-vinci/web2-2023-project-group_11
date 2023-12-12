@@ -16,18 +16,18 @@ function renderLoginPage() {
     `<h1 class="text-center">Connectez vous pour enregistrer votre score !</h1>
     <form>
     <div class="form-group w-50 p-3">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="input_email_login" aria-describedby="emailHelp" placeholder="Enter email">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="usernameLogin" aria-describedby="usernameHelp" placeholder="Enter username">
     </div>
     <div class="form-group w-50 p-3">
       <label for="loginPassword">Password</label>
-      <input type="password" class="form-control" id="input_password_login" placeholder="Password">
+      <input type="password" class="form-control" id="passwordLogin" placeholder="Password">
       <small id="pswHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
     </div>
     <div class="form-group p-3"><button type="submit" class="btn btn-primary " >Se connecter</button>
     </div>
-  </form>`;
- 
+  </form>
+  </footer>`;
   const form = main.querySelector('form');
   form.addEventListener('submit', onLogin);
 }
@@ -35,8 +35,8 @@ function renderLoginPage() {
 async function onLogin(e) {
   e.preventDefault();
 
-  const username = document.querySelector('#username').value;
-  const password = document.querySelector('#password').value;
+  const username = document.querySelector('#usernameLogin').value;
+  const password = document.querySelector('#passwordLogin').value;
 
   const options = {
     method: 'POST',
@@ -49,7 +49,7 @@ async function onLogin(e) {
     },
   };
 
-  const response = await fetch('/api/auths/login', options);
+  const response = await fetch(`${process.env.API_BASE_URL}/auths/login`, options);
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 

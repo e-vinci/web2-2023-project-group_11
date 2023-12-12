@@ -11,6 +11,7 @@ const RegisterPage = () => {
 
 function renderRegisterPage() {
     const main = document.querySelector('main');
+    
     main.innerHTML = `<h1 class="text-center">Inscrivez-vous pour tenter de vous trouver dans le tableau des meilleurs score !</h1>
     <div class="center-form"><form>
       <div class="form-group w-50 p-3">
@@ -19,14 +20,14 @@ function renderRegisterPage() {
       </div>
       <div class="form-group w-50 p-3">
         <label for="passwordRegister">Password</label>
-        <input type="password" class="form-control" id="registerPassword" placeholder="Password">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
+        <input type="password" class="form-control" id="registerPassword" placeholder="Password" minlength="8">
+        <small id="passwordHelp" class="form-text text-muted">We'll never share your password with anyone else.</small>
       </div>
       <div class="form-group p-3"><button type="submit" class="btn btn-primary" value="Register">S'inscrire</button></div>
     </form></div>
   `;
   // eslint-disable-next-line no-unused-vars
-  const form = main.querySelector('form')
+  const form = main.querySelector('form');
   form.addEventListener('submit', onRegister);
 }
 
@@ -47,7 +48,7 @@ async function onRegister(e) {
     },
   };
 
-  const response = await fetch('/api/auths/register', options);
+  const response = await fetch(`${process.env.API_BASE_URL}/auths/register`, options);
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
