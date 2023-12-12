@@ -66,7 +66,7 @@ const Navbar = () => {
       </div>
     </nav>`;*/
   navbarWrapper.innerHTML = navbar;
-  
+  onNavBarClick();
 };
 
 
