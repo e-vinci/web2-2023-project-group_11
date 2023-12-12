@@ -111,20 +111,20 @@ async function onFormSubmit(e) {
   const Art = document.getElementById('idArt').checked;
   const Géographie = document.getElementById('idGéographie').checked;
   const Littérature = document.getElementById('idLittérature').checked;
-  const Mathématique = document.getElementById('idMathématique').checked;
+  const Mathématiques = document.getElementById('idMathématique').checked;
   const Astronomie = document.getElementById('idAstronomie').checked;
   const Trivia = document.getElementById('idTrivia').checked;
   
   clearPage();
 
-  console.log("Art = ", Art, "Géographie = ", Géographie, " Littérature = ", Littérature, "Mathématique = ", Mathématique, "Astronomie = ", Astronomie,"Trivia = ",Trivia);
+  console.log("Art = ", Art, "Géographie = ", Géographie, " Littérature = ", Littérature, "Mathématique = ", Mathématiques, "Astronomie = ", Astronomie,"Trivia = ",Trivia);
 
   // les multiples parametres du site
   const categories = [];
   if (Art) categories.push('Art');
   if (Géographie) categories.push('Géographie');
   if (Littérature) categories.push('Littérature');
-  if (Mathématique) categories.push('Mathématique');
+  if (Mathématiques) categories.push('Mathématiques');
   if (Astronomie) categories.push('Astronomie');
   if (Trivia) categories.push('Trivia');
 

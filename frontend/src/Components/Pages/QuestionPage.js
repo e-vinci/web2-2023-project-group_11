@@ -8,6 +8,10 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 //import anime from 'animejs';
 // eslint-disable-next-line spaced-comment
 //import { start } from '@popperjs/core';
+import CorrectAudio from '../../assets/audio/collect-ring-15982.mp3';
+import IncorrectAudio from '../../assets/audio/buzzer-or-wrong-answer-20582.mp3';
+import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3'
+import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_preview.mp3';
 
 import { getParameters } from './HomePage';
 
@@ -25,31 +29,36 @@ const questions = [
 ];
 
 let questionsArray = null;
-
 let currentQuestionIndex = 0;
-
 let score = 0;
 const bestScore = 200;
-
 let startGame = null;
-
 let main = null;
-
 let started = false;
-
 let titleStartButton = 'Commencer';
-
 let timerInterval = null;
-
 let remainingTime;
-
 let countdownElement = null;
-
 let timeUp = false;
+let questionRendered = false;
+
+// audio elements
+const correctAudio = new Audio(CorrectAudio);            
+const incorrectAudio = new Audio(IncorrectAudio);
+const timerAudio = new Audio(TimerAudio); 
+const backgroundAudio = new Audio(BackgroundMusic);
+
+function playBackgroundMusic() {
+  backgroundAudio.loop = true; 
+// Adjust the volume as needed
+  backgroundAudio.play();
+}
 
 const QuestionPage = () => {
   console.log("debut du quizz");
   clearPage();
+  stopTimerAudio();
+ // questionsArray = null;
   main = document.querySelector('main');
 
   //const timer = '<div id="timer">Temps restant : <span id="countdown">10</span> secondes</div>';
@@ -76,9 +85,9 @@ const QuestionPage = () => {
 
 }
 
-// Function to start the countdown
 function startCountdown(secondes) {
   remainingTime = secondes;
+  playTimerAudio();
   timerInterval = setInterval(() => {
     document.getElementById('timerSpan').innerText = remainingTime;
 
@@ -96,20 +105,38 @@ function startCountdown(secondes) {
     if(remainingTime<=0)
      timeUp=true;
 
-    if (remainingTime < 0) {
+    if (timeUp) {
       clearInterval(timerInterval);
+      stopTimerAudio();
       document.body.removeChild(countdownElement); // retire le timer quand c'est fini
     }
     if(timeUp){
       handleTimeUp(); 
+      timeUp=false;
     }
-  }, 1000);
+  }, 200);
+}
+
+function playAudio(isCorrect) {
+  if (isCorrect) {
+    correctAudio.play();
+  } else {
+    incorrectAudio.play();
+  }
+}
+
+function playTimerAudio() {
+  timerAudio.play();
+}
+
+function stopTimerAudio() {
+  timerAudio.pause();
+  timerAudio.currentTime = 0;
 }
 
 function handleTimeUp() {
    console.log('Temps écoulé');
-
-   timeUp = true;
+   stopTimerAudio();
    
    const timeoutElement = document.createElement('div');
    timeoutElement.id = 'timeoutElement';
@@ -217,19 +244,24 @@ async function renderQuestion(question) {
 function renderNextQuestion() {
   console.log("envoie de la question");
   clearInterval(timerInterval);
-  if (currentQuestionIndex < questionsArray.length) {
-    const nextQuestion = questionsArray[currentQuestionIndex];
-    currentQuestionIndex+=1;
-    renderQuestion(nextQuestion);
-    startCountdown(10);
-    return;
-  }
-  console.log('No more questions.');
-   // endQuizz();
+  if(!questionRendered){
+    if (currentQuestionIndex < questionsArray.length) {
+       const nextQuestion = questionsArray[currentQuestionIndex];
+        currentQuestionIndex+=1;
+       renderQuestion(nextQuestion);
+       startCountdown(10);
+       questionRendered = false;
+       return;
+    }
+  
+     console.log('No more questions.');
+     // endQuizz();
+ }
 }
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
   timeUp=false;
+  stopTimerAudio();
   console.log(`réponse choisie : ${selectedAnswerIndex} bonne réponse : ${correctAnswerIndex}`);
   console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
 
@@ -269,6 +301,8 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
       console.log(answerButton.classList);
     }
   }
+  playAudio(correctAnswerIndex === selectedAnswerIndex);
+
   setTimeout(() => {
     resetAnswerStyles();
     renderNextQuestion();
