@@ -1,7 +1,6 @@
 /* eslint-disable spaced-comment */
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
-import onNavBarClick from '../Router/Router'
 import logo from '../../img/logo.png'
 
 /**
@@ -66,7 +65,6 @@ const Navbar = () => {
       </div>
     </nav>`;*/
   navbarWrapper.innerHTML = navbar;
-  onNavBarClick();
 };
 
 
