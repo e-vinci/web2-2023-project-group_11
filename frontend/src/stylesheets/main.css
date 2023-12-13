@@ -461,7 +461,7 @@ label{
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  background-color: #4CAF50;
+  background-color: #c1901d;
   padding: 10px;
   border-radius: 8px;
   float: left;
@@ -603,11 +603,11 @@ label{
 }
 
 score.right .score-bonus {
-  color: green; /* adjust the color for bonus points */
+  color: green; 
 }
 
 .score.wrong .score-malus {
-  color: red; /* adjust the color for malus points */
+  color: red; 
 }
 
 

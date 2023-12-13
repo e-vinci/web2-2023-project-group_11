@@ -50,6 +50,8 @@ let questionRendered = false;
 let streak = 0;
 let lossStreak = 0;
 let streakElement;
+let streakBonusScore;
+let endDiv;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);            
@@ -310,14 +312,16 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   }
 
   if (correctAnswerIndex === selectedAnswerIndex) {
-    lossStreak = 0;
+    resetStreak(false);
     streak += 1;
-    score += 10 + remainingTime*2.5;
+
+    const bonusScore = 10 + Math.floor(remainingTime*2.5);
+    score += bonusScore;
     console.log('bonne réponse!');
     // Animation pour le score
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('right');
-    scoreElement.innerHTML = `<span class="score-change">+${10 + remainingTime * 2.5}</span>`;
+    scoreElement.innerHTML = `<span class="score-change">+${bonusScore}</span>`;
 
     /*const scoreBonusDiv = document.createElement('div');
     scoreBonusDiv.className = 'score-bonus';
@@ -332,15 +336,25 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     console.log('mauvaise reponse');
     console.log('streak = 0');
     console.log(lossStreak);
-    streak = 0;
+    //streak = 0;
+
+    resetStreak(true);
     lossStreak+=1;
-    if(score>=0.1)
-      score -= score%10;
-    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
+
+    if(score>=0.1){
+      const malusScore = Math.ceil(score * 0.15);;
+      score -= malusScore;
+      const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
     answerButton.classList.add('wrong-reply');
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('wrong');
-    scoreElement.innerHTML = `<span class="score-change">-${score/10}</span>`;
+    scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
+    }
+    /*const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
+    answerButton.classList.add('wrong-reply');
+    const scoreElement = document.getElementById('score2');
+    scoreElement.classList.add('wrong');
+    scoreElement.innerHTML = `<span class="score-change">-${retrait}</span>`;*/
 
     /*const scoreMalusDiv = document.createElement('div');
     scoreMalusDiv.className = 'score-malus';
@@ -355,32 +369,62 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   }
 
   if(streak===3){
+    const bonusScore = Math.floor(score * 0.1);
+    score += bonusScore;
     console.log('streak de 3');
+
     threeWinStreak.play();
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`
+    document.body.appendChild(streakBonusScore);
+
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Winning Streak';
     document.body.appendChild(streakElement);
   }
+
   if(lossStreak===3){
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Losing Streak';
     document.body.appendChild(streakElement);
+
     losingStreakAudio.play();
   }
+
   if(streak===6){
+    const bonusScore = Math.floor(score * 0.15);
+    score += bonusScore;
     sixWinStreak.play();
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`
+    document.body.appendChild(streakBonusScore);
+
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'On Fire !';
     document.body.appendChild(streakElement);
   }
+
   if(streak===9){
+    const bonusScore = Math.floor(score * 0.2);
+    score += bonusScore;
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`
+    document.body.appendChild(streakBonusScore);
+
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Invicible';
     document.body.appendChild(streakElement);
+
     nineWinStreak.play();
   }
 
@@ -400,6 +444,8 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   setTimeout(() => {
     if(streakElement && document.body.contains(streakElement))
      document.body.removeChild(streakElement);
+    if(streakBonusScore && document.body.contains(streakBonusScore))
+     document.body.removeChild(streakBonusScore);
     resetAnswerStyles();
     renderNextQuestion();
     timeUp = false;
@@ -410,7 +456,8 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
 function resetAnswerStyles() {
   const scoreDiv = document.getElementById("score2");
-  scoreDiv.classList.remove('pulse3');
+  if(scoreDiv)
+   scoreDiv.classList.remove('pulse3');
   const answerButtons = document.querySelectorAll('.answer-button');
   answerButtons.forEach(button => {
     button.classList.remove('correct-answer', 'wrong-answer', 'wrong-reply');
@@ -418,7 +465,23 @@ function resetAnswerStyles() {
 }
 
 function endQuizz(){
-  clearPage();
+    clearPage();
+
+    endDiv = document.createElement('div');
+    endDiv.className = 'end';
+    streakBonusScore.innerText = `Fin de la partie\n Score : ${score}`;
+    document.body.appendChild(endDiv);
+
+}
+
+function resetStreak(resetStreakOrNot){
+  if(resetStreakOrNot){
+    streak=0;
+    console.log('Fin de streak');
+  }
+  else {
+   lossStreak=0
+  }
 }
 
 
