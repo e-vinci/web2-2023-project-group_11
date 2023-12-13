@@ -1,8 +1,8 @@
 const express = require('express');
+const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const cookieSession = require('cookie-session');
 
 const corsOptions = {
   origin: ['http://localhost:8080', 'https://e-baron.github.io', 'https://rafael-millor-vinci.github.io'],

@@ -194,4 +194,4 @@ console.log('New URL with parameters:', newUrl);
 clearPage();
 */
 
-export default HomePage;
+export { HomePage, getParameters };
