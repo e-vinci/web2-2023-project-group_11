@@ -90,8 +90,7 @@ function read20Questions(categories) {
   // eslint-disable-next-line no-confusing-arrow
   const filteredQuestions = quizz.filter((question) =>
     // eslint-disable-next-line implicit-arrow-linebreak
-    !categories ? true : categories.includes(question.categorie),
-  );
+    !categories ? true : categories.includes(question.categorie));
 
   console.log(`taille possible question ${filteredQuestions.length}`);
 
