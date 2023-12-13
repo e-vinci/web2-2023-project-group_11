@@ -37,6 +37,43 @@ let main = null;
 let started = false;
 
 let titleStartButton = 'Commencer';
+let timerInterval = null;
+let remainingTime;
+let countdownElement = null;
+let timeUp = false;
+let questionRendered = false;
+let streak = 0;
+let lossStreak = 0;
+let streakElement;
+let streakBonusScore;
+let endDiv;
+let oneortwo = 1;
+let malusScore;
+
+// audio elements
+const correctAudio = new Audio(CorrectAudio);            
+const incorrectAudio1 = new Audio(IncorrectAudio1);
+const timerAudio = new Audio(TimerAudio); 
+const backgroundAudio = new Audio(BackgroundMusic);
+const threeWinStreak = new Audio(ThreeWinningStreak);
+const sixWinStreak = new Audio(SixWinningStreak);
+const nineWinStreak = new Audio(NineWinningStreak);
+const losingStreakAudio = new Audio(LosingStreak);
+const timeOverAudio = new Audio(TimeOver);
+const incorrectAudio2 = new Audio(IncorrectAudio2);
+
+timerAudio.volume = 0.2;
+losingStreakAudio.volume = 1;
+incorrectAudio1.volume = 1;
+correctAudio.volume = 0.1;
+backgroundAudio.volume = 0.03;
+
+function playBackgroundMusic() {
+  backgroundAudio.loop = true; 
+// Adjust the volume as needed
+  backgroundAudio.play();
+  backgroundAudio.playbackRate = 1.1;
+}
 
 const QuestionPage = () => {
   console.log("debut du quizz");
@@ -166,9 +203,26 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   }
   else {
     console.log('mauvaise reponse');
-    if(score>=5)
-      score-=5;
-    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
+    console.log('streak = 0');
+    console.log(lossStreak);
+    //streak = 0;
+
+    resetStreak(true);
+    lossStreak+=1;
+
+    if(score>=0.1){
+      malusScore = Math.ceil(score * 0.15);;
+      score -= malusScore;
+      const scoreElement = document.getElementById('score2');
+      scoreElement.classList.add('wrong');
+      scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
+    }  
+    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`);
+    answerButton.classList.add('wrong-reply');
+    console.log(`CLASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS LISTTT`);
+    
+    
+    /*const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
     answerButton.classList.add('wrong-reply');
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('wrong');
@@ -203,7 +257,13 @@ function resetAnswerStyles() {
   });
 }
 
-function updateScore() {
+function endQuizz(){
+    clearPage();
+
+    endDiv = document.createElement('div');
+    endDiv.className = 'end';
+    endDiv.innerText = `Fin de la partie\n Score : ${score}`;
+    document.body.appendChild(endDiv);
 
 }
 
