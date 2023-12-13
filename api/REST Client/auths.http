@@ -24,8 +24,8 @@ POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "username":"test1",
+    "password":"test1"
 }
 
 ### Login the manager user
@@ -36,3 +36,6 @@ Content-Type: application/json
     "username":"manager",
     "password":"manager"
 }
+
+### GET ALL USERS
+GET {{baseUrl}}/users

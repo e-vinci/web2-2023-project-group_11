@@ -1,4 +1,4 @@
-import HomePage from '../Pages/HomePage';
+import { HomePage } from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import NewPage from '../Pages/NewPage';
 import QuestionPage from '../Pages/QuestionPage';
@@ -9,7 +9,7 @@ import LeaderBoardPage from '../Pages/LeaderBoardPage';
 const routes = {
   '/': HomePage,
   '/new': NewPage,
-  '/question': QuestionPage,
+  '/quizz': QuestionPage,
   '/login':LoginPage,
   '/register':RegisterPage,
   '/leaderboard':LeaderBoardPage
