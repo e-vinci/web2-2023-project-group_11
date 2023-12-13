@@ -18,6 +18,7 @@ import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
 import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
+//import DoubleLosingStreak 
 
 import { getParameters } from './HomePage';
 
@@ -52,7 +53,8 @@ let lossStreak = 0;
 let streakElement;
 let streakBonusScore;
 let endDiv;
-let oneortwo = 1;
+let pitchSelector = 2;
+//let oneOrTwo = 1;
 let malusScore;
 
 // audio elements
@@ -66,12 +68,22 @@ const nineWinStreak = new Audio(NineWinningStreak);
 const losingStreakAudio = new Audio(LosingStreak);
 const timeOverAudio = new Audio(TimeOver);
 const incorrectAudio2 = new Audio(IncorrectAudio2);
+// const doublelosingstreak = new Audio(DoubleLosingStreak);
 
 timerAudio.volume = 0.2;
 losingStreakAudio.volume = 1;
-incorrectAudio1.volume = 1;
 correctAudio.volume = 0.1;
 backgroundAudio.volume = 0.03;
+threeWinStreak.playbackRate = 1.6;
+threeWinStreak.preservesPitch = false;
+sixWinStreak.playbackRate = 1.6;
+sixWinStreak.preservesPitch = false;
+nineWinStreak.playbackRate = 1.6;
+nineWinStreak.preservesPitch = false;
+losingStreakAudio.playbackRate = 0.8;
+losingStreakAudio.preservesPitch = false;
+timeOverAudio.playbackRate = 1.6;
+timeOverAudio.preservesPitch = false;
 
 function playBackgroundMusic() {
   backgroundAudio.loop = true; 
@@ -151,21 +163,63 @@ function clearTimer() {
 }
 
 function playAudio(isCorrect) {
+  incorrectAudio2.pause();
   if (isCorrect) {
     correctAudio.play();
     console.log('BON AUDIO')
   } else {
-    if(oneortwo===1){
-       incorrectAudio1.play();
-       oneortwo = 2;
-    }
-    else if(oneortwo===2){
+     if(lossStreak===1){
       incorrectAudio2.play();
-      oneortwo = 1;
+      incorrectAudio2.playbackRate = 1.5;
+     }
+     else if(lossStreak===2){
+      incorrectAudio2.play();
+      incorrectAudio2.playbackRate = 0.8;
+     }
+     else if(lossStreak===4){
+      incorrectAudio2.play();
+      incorrectAudio2.playbackRate = 0.6;
+     }
+     else if(lossStreak>=5 && lossStreak !== 3){
+      incorrectAudio2.play();
+      incorrectAudio2.playbackRate = 0.4;
+     }
+     
+
+    /*else if(oneOrTwo===2){
+      const speedMultiplier = 0.20; 
+      /*if(lossStreak>2)
+       speedMultiplier = 0.12;
+             incorrectAudio2.play();
+      incorrectAudio2.playbackRate = Math.max(0.2, 2 - lossStreak * speedMultiplier);
+      console.log('MAUVAIS AUDIO');
+      oneOrTwo=1;
+
+      if(lossStreak>1)
+       speedMultiplier = 0.25;
+      incorrectAudio2.play();
+      incorrectAudio2.playbackRate = Math.max(0.2, 1.5 - lossStreak * speedMultiplier);
+      console.log('MAUVAIS AUDIO');
+      oneOrTwo=2;
+    }*/
+    
+    /*if(pitchSelector===1){
+       incorrectAudio1.play();
+       incorrectAudio1.playbackRate = 2;
+       pitchSelector = 2;
     }
+    else if(pitchSelector===2){
+      incorrectAudio2.play();
+      pitchSelector = 3;
+    }
+    else if(pitchSelector===3){
+      incorrectAudio2.play();
+      pitchSelector = 4;
+    }*/
     console.log('MAUVAIS AUDIO')
   }
 }
+
 
 function playTimerAudio() {
   timerAudio.play();
@@ -353,6 +407,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     resetStreak(true);
     lossStreak+=1;
+    pitchSelector -= lossStreak/10;
 
     if(score>=0.1){
       malusScore = Math.ceil(score * 0.15);;
@@ -462,6 +517,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
      document.body.removeChild(streakElement);
     if(streakBonusScore && document.body.contains(streakBonusScore))
      document.body.removeChild(streakBonusScore);
+    // endQuizz();
     resetAnswerStyles();
     renderNextQuestion();
     timeUp = false;
@@ -483,6 +539,7 @@ function resetAnswerStyles() {
 function endQuizz(){
     clearPage();
 
+    backgroundAudio.volume = 1;
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
@@ -500,7 +557,7 @@ function resetStreak(resetStreakOrNot){
   }
 }
 
-async function changerScore(username, nouveauScore) {
+async function updateBestScore(username, nouveauScore) {
   try {
     const options = {
       method: 'PATCH',
@@ -513,7 +570,7 @@ async function changerScore(username, nouveauScore) {
       },
     };
 
-    const response = await fetch(`${process.env.API_BASE_URL}/users/changerScore`, options);
+    const response = await fetch(`${process.env.API_BASE_URL}/users/updateBestScore`, options);
 
     if (!response.ok) {
       throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);

@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   res.json(allUsers);
 });
 
-router.patch('/changerScore', async (req, res) => {
+router.patch('/updateBestScore', async (req, res) => {
   try {
     const nouveauScore = req?.body?.nouveauScore?.length !== 0 ? req.body.nouveauScore : undefined;
     const id = req?.body?.id?.length !== 0 ? req.body.id : undefined;
