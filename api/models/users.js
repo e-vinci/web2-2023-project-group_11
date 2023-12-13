@@ -103,10 +103,29 @@ function readAllUsers() {
   const allUsers = parse(jsonDbPath, defaultUsers);
   return allUsers;
 }
+async function changerScore(id, nouveauScore) {
+  try {
+    const idNumber = parseInt(id, 10);
+    const users = parse(jsonDbPath, defaultUsers);
+    const foundIndex = users.findIndex((user) => user.id === idNumber);
+
+    if (foundIndex < 0) return undefined;
+
+    users[foundIndex].score = nouveauScore;
+
+    await serialize(jsonDbPath, users); // Attendez la fin de l'opération asynchrone
+
+    return users[foundIndex];
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du score :', error);
+    throw error;
+  }
+}
 
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   readAllUsers,
+  changerScore,
 };

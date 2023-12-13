@@ -498,6 +498,38 @@ function resetStreak(resetStreakOrNot){
   }
 }
 
+async function changerScore(username, nouveauScore) {
+  try {
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        id: username.id,
+        nouveauScore,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await fetch(`${process.env.API_BASE_URL}/users/changerScore`, options);
+
+    if (!response.ok) {
+      throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);
+    }
+
+    
+    const data = await response.json();
+    console.log('Réponse du serveur :', data);
+
+    
+    return data;
+  } catch (error) {
+    console.error('Erreur lors de la requête PATCH :', error);
+    throw error
+  }
+}
+
+
 
 /* async function fetchQuestion(id) {
  return new Promise((resolve, reject) => {
