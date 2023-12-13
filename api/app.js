@@ -1,4 +1,5 @@
 const express = require('express');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
