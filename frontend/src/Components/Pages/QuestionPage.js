@@ -207,6 +207,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     console.log(lossStreak);
     //streak = 0;
 
+    // eslint-disable-next-line no-undef
     resetStreak(true);
     lossStreak+=1;
 
@@ -228,6 +229,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     scoreElement.classList.add('wrong');
     scoreElement.innerHTML = `<span class="score-change">-5</span>`;
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
+    
   }
 
   for (let i = 0; i <= 3; i+=1) {
@@ -387,5 +389,5 @@ function endQuizz(){
          <p> ${bestScore} </p>
        </div>
        */
-
+  }}
 export default QuestionPage;
