@@ -22,24 +22,35 @@ const defaultUsers = [
 ];
 
 async function login(username, password) {
-  const userFound = readOneUserFromUsername(username);
-  if (!userFound) return undefined;
+  try {
+    const userFound = await readOneUserFromUsername(username);
 
-  const passwordMatch = await bcrypt.compare(password, userFound.password);
-  if (!passwordMatch) return undefined;
+    if (!userFound) {
+      throw new Error('Utilisateur non trouvé');
+    }
 
-  const token = jwt.sign(
-    { username }, // session data added to the payload (payload : part 2 of a JWT)
-    jwtSecret, // secret used for the signature (signature part 3 of a JWT)
-    { expiresIn: lifetimeJwt }, // lifetime of the JWT (added to the JWT payload)
-  );
+    const passwordMatch = await bcrypt.compare(password, userFound.password);
 
-  const authenticatedUser = {
-    username,
-    token,
-  };
+    if (!passwordMatch) {
+      throw new Error('Mot de passe incorrect');
+    }
 
-  return authenticatedUser;
+    const token = jwt.sign(
+      { username },
+      jwtSecret,
+      { expiresIn: lifetimeJwt },
+    );
+
+    const authenticatedUser = {
+      username,
+      token,
+    };
+
+    return authenticatedUser;
+  } catch (er) {
+    console.error('Erreur lors de l\'authentification :', er.message);
+    return undefined; // Ou utilisez `null` selon vos préférences
+  }
 }
 
 async function register(username, password) {
@@ -67,7 +78,6 @@ async function register(username, password) {
     username,
     token,
   };
-
   return authenticatedUser;
 }
 
