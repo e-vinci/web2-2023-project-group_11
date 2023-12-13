@@ -36,7 +36,6 @@ const questions = [
 let questionsArray = null;
 let currentQuestionIndex = 0;
 let score = 0;
-const bestScore = 200;
 let startGame = null;
 let main = null;
 let started = false;
@@ -426,10 +425,42 @@ function endQuizz(){
   scoreElement.id = 'scoreQuizz';
   scoreElement.className = 'titleDiv'
   scoreElement.textContent = `Score: ${  score}`;
-
+  
   // Ajout de l'élément au corps du document
   document.body.appendChild(scoreElement);
 }
+
+async function changerScore(username, nouveauScore) {
+  try {
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        id: username.id,
+        nouveauScore,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await fetch(`${process.env.API_BASE_URL}/users/changerScore`, options);
+
+    if (!response.ok) {
+      throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);
+    }
+
+    
+    const data = await response.json();
+    console.log('Réponse du serveur :', data);
+
+    
+    return data;
+  } catch (error) {
+    console.error('Erreur lors de la requête PATCH :', error);
+    throw error
+  }
+}
+
 
 
 /* async function fetchQuestion(id) {

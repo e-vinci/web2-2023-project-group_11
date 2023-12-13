@@ -39,3 +39,12 @@ Content-Type: application/json
 
 ### GET ALL USERS
 GET {{baseUrl}}/users
+
+### Update the pizza identified by 6 with the admin token
+PATCH {{baseUrl}}/users/changerScore
+Content-Type: application/json
+
+{
+    "id":2,
+    "nouveauScore":100
+}
