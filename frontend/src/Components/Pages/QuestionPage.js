@@ -223,7 +223,7 @@ async function startQuizz() {
   started=true;
   titleStartButton = `Continuer`
 
-  startCountdown(10);
+  //startCountdown(10);
   renderNextQuestion();
   console.log()
 }
@@ -418,7 +418,17 @@ function resetAnswerStyles() {
 }
 
 function endQuizz(){
+  // Appel de la fonction clearPage pour vider la page
   clearPage();
+
+  // Création de l'élément HTML scoreQuizz
+  const scoreElement = document.createElement('div');
+  scoreElement.id = 'scoreQuizz';
+  scoreElement.className = 'titleDiv'
+  scoreElement.textContent = `Score: ${  score}`;
+
+  // Ajout de l'élément au corps du document
+  document.body.appendChild(scoreElement);
 }
 
 
