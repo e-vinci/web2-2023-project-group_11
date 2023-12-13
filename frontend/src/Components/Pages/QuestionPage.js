@@ -8,7 +8,18 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 //import anime from 'animejs';
 // eslint-disable-next-line spaced-comment
 //import { start } from '@popperjs/core';
+import CorrectAudio from '../../assets/audio/collect-ring-15982.mp3';
+import IncorrectAudio1 from '../../assets/audio/fart-with-reverb-39675(1).mp3';   /* '../../assets/audio/fart-with-reverb-39675(1).mp3'; */
+import IncorrectAudio2 from '../../assets/audio/wet-fart-6139(1).mp3';
+import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3';
+import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_preview.mp3';
+import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
+import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
+import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
+import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
+import TimeOver from '../../assets/audio/Recording (6).mp3';
 
+import { getParameters } from './HomePage';
 
 const questions = [
   {

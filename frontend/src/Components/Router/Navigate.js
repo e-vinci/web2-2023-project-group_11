@@ -18,7 +18,7 @@
   };
 
 
-   const NavigateWithParameter = (toUri,data) => {
+  export const NavigateWithParameter = (toUri,data) => {
     const fromUri = window.location.pathname;
     if (fromUri === toUri) return;
   
@@ -27,5 +27,5 @@
     dispatchEvent(popStateEvent);
  };
  
- export {Navigate,NavigateWithParameter};
+ export default Navigate;
  

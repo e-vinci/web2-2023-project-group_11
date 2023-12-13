@@ -4,9 +4,8 @@ const logger = require('morgan');
 const cors = require('cors');
 const cookieSession = require('cookie-session');
 
-
 const corsOptions = {
-  origin: ['http://localhost:8080', 'https://e-baron.github.io'],
+  origin: ['http://localhost:8080', 'https://e-baron.github.io', 'https://rafael-millor-vinci.github.io'],
 };
 
 const usersRouter = require('./routes/users');
@@ -21,7 +20,7 @@ const cookieSecreteKey = 'YouWouldnot!not!like!mypizza';
 app.use(
   cookieSession({
     name: 'user',
-    keys: [cookieSecreteKey],  
+    keys: [cookieSecreteKey],
     httpOnly: true,
     expires: expiryDateIn3Months,
   }),

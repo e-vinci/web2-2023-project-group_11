@@ -1,6 +1,6 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
-import {Navigate} from '../Router/Navigate';
-import ArtImage from  '../../img/9b9629cfd3d1e41c1866605b0dce0d4f.jpg'
+import Navigate from '../Router/Navigate';
+import ArtImage from '../../img/9b9629cfd3d1e41c1866605b0dce0d4f.jpg'
 import LitteratureImage from '../../img/great-literature-scaled.jpg'
 import GeographieImage from '../../img/d9241ee4e7f0e89c54704904eac8b230.jpg'
 import AstronomieImage  from '../../img/69f71c1df7fde8069e91a52903ab9659.jpg'
