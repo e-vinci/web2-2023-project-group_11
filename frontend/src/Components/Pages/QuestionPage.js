@@ -10,8 +10,13 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 //import { start } from '@popperjs/core';
 import CorrectAudio from '../../assets/audio/collect-ring-15982.mp3';
 import IncorrectAudio from '../../assets/audio/buzzer-or-wrong-answer-20582.mp3';
-import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3'
+import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3';
 import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_preview.mp3';
+import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
+import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
+import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
+import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
+import TimeOver from '../../assets/audio/Recording (6).mp3';
 
 import { getParameters } from './HomePage';
 
@@ -42,17 +47,32 @@ let remainingTime;
 let countdownElement = null;
 let timeUp = false;
 let questionRendered = false;
+let streak = 0;
+let lossStreak = 0;
+let streakElement;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);            
 const incorrectAudio = new Audio(IncorrectAudio);
 const timerAudio = new Audio(TimerAudio); 
 const backgroundAudio = new Audio(BackgroundMusic);
+const threeWinStreak = new Audio(ThreeWinningStreak);
+const sixWinStreak = new Audio(SixWinningStreak);
+const nineWinStreak = new Audio(NineWinningStreak);
+const losingStreakAudio = new Audio(LosingStreak);
+const timeOverAudio = new Audio(TimeOver);
+
+timerAudio.volume = 0.2;
+losingStreakAudio.volume = 1;
+incorrectAudio.volume = 0.1;
+correctAudio.volume = 0.1;
+backgroundAudio.volume = 0.03;
 
 function playBackgroundMusic() {
   backgroundAudio.loop = true; 
 // Adjust the volume as needed
   backgroundAudio.play();
+  backgroundAudio.playbackRate = 1.1;
 }
 
 const QuestionPage = () => {
@@ -82,6 +102,7 @@ const QuestionPage = () => {
 
   main.appendChild(startGame);
   //main.appendChild(timer);
+  startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
 
 }
@@ -105,7 +126,6 @@ function startCountdown(secondes) {
 
     if(remainingTime<=-1)
      timeUp=true;
-
     if (timeUp) {
       clearTimer();
       stopTimerAudio();
@@ -144,18 +164,24 @@ function stopTimerAudio() {
 
 function handleTimeUp() {
    console.log('Temps écoulé');
+   streak=0;
+   lossStreak=0;
    stopTimerAudio();
+   timeOverAudio.play();
    
    const timeoutElement = document.createElement('div');
    timeoutElement.id = 'timeoutElement';
    timeoutElement.innerText = 'Temps écoulé';
    document.body.appendChild(timeoutElement);
+
+   //timeoutElement.classList.add('slide-in');
  
    // Appeler la fonction pour passer à la prochaine question après 2 secondes
    setTimeout(() => {
     if(timeoutElement){
       document.body.removeChild(timeoutElement);
     }
+    //timeoutElement.classList.add('slide-out');
      renderNextQuestion();
      timeUp = false;
    }, 3000);
@@ -203,7 +229,7 @@ async function startQuizz() {
 }
 
 async function renderQuestion(question) {
-  
+
   // suppression de la question précédente
   clearPage();
   console.log("render de la question");
@@ -225,7 +251,6 @@ async function renderQuestion(question) {
 
     // index de la bonne réponse
     const correctAnswerIndex = question.answers.findIndex(answer => answer.isCorrect);
-    console.log(`BONNE REPONSE : ${question.answers[correctAnswerIndex].text}`);
 
     //ajout de la variable dans le main
     main.innerHTML = `
@@ -265,7 +290,7 @@ function renderNextQuestion() {
     }
   
      console.log('No more questions.');
-     // endQuizz();
+     endQuizz();
  }
 }
 
@@ -285,6 +310,8 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   }
 
   if (correctAnswerIndex === selectedAnswerIndex) {
+    lossStreak = 0;
+    streak += 1;
     score += 10 + remainingTime*2.5;
     console.log('bonne réponse!');
     // Animation pour le score
@@ -303,6 +330,10 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   }
   else {
     console.log('mauvaise reponse');
+    console.log('streak = 0');
+    console.log(lossStreak);
+    streak = 0;
+    lossStreak+=1;
     if(score>=0.1)
       score -= score%10;
     const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
@@ -323,6 +354,36 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
   }
 
+  if(streak===3){
+    console.log('streak de 3');
+    threeWinStreak.play();
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Winning Streak';
+    document.body.appendChild(streakElement);
+  }
+  if(lossStreak===3){
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Losing Streak';
+    document.body.appendChild(streakElement);
+    losingStreakAudio.play();
+  }
+  if(streak===6){
+    sixWinStreak.play();
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'On Fire !';
+    document.body.appendChild(streakElement);
+  }
+  if(streak===9){
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Invicible';
+    document.body.appendChild(streakElement);
+    nineWinStreak.play();
+  }
+
   for (let i = 0; i <= 3; i+=1) {
     const answerButton = document.getElementById(`answer${questionid}_${i}`)
     if (i !== correctAnswerIndex) {
@@ -337,6 +398,8 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   playAudio(correctAnswerIndex === selectedAnswerIndex);
 
   setTimeout(() => {
+    if(streakElement && document.body.contains(streakElement))
+     document.body.removeChild(streakElement);
     resetAnswerStyles();
     renderNextQuestion();
     timeUp = false;
@@ -354,8 +417,8 @@ function resetAnswerStyles() {
   });
 }
 
-function updateScore() {
-
+function endQuizz(){
+  clearPage();
 }
 
 

@@ -123,17 +123,87 @@ label{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(102, 12, 12); /* Fond rouge semi-transparent */
+  background-color: rgb(102, 12, 12);
   color: #fff;
   padding-top: 40px;
   width: 1200px;
   height: 250px;
   font-size: 90px;
-  border-radius: 5px;
+  border-color: #ccc;
+  border-radius: 70px;
   text-align: center;
-  z-index: 1000; /* Au-dessus des autres éléments */
+  z-index: 1000;
   font-family: 'Bangers', cursive;
-  animation: fadeInOut 2s ease-in-out infinite;
+  animation: slideAndDisappear 3s ease;
+}
+
+.streak {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  padding-top: 40px;
+  width: 500px;
+  height: 140px;
+  font-size: 35px;
+  border-color: #ccc;
+  text-align: center;
+  z-index: 1000;
+  font-family: 'Bangers', cursive;
+  color: rgb(0, 0, 0);
+  background-color: rgb(166, 166, 14);
+  animation: slideAndDisappear2 3s;
+}
+
+@keyframes slideAndDisappear2 {
+  0% {
+    transform: translateX(100%) scaleX(0);
+  }
+  10% {
+    transform: translateX(50%) scaleX(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  60% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  70% {
+    transform: translateX(-60%) scaleX(0.9);
+  }
+  80% {
+    transform: translateX(-80%) scaleX(0.7);
+  }
+  100% {
+    transform: translateX(-100%) scaleX(0);
+  }
+}
+
+@keyframes slideAndDisappear {
+  0% {
+    transform: translateX(-100%) scaleX(0);
+  }
+  10% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  60% {
+    transform: translateX(50%) scaleX(1);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 1s ease;
+}
+
+.slide-out {
+  animation: slideOut 1s ease;
 }
 
 @keyframes fadeInOut {
