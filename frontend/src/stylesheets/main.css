@@ -610,6 +610,19 @@ score.right .score-bonus {
   color: red; 
 }
 
+.end{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffd700;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive; 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+}
+
 
 /* Home Page CSS */
 /* hiddenInput{

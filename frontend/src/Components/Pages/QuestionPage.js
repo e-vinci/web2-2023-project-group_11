@@ -53,6 +53,7 @@ let streakElement;
 let streakBonusScore;
 let endDiv;
 let oneortwo = 1;
+let malusScore;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);            
@@ -354,16 +355,17 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     lossStreak+=1;
 
     if(score>=0.1){
-      const malusScore = Math.ceil(score * 0.15);;
+      malusScore = Math.ceil(score * 0.15);;
       score -= malusScore;
-      const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
-      
+      const scoreElement = document.getElementById('score2');
+      scoreElement.classList.add('wrong');
+      scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
+    }  
+    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`);
     answerButton.classList.add('wrong-reply');
     console.log(`CLASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS LISTTT`);
-    const scoreElement = document.getElementById('score2');
-    scoreElement.classList.add('wrong');
-    scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
-    }
+    
+    
     /*const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
     answerButton.classList.add('wrong-reply');
     const scoreElement = document.getElementById('score2');
@@ -483,7 +485,7 @@ function endQuizz(){
 
     endDiv = document.createElement('div');
     endDiv.className = 'end';
-    streakBonusScore.innerText = `Fin de la partie\n Score : ${score}`;
+    endDiv.innerText = `Fin de la partie\n Score : ${score}`;
     document.body.appendChild(endDiv);
 
 }
