@@ -45,6 +45,9 @@ PATCH {{baseUrl}}/users/changerScore
 Content-Type: application/json
 
 {
-    "id":2,
+    "id":4,
     "nouveauScore":100
 }
+
+### GET ALL USERS
+GET {{baseUrl}}/users/getScore?username=Biub

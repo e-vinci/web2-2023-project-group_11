@@ -24,7 +24,7 @@ async function  LeaderBoardPage  () {
 
   const leaderboardData = dataNonTrie.sort(
     ((a, b) =>
-       (b.score / b.nbPartie === 0 ? 1 : b.nbPartie)- (a.score / a.nbPartie === 0 ? 1 : a.nbPartie)),
+       (b.score)- (a.score)),
   );
   function renderLeaderBoardPage() {
     const main = document.querySelector('main');
@@ -46,7 +46,7 @@ async function  LeaderBoardPage  () {
                   <tr>
                       <td>${rank}</td>
                       <td>${player.username}</td>
-                      <td>${(player.score/(player.nbPartie === 0 ? 1 : player.nbPartie))}</td>
+                      <td>${player.score}</td>
                   </tr>
               `;
                 })
