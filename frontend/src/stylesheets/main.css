@@ -6,7 +6,7 @@ body {
   background-size: 2000px;
   margin: 0;
   padding: 0;
-  animation: moveBackground 6s linear infinite;
+  animation: moveBackground 9s linear infinite;
 }
 
 
@@ -26,10 +26,14 @@ body {
 }
 
 /* Home Page CSS */
+.logoAsset{
+  width: 5rem;
+}
 
 .hpWelcome {
   font-size: 40px;
   color: white;
+  background-size: 100%;
 }
 label{
   display: inline;
@@ -84,6 +88,136 @@ label{
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) ;
+  background-color: #0b400d;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#countdownElement {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgb(42, 8, 53);
+  color: rgb(138, 11, 11);
+  width:  180px;
+  font-size: 74px;
+  border: 2px solid #ccc;
+ /* z-index: 1000; /* au dessus du reste */
+  display: inline-block;
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  box-sizing: border-box;
+}
+
+#timeoutElement {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(102, 12, 12);
+  color: #fff;
+  padding-top: 40px;
+  width: 1200px;
+  height: 250px;
+  font-size: 90px;
+  border-color: #ccc;
+  border-radius: 70px;
+  text-align: center;
+  z-index: 1000;
+  font-family: 'Bangers', cursive;
+  animation: slideAndDisappear 3s ease;
+}
+
+.streak {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  padding-top: 40px;
+  width: 500px;
+  height: 140px;
+  font-size: 35px;
+  border-color: #ccc;
+  text-align: center;
+  z-index: 1000;
+  font-family: 'Bangers', cursive;
+  color: rgb(0, 0, 0);
+  background-color: rgb(166, 166, 14);
+  animation: slideAndDisappear2 3s;
+}
+
+@keyframes slideAndDisappear2 {
+  0% {
+    transform: translateX(100%) scaleX(0);
+  }
+  10% {
+    transform: translateX(50%) scaleX(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  60% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  70% {
+    transform: translateX(-60%) scaleX(0.9);
+  }
+  80% {
+    transform: translateX(-80%) scaleX(0.7);
+  }
+  100% {
+    transform: translateX(-100%) scaleX(0);
+  }
+}
+
+@keyframes slideAndDisappear {
+  0% {
+    transform: translateX(-100%) scaleX(0);
+  }
+  10% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  60% {
+    transform: translateX(50%) scaleX(1);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 1s ease;
+}
+
+.slide-out {
+  animation: slideOut 1s ease;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+#timerSpan{
+  font-size: 24px;
+  color: #2196F3;
 }
 
 .hiddenInput {
@@ -159,7 +293,9 @@ label{
   grid-template-rows: repeat(2, 1fr);
 }
 
-
+#navbarSupportedContent{
+  user-select: none;
+}
 
 .nav-link {
   margin-left: 100px;
@@ -289,31 +425,21 @@ label{
   from {
     transform: translateX(-100%);
   }
-}
-.logo-img {
-    width: 150px;
-    height: 150px;
+
+  to {
+    transform: translateX(0);
+  }
 }
 
-
-  .startGame {
-    padding: 30px 70px;
-    background-color: black;
-    color: white;
-    border: solid 0.5px gray;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 20px;
-    border-radius: 5px;
-    float:left;
-    margin-left: 750px;
-    font-family: 'Bangers', cursive;
+@keyframes slideUp {
+  from {
+    transform: translateY(-100%);
   }
 
   to {
     transform: translateX(0);
   }
-
+}
 
 @keyframes slideIn2 {
   from {
@@ -328,18 +454,36 @@ label{
 
 
 .score {
-  width: 120px;
+  top: 20px;
+  left: 20px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  background-color: #4CAF50;
+  background-color: #c1901d;
   padding: 10px;
   border-radius: 8px;
-  margin-top: 350px;
   float: left;
   font-size: 60px;
   color: azure;
+  position: fixed;
+}
+
+#countdownElement {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgb(42, 8, 53);
+  color: rgb(138, 11, 11);
+  width:  180px;
+  font-size: 74px;
+  border: 2px solid #ccc;
+ /* z-index: 1000; /* au dessus du reste */
+  display: inline-block;
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  box-sizing: border-box;
 }
 
 .score.right {
@@ -349,7 +493,7 @@ label{
 }
 
 .score.wrong {
-  font-size: 100px;
+  font-size: 80px;
   background-color: red;
   color: rgb(117, 11, 11);
 }
