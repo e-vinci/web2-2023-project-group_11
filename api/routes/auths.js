@@ -45,5 +45,4 @@ function createCookieSessionData(req, authenticatedUser) {
   req.session.token = authenticatedUser.token;
 }
 
-
 module.exports = router;

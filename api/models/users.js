@@ -16,6 +16,8 @@ const defaultUsers = [
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('admin', saltRounds),
+    score: 0,
+    nbPartie: 0,
   },
 ];
 
@@ -107,10 +109,29 @@ function readAllUsers() {
   const allUsers = parse(jsonDbPath, defaultUsers);
   return allUsers;
 }
+async function changerScore(id, nouveauScore) {
+  try {
+    const idNumber = parseInt(id, 10);
+    const users = parse(jsonDbPath, defaultUsers);
+    const foundIndex = users.findIndex((user) => user.id === idNumber);
+
+    if (foundIndex < 0) return undefined;
+
+    users[foundIndex].score = nouveauScore;
+
+    await serialize(jsonDbPath, users); // Attendez la fin de l'opération asynchrone
+
+    return users[foundIndex];
+  } catch (er) {
+    console.error('Erreur lors de la mise à jour du score :', er);
+    throw er;
+  }
+}
 
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   readAllUsers,
+  changerScore,
 };
