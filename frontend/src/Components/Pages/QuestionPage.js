@@ -530,6 +530,26 @@ async function changerScore(username, nouveauScore) {
     throw error
   }
 }
+async function getBestScoreByUsername(username) {
+  try {
+  
+    const response = await fetch(`${process.env.API_BASE_URL}/users/getScore?username=${username}`);
+    
+    if (!response.ok) {
+      throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);
+    }
+
+    
+    const data = await response.json();
+    console.log('Réponse du serveur :', data);
+
+    
+    return data;
+  } catch (error) {
+    console.error('Erreur lors de la requête GET :', error);
+    throw error
+  }
+}
 
 
 

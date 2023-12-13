@@ -3,6 +3,7 @@ const express = require('express');
 const {
   readAllUsers,
   changerScore,
+  readBestScore,
 } = require('../models/users');
 
 const router = express.Router();
@@ -27,6 +28,15 @@ router.patch('/changerScore', async (req, res) => {
     console.error('Erreur lors de la mise à jour du score :', error);
     return res.status(500).json({ error: 'Erreur serveur' });
   }
+});
+
+router.get('/getScore', (req, res) => {
+  const username = req?.query?.categorie?.username !== 0 ? req.query.username : undefined;
+  console.log('route', username);
+
+  const score = readBestScore(username);
+  console.log('route', score);
+  return res.json(score);
 });
 
 module.exports = router;

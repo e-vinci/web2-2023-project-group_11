@@ -130,6 +130,7 @@ async function changerScore(id, nouveauScore) {
     if (foundIndex < 0) return undefined;
 
     users[foundIndex].score = nouveauScore;
+    users[foundIndex].nbPartie += 1;
 
     await serialize(jsonDbPath, users); // Attendez la fin de l'opération asynchrone
 
@@ -140,10 +141,28 @@ async function changerScore(id, nouveauScore) {
   }
 }
 
+function readBestScore(username) {
+  try {
+    const users = parse(jsonDbPath, defaultUsers);
+    const foundIndex = users.findIndex((user) => user.username === username);
+
+    if (foundIndex < 0) return undefined;
+
+    const scoreAreturn = users[foundIndex].score;
+    console.log('model', scoreAreturn);
+
+    return scoreAreturn;
+  } catch (er) {
+    console.error('Erreur lors de la lecture du score :', er);
+    throw er;
+  }
+}
+
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   readAllUsers,
   changerScore,
+  readBestScore,
 };
