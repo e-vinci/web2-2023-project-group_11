@@ -9,7 +9,8 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 // eslint-disable-next-line spaced-comment
 //import { start } from '@popperjs/core';
 import CorrectAudio from '../../assets/audio/collect-ring-15982.mp3';
-import IncorrectAudio from '../../assets/audio/buzzer-or-wrong-answer-20582.mp3';
+import IncorrectAudio1 from '../../assets/audio/fart-with-reverb-39675(1).mp3';   /* '../../assets/audio/fart-with-reverb-39675(1).mp3'; */
+import IncorrectAudio2 from '../../assets/audio/wet-fart-6139(1).mp3';
 import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3';
 import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_preview.mp3';
 import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
@@ -36,7 +37,6 @@ const questions = [
 let questionsArray = null;
 let currentQuestionIndex = 0;
 let score = 0;
-const bestScore = 200;
 let startGame = null;
 let main = null;
 let started = false;
@@ -52,10 +52,11 @@ let lossStreak = 0;
 let streakElement;
 let streakBonusScore;
 let endDiv;
+let oneortwo = 1;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);            
-const incorrectAudio = new Audio(IncorrectAudio);
+const incorrectAudio1 = new Audio(IncorrectAudio1);
 const timerAudio = new Audio(TimerAudio); 
 const backgroundAudio = new Audio(BackgroundMusic);
 const threeWinStreak = new Audio(ThreeWinningStreak);
@@ -63,10 +64,11 @@ const sixWinStreak = new Audio(SixWinningStreak);
 const nineWinStreak = new Audio(NineWinningStreak);
 const losingStreakAudio = new Audio(LosingStreak);
 const timeOverAudio = new Audio(TimeOver);
+const incorrectAudio2 = new Audio(IncorrectAudio2);
 
 timerAudio.volume = 0.2;
 losingStreakAudio.volume = 1;
-incorrectAudio.volume = 0.1;
+incorrectAudio1.volume = 1;
 correctAudio.volume = 0.1;
 backgroundAudio.volume = 0.03;
 
@@ -150,8 +152,17 @@ function clearTimer() {
 function playAudio(isCorrect) {
   if (isCorrect) {
     correctAudio.play();
+    console.log('BON AUDIO')
   } else {
-    incorrectAudio.play();
+    if(oneortwo===1){
+       incorrectAudio1.play();
+       oneortwo = 2;
+    }
+    else if(oneortwo===2){
+      incorrectAudio2.play();
+      oneortwo = 1;
+    }
+    console.log('MAUVAIS AUDIO')
   }
 }
 
@@ -299,6 +310,7 @@ function renderNextQuestion() {
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
   if(questionAnswered)
     return;
+
   clearTimer();
   questionAnswered = true;
   timeUp=false;
@@ -345,7 +357,9 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
       const malusScore = Math.ceil(score * 0.15);;
       score -= malusScore;
       const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
+      
     answerButton.classList.add('wrong-reply');
+    console.log(`CLASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS LISTTT`);
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('wrong');
     scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
