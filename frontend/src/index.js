@@ -8,4 +8,3 @@ import Footer from './Components/Footer/Footer';
 Navbar();
 Footer();
 Router();
-

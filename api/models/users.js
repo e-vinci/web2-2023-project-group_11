@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const { error } = require('node:console');
 const { parse, serialize } = require('../utils/json');
 
 const jwtSecret = 'ilovemypizza!';
@@ -44,6 +45,15 @@ async function login(username, password) {
 async function register(username, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
+  if (password.length < 8) {
+    // eslint-disable-next-line no-undef
+    sessionStorage.setItem(error, 'weak_password');
+  }
+
+  if (username.length < 1) {
+    // eslint-disable-next-line no-undef
+    sessionStorage.setItem(error, 'empty_username');
+  }
 
   await createOneUser(username, password);
 
@@ -73,15 +83,13 @@ async function createOneUser(username, password) {
   const users = parse(jsonDbPath, defaultUsers);
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  const scoreDefault = 0;
-  const nbPartieDefault = 0;
 
   const createdUser = {
     id: getNextId(),
     username,
     password: hashedPassword,
-    score: scoreDefault,
-    nbPartie: nbPartieDefault,
+    score: 0,
+    nbPartie: 0,
   };
 
   users.push(createdUser);
@@ -116,9 +124,9 @@ async function changerScore(id, nouveauScore) {
     await serialize(jsonDbPath, users); // Attendez la fin de l'opération asynchrone
 
     return users[foundIndex];
-  } catch (error) {
-    console.error('Erreur lors de la mise à jour du score :', error);
-    throw error;
+  } catch (er) {
+    console.error('Erreur lors de la mise à jour du score :', er);
+    throw er;
   }
 }
 
