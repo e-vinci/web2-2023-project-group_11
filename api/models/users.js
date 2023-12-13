@@ -88,6 +88,8 @@ async function createOneUser(username, password) {
     id: getNextId(),
     username,
     password: hashedPassword,
+    score: 0,
+    nbPartie: 0,
   };
 
   users.push(createdUser);
