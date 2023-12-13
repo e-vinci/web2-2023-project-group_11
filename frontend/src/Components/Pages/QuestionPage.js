@@ -8,7 +8,18 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 //import anime from 'animejs';
 // eslint-disable-next-line spaced-comment
 //import { start } from '@popperjs/core';
+import CorrectAudio from '../../assets/audio/collect-ring-15982.mp3';
+import IncorrectAudio1 from '../../assets/audio/fart-with-reverb-39675(1).mp3';   /* '../../assets/audio/fart-with-reverb-39675(1).mp3'; */
+import IncorrectAudio2 from '../../assets/audio/wet-fart-6139(1).mp3';
+import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3';
+import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_preview.mp3';
+import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
+import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
+import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
+import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
+import TimeOver from '../../assets/audio/Recording (6).mp3';
 
+import {getParameters} from './HomePage';
 
 const questions = [
   {
@@ -24,39 +35,177 @@ const questions = [
 ];
 
 let questionsArray = null;
-
 let currentQuestionIndex = 0;
-
 let score = 0;
-const bestScore = 200;
-
 let startGame = null;
-
 let main = null;
-
 let started = false;
-
+let questionAnswered = false;
 let titleStartButton = 'Commencer';
+let timerInterval = null;
+let remainingTime;
+let countdownElement = null;
+let timeUp = false;
+let questionRendered = false;
+let streak = 0;
+let lossStreak = 0;
+let streakElement;
+let streakBonusScore;
+let endDiv;
+let oneortwo = 1;
+let malusScore;
+
+// audio elements
+const correctAudio = new Audio(CorrectAudio);            
+const incorrectAudio1 = new Audio(IncorrectAudio1);
+const timerAudio = new Audio(TimerAudio); 
+const backgroundAudio = new Audio(BackgroundMusic);
+const threeWinStreak = new Audio(ThreeWinningStreak);
+const sixWinStreak = new Audio(SixWinningStreak);
+const nineWinStreak = new Audio(NineWinningStreak);
+const losingStreakAudio = new Audio(LosingStreak);
+const timeOverAudio = new Audio(TimeOver);
+const incorrectAudio2 = new Audio(IncorrectAudio2);
+
+timerAudio.volume = 0.2;
+losingStreakAudio.volume = 1;
+incorrectAudio1.volume = 1;
+correctAudio.volume = 0.1;
+backgroundAudio.volume = 0.03;
+
+function playBackgroundMusic() {
+  backgroundAudio.loop = true; 
+// Adjust the volume as needed
+  backgroundAudio.play();
+  backgroundAudio.playbackRate = 1.1;
+}
 
 const QuestionPage = () => {
   console.log("debut du quizz");
   clearPage();
+  stopTimerAudio();
+ // questionsArray = null;
   main = document.querySelector('main');
 
+  //const timer = '<div id="timer">Temps restant : <span id="countdown">10</span> secondes</div>';
   startGame = document.createElement('button');
   startGame.className = "start-button";
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
   startGame.innerText = `${titleStartButton}`;
 
-  main.appendChild(startGame);
+  const timerDiv = document.createElement('div');    //container
+  timerDiv.id = 'timerModel';
+  timerDiv.className = "modal";
+  timerDiv.innerText = 'AAAAAAAAAAAA'
 
+  const timerSpan = document.createElement('span');    //span
+  timerSpan.id = 'timerSpan';
+  timerDiv.innerText = 'BBBBBBBBBBB'
+  timerDiv.appendChild(timerSpan);
+
+  document.body.appendChild(timerDiv);
+
+  main.appendChild(startGame);
+  //main.appendChild(timer);
+  startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
 
 }
 
+function startCountdown(secondes) {
+  remainingTime = secondes;
+  playTimerAudio();
+  timerInterval = setInterval(() => {
+    document.getElementById('timerSpan').innerText = remainingTime;
+
+    
+    countdownElement = document.createElement('div');
+    countdownElement.id = 'countdownElement';
+    countdownElement.className = 'countdown-number';
+    countdownElement.innerText = remainingTime;
+
+    document.body.appendChild(countdownElement);
+   
+
+    remainingTime -= 1;
+
+    if(remainingTime<=-1)
+     timeUp=true;
+    if (timeUp) {
+      clearTimer();
+      stopTimerAudio();
+    }
+    if(timeUp){
+      handleTimeUp(); 
+      timeUp=false;
+    }
+  }, 1000);
+}
+
+function clearTimer() {
+  clearInterval(timerInterval);
+  if (countdownElement && document.body.contains(countdownElement)) {
+    document.body.removeChild(countdownElement);
+    countdownElement = null;
+  }
+}
+
+function playAudio(isCorrect) {
+  if (isCorrect) {
+    correctAudio.play();
+    console.log('BON AUDIO')
+  } else {
+    if(oneortwo===1){
+       incorrectAudio1.play();
+       oneortwo = 2;
+    }
+    else if(oneortwo===2){
+      incorrectAudio2.play();
+      oneortwo = 1;
+    }
+    console.log('MAUVAIS AUDIO')
+  }
+}
+
+function playTimerAudio() {
+  timerAudio.play();
+}
+
+function stopTimerAudio() {
+  timerAudio.pause();
+  timerAudio.currentTime = 0;
+}
+
+function handleTimeUp() {
+   console.log('Temps écoulé');
+   streak=0;
+   lossStreak=0;
+   stopTimerAudio();
+   timeOverAudio.play();
+   
+   const timeoutElement = document.createElement('div');
+   timeoutElement.id = 'timeoutElement';
+   timeoutElement.innerText = 'Temps écoulé';
+   document.body.appendChild(timeoutElement);
+
+   //timeoutElement.classList.add('slide-in');
+ 
+   // Appeler la fonction pour passer à la prochaine question après 2 secondes
+   setTimeout(() => {
+    if(timeoutElement){
+      document.body.removeChild(timeoutElement);
+    }
+    //timeoutElement.classList.add('slide-out');
+     renderNextQuestion();
+     timeUp = false;
+   }, 3000);
+}
+
 async function fetchQuestions() {
+  const param = getParameters();
+
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=Géographie,Art,Trivia`
+    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=${param}`
      /* method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +214,7 @@ async function fetchQuestions() {
         categorie: ['Géographie', 'Art'],
       }), */
     );
-
+      console.log(response);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -84,14 +233,17 @@ async function startQuizz() {
   console.log("début du quizz");
   startGame.removeEventListener('click', startQuizz);
   questionsArray = await fetchQuestions();
+  console.log(questionsArray);
   started=true;
   titleStartButton = `Continuer`
+
+  //startCountdown(10);
   renderNextQuestion();
   console.log()
 }
 
 async function renderQuestion(question) {
-  
+
   // suppression de la question précédente
   clearPage();
   console.log("render de la question");
@@ -113,7 +265,6 @@ async function renderQuestion(question) {
 
     // index de la bonne réponse
     const correctAnswerIndex = question.answers.findIndex(answer => answer.isCorrect);
-    console.log(`BONNE REPONSE : ${question.answers[correctAnswerIndex].text}`);
 
     //ajout de la variable dans le main
     main.innerHTML = `
@@ -140,40 +291,157 @@ async function renderQuestion(question) {
 }
 
 function renderNextQuestion() {
-  console.log();
   console.log("envoie de la question");
-  if (currentQuestionIndex < questionsArray.length) {
-    const nextQuestion = questionsArray[currentQuestionIndex];
-    currentQuestionIndex+=1;
-    renderQuestion(nextQuestion);
-    return;
-  }
-  console.log('No more questions.');
-   // endQuizz();
+  clearInterval(timerInterval);
+  if(!questionRendered){
+    if (currentQuestionIndex < questionsArray.length) {
+       const nextQuestion = questionsArray[currentQuestionIndex];
+        currentQuestionIndex+=1;
+       renderQuestion(nextQuestion);
+       startCountdown(10);
+       questionRendered = false;
+       return;
+    }
+  
+     console.log('No more questions.');
+     endQuizz();
+ }
 }
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
+  if(questionAnswered)
+    return;
+
+  clearTimer();
+  questionAnswered = true;
+  timeUp=false;
+  stopTimerAudio();
   console.log(`réponse choisie : ${selectedAnswerIndex} bonne réponse : ${correctAnswerIndex}`);
   console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
 
+  if (remainingTime >= 0 && countdownElement) {
+    // reset timer lorsque la réponse est donnée avant la fin du temps imparti
+    document.body.removeChild(countdownElement);
+  }
+
   if (correctAnswerIndex === selectedAnswerIndex) {
-    score += 10;
+    resetStreak(false);
+    streak += 1;
+
+    const bonusScore = 10 + Math.floor(remainingTime*2.5);
+    score += bonusScore;
     console.log('bonne réponse!');
     // Animation pour le score
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('right');
-    scoreElement.innerHTML = `<span class="score-change">+10</span>`;
+    scoreElement.innerHTML = `<span class="score-change">+${bonusScore}</span>`;
+
+    /*const scoreBonusDiv = document.createElement('div');
+    scoreBonusDiv.className = 'score-bonus';
+    scoreBonusDiv.innerHTML = `+${10 + remainingTime * 2.5}`;
+    document.body.appendChild(scoreBonusDiv);
+
+    setTimeout(() => {
+      document.body.removeChild(scoreBonusDiv);
+    }, 2000);  */
   }
   else {
     console.log('mauvaise reponse');
-    if(score>=5)
-      score-=5;
-    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
+    console.log('streak = 0');
+    console.log(lossStreak);
+    //streak = 0;
+
+    resetStreak(true);
+    lossStreak+=1;
+
+    if(score>=0.1){
+      malusScore = Math.ceil(score * 0.15);;
+      score -= malusScore;
+      const scoreElement = document.getElementById('score2');
+      scoreElement.classList.add('wrong');
+      scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
+    }  
+    const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`);
+    answerButton.classList.add('wrong-reply');
+    console.log(`CLASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS LISTTT`);
+    
+    
+    /*const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
     answerButton.classList.add('wrong-reply');
     const scoreElement = document.getElementById('score2');
     scoreElement.classList.add('wrong');
-    scoreElement.innerHTML = `<span class="score-change">-5</span>`;
+    scoreElement.innerHTML = `<span class="score-change">-${retrait}</span>`;*/
+
+    /*const scoreMalusDiv = document.createElement('div');
+    scoreMalusDiv.className = 'score-malus';
+    scoreMalusDiv.innerHTML = `-${score / 10}`;
+    document.body.appendChild(scoreMalusDiv);
+
+
+    setTimeout(() => {
+      document.body.removeChild(scoreMalusDiv);
+    }, 2000); */
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
+  }
+
+  if(streak===3){
+    const bonusScore = Math.floor(score * 0.1);
+    score += bonusScore;
+    console.log('streak de 3');
+
+    threeWinStreak.play();
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`
+    document.body.appendChild(streakBonusScore);
+
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Winning Streak';
+    document.body.appendChild(streakElement);
+  }
+
+  if(lossStreak===3){
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Losing Streak';
+    document.body.appendChild(streakElement);
+
+    losingStreakAudio.play();
+  }
+
+  if(streak===6){
+    const bonusScore = Math.floor(score * 0.15);
+    score += bonusScore;
+    sixWinStreak.play();
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`
+    document.body.appendChild(streakBonusScore);
+
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'On Fire !';
+    document.body.appendChild(streakElement);
+  }
+
+  if(streak===9){
+    const bonusScore = Math.floor(score * 0.2);
+    score += bonusScore;
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`
+    document.body.appendChild(streakBonusScore);
+
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Invicible';
+    document.body.appendChild(streakElement);
+
+    nineWinStreak.play();
   }
 
   for (let i = 0; i <= 3; i+=1) {
@@ -187,25 +455,82 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
       console.log(answerButton.classList);
     }
   }
+  playAudio(correctAnswerIndex === selectedAnswerIndex);
+
   setTimeout(() => {
+    if(streakElement && document.body.contains(streakElement))
+     document.body.removeChild(streakElement);
+    if(streakBonusScore && document.body.contains(streakBonusScore))
+     document.body.removeChild(streakBonusScore);
     resetAnswerStyles();
     renderNextQuestion();
+    timeUp = false;
+    questionAnswered = false;
     // Call the function to render the next question here
   }, 2000); // Adjust the delay time as needed
 }
 
 function resetAnswerStyles() {
   const scoreDiv = document.getElementById("score2");
-  scoreDiv.classList.remove('pulse3');
+  if(scoreDiv)
+   scoreDiv.classList.remove('pulse3');
   const answerButtons = document.querySelectorAll('.answer-button');
   answerButtons.forEach(button => {
     button.classList.remove('correct-answer', 'wrong-answer', 'wrong-reply');
   });
 }
 
-function updateScore() {
+function endQuizz(){
+    clearPage();
+
+    endDiv = document.createElement('div');
+    endDiv.className = 'end';
+    endDiv.innerText = `Fin de la partie\n Score : ${score}`;
+    document.body.appendChild(endDiv);
 
 }
+
+function resetStreak(resetStreakOrNot){
+  if(resetStreakOrNot){
+    streak=0;
+    console.log('Fin de streak');
+  }
+  else {
+   lossStreak=0
+  }
+}
+
+async function changerScore(username, nouveauScore) {
+  try {
+    const options = {
+      method: 'PATCH',
+      body: JSON.stringify({
+        id: username.id,
+        nouveauScore,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await fetch(`${process.env.API_BASE_URL}/users/changerScore`, options);
+
+    if (!response.ok) {
+      throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);
+    }
+
+    
+    const data = await response.json();
+    console.log('Réponse du serveur :', data);
+
+    
+    return data;
+  } catch (error) {
+    console.error('Erreur lors de la requête PATCH :', error);
+    throw error
+  }
+}
+
 
 
 /* async function fetchQuestion(id) {
