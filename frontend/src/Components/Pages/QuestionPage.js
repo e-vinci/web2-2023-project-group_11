@@ -225,7 +225,7 @@ async function startQuizz() {
   started=true;
   titleStartButton = `Continuer`
 
-  startCountdown(10);
+  //startCountdown(10);
   renderNextQuestion();
   console.log()
 }
