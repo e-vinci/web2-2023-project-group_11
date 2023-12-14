@@ -4,7 +4,7 @@ import NewPage from '../Pages/NewPage';
 import QuestionPage from '../Pages/QuestionPage';
 import RegisterPage from '../Pages/RegisterPage';
 import LeaderBoardPage from '../Pages/LeaderBoardPage';
-
+import Logout from '../Logout/Logout';
 
 const routes = {
   '/': HomePage,
@@ -12,7 +12,8 @@ const routes = {
   '/quizz': QuestionPage,
   '/login':LoginPage,
   '/register':RegisterPage,
-  '/leaderboard':LeaderBoardPage
+  '/leaderboard':LeaderBoardPage,
+  '/logout':Logout,
 };
 
 export default routes;

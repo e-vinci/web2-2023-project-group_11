@@ -6,6 +6,13 @@ import GeographieImage from '../../img/d9241ee4e7f0e89c54704904eac8b230.jpg'
 import AstronomieImage from '../../img/69f71c1df7fde8069e91a52903ab9659.jpg'
 import MathematicsImage from '../../img/b543ba9e98d55c4341a7f5e1a34101dc.jpg'
 import TriviaImage from '../../img/istockphoto-1267191865-612x612.jpg'
+// eslint-disable-next-line no-unused-vars
+import { getAuthenticatedUser , isAuthenticated } from '../../utils/auth';
+
+
+// eslint-disable-next-line no-unused-vars
+const isConnected = isAuthenticated();
+// eslint-disable-next-line no-unused-vars
 
 const HomePage = () => {
   clearPage();

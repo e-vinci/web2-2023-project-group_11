@@ -20,6 +20,7 @@ import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
 
 import { getParameters } from './HomePage';
+import { getAuthenticatedUser,isAuthenticated } from '../../utils/auth';
 
 const questions = [
   {

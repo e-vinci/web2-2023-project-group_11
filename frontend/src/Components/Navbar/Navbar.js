@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
 import logo from '../../img/logo.png'
-
+import { getAuthenticatedUser,isAuthenticated } from '../../utils/auth';
 /**
  * Render the Navbar which is styled by using Bootstrap
  * Each item in the Navbar is tightly coupled with the Router configuration :
@@ -12,7 +12,37 @@ import logo from '../../img/logo.png'
 
 const Navbar = () => {
   const navbarWrapper = document.querySelector('#navbarWrapper');
-  const navbar = 
+  let navbar=''
+  if (isAuthenticated()) {
+    //User Connecté
+     navbar = 
+  `<nav class="navbar navbar-expand p-4" style="background: linear-gradient(to right, #430A58, #06082B); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex;">
+  <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" style="color: white;"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link active mr-3 logoAsset" aria-current="page" href="#" data-uri="/" ><img src= "${logo}" class ="logoAsset"  data-uri="/"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active mr-3" aria-current="page" href="#" data-uri="/logout" style="color: white; font-size: 3rem;">Logout</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#" data-uri="/leaderboard" style="color: white; font-size: 3rem;">Leaderboard</a>
+              </li>
+              <li class="nav-item">
+                  <div>Bonjour,${getAuthenticatedUser().username} </div>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+`
+  }else{
+    //User NON Connecté
+   navbar = 
   `<nav class="navbar navbar-expand p-4" style="background: linear-gradient(to right, #430A58, #06082B); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex;">
   <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,10 +66,8 @@ const Navbar = () => {
       </div>
   </div>
 </nav>
-
-
-
 `
+  }
 /*
   /*`
   <nav class="navbar navbar-expand p-5 fs-3" style="background-color: #9055ee;">
