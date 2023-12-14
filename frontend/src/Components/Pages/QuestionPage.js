@@ -550,9 +550,6 @@ async function endQuizz() {
 
     document.body.appendChild(endDiv);
   }
-
-  
-
   /*const restartButton = document.createElement('button');               marche pas encore
     restartButton.className = "restart-button";
     restartButton.innerText = `Rejouer`;
