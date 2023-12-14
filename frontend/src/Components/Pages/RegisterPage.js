@@ -1,5 +1,6 @@
+/* eslint-disable spaced-comment */
 // eslint-disable-next-line import/no-extraneous-dependencies
-// import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import { setAuthenticatedUser } from '../../utils/auth';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
@@ -40,7 +41,7 @@ async function onRegister(e) {
   const password = document.querySelector('#registerPassword').value;
 
   if (!username || !password) {
-    // popError('Il manque un champs obligatoire');
+    /*popError('Il manque un champs obligatoire');*/
     return;
   }
   try {
@@ -58,7 +59,7 @@ async function onRegister(e) {
     const response = await fetch(`${process.env.API_BASE_URL}/auths/register`, options);
 
     if (!response.ok) {
-      // popError('Le pseudo existe deja');
+      /*popError('Le pseudo existe deja');*/
       return;
     }
 
@@ -72,18 +73,16 @@ async function onRegister(e) {
 
     Navigate('/');
   } catch (err) {
-    // popError('Une erreur est survenue');
+    //popError('Une erreur est survenue');
     console.error('Register Error:', err);
   }
 }
-/*
-function popError(message) {
+/*function popError(message) {
   Swal.fire({
     icon: 'error',
     title: 'Oops...',
     text: message,
     showConfirmButton: true,
   });
-}
-*/
+} */
 export default RegisterPage;

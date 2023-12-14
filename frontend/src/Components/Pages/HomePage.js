@@ -16,7 +16,7 @@ const isConnected = isAuthenticated();
 
 const HomePage = () => {
   clearPage();
-  renderPageTitle('HomePage');
+  renderPageTitle(' ');
   renderHomePage();
 
   const form = document.getElementById('form');
