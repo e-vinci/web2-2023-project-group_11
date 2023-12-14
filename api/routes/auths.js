@@ -36,6 +36,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+  console.log('logout');
   req.session = null;
   return res.sendStatus();
 });

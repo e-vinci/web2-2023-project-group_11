@@ -10,10 +10,10 @@ GET {{baseUrl}}/quizz
 ### Read 20 question whith all categorie
 GET {{baseUrl}}/quizz/20
 
-### Read 20 question whith all categorie
-GET {{baseUrl}}/quizz/20?categorie=Géographie,Art,Trivia
+### Read 20 question whith selected categorie
+GET {{baseUrl}}/quizz/20?categorie=Art
 
-### Create a pizza by using the admin account
+### Create a question by using the admin account
 #### First login as the admin
 ##### Define a request variable nammed admin
 # @name admin
@@ -25,7 +25,7 @@ Content-Type: application/json
     "password":"admin"
 }
 
-### Read all question with File variable
+### Create a question
 POST {{baseUrl}}/quizz/addQuestion
 Content-Type: application/json
 Authorization: {{admin.response.body.token}}
@@ -51,3 +51,7 @@ Authorization: {{admin.response.body.token}}
       }
     ]
 }
+
+### Delete question identified by 121 with the admin token
+DELETE {{baseUrl}}/quizz/121
+Authorization: {{admin.response.body.token}}
