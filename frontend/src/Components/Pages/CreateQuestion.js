@@ -19,6 +19,25 @@ const CreateQuestion = () => {
     form.appendChild(label);
     form.appendChild(input);
  };
+
+ createInput('Question Text:', 'questionText', 'questionText');
+ createInput('Answer 1:', 'answer1', 'answer1');
+ createInput('Is Correct?', 'isCorrect1', 'isCorrect1', true);
+ createInput('Answer 2:', 'answer2', 'answer2');
+ createInput('Is Correct?', 'isCorrect2', 'isCorrect2', true);
+ createInput('Answer 3:', 'answer3', 'answer3');
+ createInput('Is Correct?', 'isCorrect3', 'isCorrect3', true);
+ createInput('Answer 4:', 'answer4', 'answer4');
+ createInput('Is Correct?', 'isCorrect4', 'isCorrect4', true);
+
+ const submitButton = document.createElement('button');
+ submitButton.textContent = 'Submit';
+ submitButton.type = 'button';
+ submitButton.addEventListener('click', submitForm);
+
+ form.appendChild(submitButton);
+
+ document.body.appendChild(form);
 }
 
 export default CreateQuestion;
