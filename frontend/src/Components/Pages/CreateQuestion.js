@@ -1,6 +1,21 @@
 /* eslint-disable no-unused-vars */
 import clearPage from '../../utils/render';
 /* eslint-disable spaced-comment */
+
+const submitForm = () => {
+  const questionText = document.getElementById('questionText').value;
+  const answers = [
+    { text: document.getElementById('answer1').value, isCorrect: document.getElementById('isCorrect1').checked },
+    { text: document.getElementById('answer2').value, isCorrect: document.getElementById('isCorrect2').checked },
+    { text: document.getElementById('answer3').value, isCorrect: document.getElementById('isCorrect3').checked },
+    { text: document.getElementById('answer4').value, isCorrect: document.getElementById('isCorrect4').checked },
+  ];
+
+  const question = { questionText, answers };
+
+  console.log(question);
+}
+
 const CreateQuestion = () => {
     clearPage();
    
@@ -33,28 +48,14 @@ const CreateQuestion = () => {
  const submitButton = document.createElement('button');
  submitButton.textContent = 'Submit';
  submitButton.type = 'button';
- submitButton.addEventListener('click', submitForm); à faire la methode
+ submitButton.addEventListener('click', submitForm);
 
  form.appendChild(submitButton);
 
  document.body.appendChild(form);
 }
 
-const submitForm = () => {
-  const questionText = document.getElementById('questionText').value;
-  const answers = [
-    { text: document.getElementById('answer1').value, isCorrect: document.getElementById('isCorrect1').checked },
-    { text: document.getElementById('answer2').value, isCorrect: document.getElementById('isCorrect2').checked },
-    { text: document.getElementById('answer3').value, isCorrect: document.getElementById('isCorrect3').checked },
-    { text: document.getElementById('answer4').value, isCorrect: document.getElementById('isCorrect4').checked },
-  ];
 
-  const question = { questionText, answers };
-
-  console.log(question);
-}
-
-
-createQuestionForm();
+CreateQuestion();
 
 export default CreateQuestion;
