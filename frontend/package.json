@@ -25,6 +25,7 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",
+    "sweetalert2": "^11.10.1",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "cookie-session": "^2.0.0",
     "gh-pages": "^4.0.0",
     "phaser": "^3.55.2",
+    "sweetalert2": "^11.10.1",
     "terser-webpack-plugin": "^5.3.6",
     "webpack-merge": "^5.8.0"
   }
