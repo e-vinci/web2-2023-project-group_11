@@ -542,13 +542,13 @@ async function endQuizz() {
       endDiv.innerText += `\nMeilleur  score ${result}`;
     }
 
-    document.body.appendChild(endDiv);
+    main.appendChild(endDiv);
   } else {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
 
-    document.body.appendChild(endDiv);
+    main.appendChild(endDiv);
   }
   /*const restartButton = document.createElement('button');               marche pas encore
     restartButton.className = "restart-button";
