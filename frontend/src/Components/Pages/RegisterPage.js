@@ -1,18 +1,20 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Swal from 'sweetalert2';
 import { setAuthenticatedUser } from '../../utils/auth';
-import { clearPage,renderPageTitle  } from '../../utils/render';
+import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
-import Navigate from "../Router/Navigate";
+import Navigate from '../Router/Navigate';
 
 const RegisterPage = () => {
-    clearPage();
-    renderPageTitle('Register');
-    renderRegisterPage();
-  };
+  clearPage();
+  renderPageTitle('Register');
+  renderRegisterPage();
+};
 
 function renderRegisterPage() {
-    const main = document.querySelector('main');
-    
-    main.innerHTML = `<h1 class="text-center">Inscrivez-vous pour tenter de vous trouver dans le tableau des meilleurs score !</h1>
+  const main = document.querySelector('main');
+
+  main.innerHTML = `<h1 class="text-center">Inscrivez-vous pour tenter de vous trouver dans le tableau des meilleurs score !</h1>
     <div class="center-form"><form>
       <div class="form-group w-50 p-3">
         <label for="usernameRegister">Username</label>
@@ -37,29 +39,49 @@ async function onRegister(e) {
   const username = document.querySelector('#usernameRegister').value;
   const password = document.querySelector('#registerPassword').value;
 
-  const options = {
-    method: 'POST',
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+  if (!username || !password) {
+    popError('Il manque un champs obligatoire');
+    return;
+  }
+  try {
+    const options = {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  const response = await fetch(`${process.env.API_BASE_URL}/auths/register`, options);
+    const response = await fetch(`${process.env.API_BASE_URL}/auths/register`, options);
 
-  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+    if (!response.ok) {
+      popError('Le pseudo existe deja');
+      return;
+    }
 
-  const authenticatedUser = await response.json();
+    const authenticatedUser = await response.json();
 
-  console.log('Newly registered & authenticated user : ', authenticatedUser);
+    console.log('Newly registered & authenticated user : ', authenticatedUser);
 
-  setAuthenticatedUser(authenticatedUser);
+    setAuthenticatedUser(authenticatedUser);
 
-  Navbar();
+    Navbar();
 
-  Navigate('/');
+    Navigate('/');
+  } catch (err) {
+    popError('Une erreur est survenue');
+    console.error('Register Error:', err);
+  }
 }
-  export default RegisterPage;
+function popError(message) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: message,
+    showConfirmButton: true,
+  });
+}
+export default RegisterPage;
