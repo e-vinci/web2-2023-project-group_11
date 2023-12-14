@@ -16,6 +16,7 @@ import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_pr
 import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
 import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
 import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
+import TwelveWinningStreak from '../../assets/audio/Recording-_17_.mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
 //import DoubleLosingStreak
@@ -57,6 +58,8 @@ let endDiv;
 let pitchSelector = 2;
 //let oneOrTwo = 1;
 let malusScore;
+let isMuted = false;
+let muteText = 'mute';
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);
@@ -66,6 +69,7 @@ const backgroundAudio = new Audio(BackgroundMusic);
 const threeWinStreak = new Audio(ThreeWinningStreak);
 const sixWinStreak = new Audio(SixWinningStreak);
 const nineWinStreak = new Audio(NineWinningStreak);
+const twelveWinStreak = new Audio(TwelveWinningStreak);
 const losingStreakAudio = new Audio(LosingStreak);
 const timeOverAudio = new Audio(TimeOver);
 const incorrectAudio2 = new Audio(IncorrectAudio2);
@@ -81,6 +85,8 @@ sixWinStreak.playbackRate = 1.6;
 sixWinStreak.preservesPitch = false;
 nineWinStreak.playbackRate = 1.6;
 nineWinStreak.preservesPitch = false;
+twelveWinStreak.playbackRate = 1.6;
+twelveWinStreak.preservesPitch = false;
 losingStreakAudio.playbackRate = 0.8;
 losingStreakAudio.preservesPitch = false;
 timeOverAudio.playbackRate = 1.6;
@@ -99,6 +105,12 @@ const QuestionPage = () => {
   stopTimerAudio();
   // questionsArray = null;
   main = document.querySelector('main');
+
+  /*const muteButton = document.createElement('button');
+  muteButton.className = 'mute-button';
+  muteButton.innerText = `${muteText}`;
+  muteButton.addEventListener('click', changeVolume);
+  document.body.appendChild(muteButton);*/
 
   //const timer = '<div id="timer">Temps restant : <span id="countdown">10</span> secondes</div>';
   startGame = document.createElement('button');
@@ -123,6 +135,20 @@ const QuestionPage = () => {
   startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
 };
+
+function changeVolume(){
+ if(!isMuted){
+   backgroundAudio.volume = 0;
+   isMuted = true;
+   muteText = 'Unmute';
+ }
+ else{
+   backgroundAudio.volume = 0.03;
+   isMuted = false;
+   muteText = 'Mute'
+ }
+ 
+}
 
 function startCountdown(secondes) {
   remainingTime = secondes;
@@ -450,6 +476,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Losing Streak';
+    streakElement.style.backgroundColor = '#6d7a05'
     document.body.appendChild(streakElement);
 
     losingStreakAudio.play();
@@ -468,6 +495,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'On Fire !';
+    streakElement.style.backgroundColor = '#bd7e1a'
     document.body.appendChild(streakElement);
   }
 
@@ -480,12 +508,32 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakBonusScore.innerText = `+${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
+
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Invicible';
+    streakElement.style.backgroundColor = '#a83b0f';
     document.body.appendChild(streakElement);
 
     nineWinStreak.play();
+  }
+
+  if(streak === 12) {
+    const bonusScore = Math.floor(score * 0.25);
+    score += bonusScore;
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`;
+    document.body.appendChild(streakBonusScore);
+
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Unstoppable';
+    streakElement.style.backgroundColor = '#e30b21';
+    document.body.appendChild(streakElement);
+
+    twelveWinStreak.play();
   }
 
   for (let i = 0; i <= 3; i += 1) {
@@ -542,13 +590,13 @@ async function endQuizz() {
       endDiv.innerText += `\nMeilleur  score ${result}`;
     }
 
-    document.body.appendChild(endDiv);
+    main.appendChild(endDiv);
   } else {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
 
-    document.body.appendChild(endDiv);
+    main.appendChild(endDiv);
   }
   /*const restartButton = document.createElement('button');               marche pas encore
     restartButton.className = "restart-button";

@@ -33,6 +33,11 @@ body {
 .hpWelcome {
   font-size: 40px;
   color: white;
+  text-shadow: 
+  -1px -1px 0 rgb(0, 0, 0), /* Top-left shadow */
+  1px -1px 0 rgb(0, 0, 0), /* Top-right shadow */
+  -1px 1px 0 rgb(0, 0, 0), /* Bottom-left shadow */
+  1px 1px 0 rgb(0, 0, 0); /* Bottom-right shadow */
   background-size: 100%;
   text-align: center;
   font-family: 'Bangers', cursive;
@@ -226,43 +231,106 @@ label{
   border: 1px solid red;
 }
 
-.c-check:checked~.c-label {
-  color: aqua;
-  width: 50%;
-  user-select: none;
-  width: 100%;
-  height: 100%;
-  opacity: 4;
-  border-radius: 15px;
-  border: 3px solid rgb(154, 4, 241);
-  position: absolute;
-  top: 0px;
-  left: 0;
-  padding-top: 90px;
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
+
+.c-check:checked~.c-label {
+  font-size: 70px;
+  color: white;
+  text-shadow: 
+  -2px -2px 0 #000000, /* Top-left shadow for left border */
+  2px -2px 0 #000000, /* Top-right shadow for top border */
+  -2px 2px 0 #000000, /* Bottom-left shadow for left border */
+  2px 2px 0 #000000;
+  /*animation: pulsate 4s infinite;*/
+}
+
+/*@keyframes slideLR {
+  0% {
+    transform: translateX(-10%);
+  }
+  50% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
+}*/
 
 .hiddenInputVid {
   opacity: 0;
 }
 
-.c-check:checked~.c-label {
-  color: rgba(255, 0, 0, 0);
-  user-select: none;
-  background-size: 12px;
-}
-
-#catDiv {                                           /* REMETTRE A .categorie .c-label POUR REMETTRE LES IMAGES ENSEMBLES */
+#catDiv { 
+  display: flex;                                          /* REMETTRE A .categorie .c-label POUR REMETTRE LES IMAGES ENSEMBLES */
   width: 50%;
+  align-items: center;
+  text-align: center;
   user-select: none;
+  font-family: 'Bangers', cursive;
+  font-size: 45px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1.5);
+  text-shadow: 
+    -1px -1px 0 rgb(250, 247, 247), /* Top-left shadow */
+    1px -1px 0 rgb(249, 249, 249), /* Top-right shadow */
+    -1px 1px 0 rgb(255, 254, 254), /* Bottom-left shadow */
+    1px 1px 0 rgb(255, 255, 255); /* Bottom-right shadow */
+    border: 3px solid transparent; /* Bord initial transparent */
+    animation: colorChange 3s infinite, shadowChange 2s infinite;
 }
 
-.categorie .c-label:hover {
-  animation: scrollBackground 10s linear infinite;
+@keyframes shadowChange {
+  0% {
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    border-color: #3498db; 
+  }
+  12%{
+    border-color: #450e75;
+  }
+  25% {
+    border-color: #e74c3c; 
+  }
+  55% {
+    border-color: #c8710d; 
+  }
+  55% {
+    border-color: #bad10e; 
+  }
+  75% {
+    border-color: #3ec316; 
+  }
+  100% {
+    border-color: #3498db; 
+  }
+}
+
+#catDiv:hover {
+  animation: scrollBackground 4s linear infinite;
 }
 
 @keyframes scrollBackground {
   0% {
-    background-position: 0% 0%;
+    background-position: 0% -100%;
   }
   100% {
     background-position: 100% 100%;
@@ -350,6 +418,8 @@ label{
 }
 
 .startGame {
+  width: 500px;
+  height: 300px;
   background-color: black;
   color: white;
   border: solid 0.5px gray;
@@ -365,12 +435,11 @@ label{
 }
 
 .startGame:hover {
-  background-color: rgb(58, 22, 92);
-  color: rgb(199, 20, 175);
   border: solid 0.5px gray;
   text-transform: uppercase;
   letter-spacing: 1px;
   border-radius: 5px;
+  animation: pulse1 1s infinite alternate;
 }
 
 .start-button {
@@ -427,8 +496,9 @@ label{
 }
 
 .titleDiv {
-  margin-top: 30px;
-  margin-left: 400px;
+  /*margin-top: 30px;
+  margin-left: 400px;*/
+  text-align: center;
   font-size: 50px;
   color: azure;
   animation: slideIn 1s ease-in-out;
