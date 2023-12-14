@@ -1,8 +1,8 @@
 /* eslint-disable spaced-comment */
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
-import logo from '../../img/logo.png'
-import { getAuthenticatedUser,isAuthenticated } from '../../utils/auth';
+import logo from '../../img/logo.png';
+import { getAuthenticatedUser } from '../../utils/auth';
 /**
  * Render the Navbar which is styled by using Bootstrap
  * Each item in the Navbar is tightly coupled with the Router configuration :
@@ -12,11 +12,10 @@ import { getAuthenticatedUser,isAuthenticated } from '../../utils/auth';
 
 const Navbar = () => {
   const navbarWrapper = document.querySelector('#navbarWrapper');
-  let navbar=''
-  if (isAuthenticated()) {
+  let navbar = '';
+  if (getAuthenticatedUser()) {
     //User Connecté
-     navbar = 
-  `<nav class="navbar navbar-expand p-4" style="background: linear-gradient(to right, #430A58, #06082B); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex;">
+    navbar = `<nav class="navbar navbar-expand p-4" style="background: linear-gradient(to right, #430A58, #06082B); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex;">
   <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon" style="color: white;"></span>
@@ -39,11 +38,10 @@ const Navbar = () => {
       </div>
   </div>
 </nav>
-`
-  }else{
+`;
+  } else {
     //User NON Connecté
-   navbar = 
-  `<nav class="navbar navbar-expand p-4" style="background: linear-gradient(to right, #430A58, #06082B); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex;">
+    navbar = `<nav class="navbar navbar-expand p-4" style="background: linear-gradient(to right, #430A58, #06082B); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex;">
   <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon" style="color: white;"></span>
@@ -66,9 +64,9 @@ const Navbar = () => {
       </div>
   </div>
 </nav>
-`
+`;
   }
-/*
+  /*
   /*`
   <nav class="navbar navbar-expand p-5 fs-3" style="background-color: #9055ee;">
       <div class="container-fluid">
@@ -94,7 +92,5 @@ const Navbar = () => {
     </nav>`;*/
   navbarWrapper.innerHTML = navbar;
 };
-
-
 
 export default Navbar;

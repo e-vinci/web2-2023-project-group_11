@@ -9,7 +9,7 @@ import { clearPage, renderPageTitle } from '../../utils/render';
 // eslint-disable-next-line spaced-comment
 //import { start } from '@popperjs/core';
 import CorrectAudio from '../../assets/audio/collect-ring-15982.mp3';
-import IncorrectAudio1 from '../../assets/audio/fart-with-reverb-39675(1).mp3';   /* '../../assets/audio/fart-with-reverb-39675(1).mp3'; */
+import IncorrectAudio1 from '../../assets/audio/fart-with-reverb-39675(1).mp3'; /* '../../assets/audio/fart-with-reverb-39675(1).mp3'; */
 import IncorrectAudio2 from '../../assets/audio/wet-fart-6139(1).mp3';
 import TimerAudio from '../../assets/audio/tickingbuzzer-75859.mp3';
 import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_preview.mp3';
@@ -18,21 +18,21 @@ import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
 import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
-//import DoubleLosingStreak 
+//import DoubleLosingStreak
 
 import { getParameters } from './HomePage';
-import { getAuthenticatedUser,isAuthenticated } from '../../utils/auth';
+import { getAuthenticatedUser, isAuthenticated } from '../../utils/auth';
 
 const questions = [
   {
     id: 0,
     title: 'Quelle couleur est le ciel ?',
     answers: [
-      { text: "bleu", isCorrect: true },
-      { text: "vert", isCorrect: false },
-      { text: "rouge", isCorrect: false },
-      { text: "orange", isCorrect: false }
-    ]
+      { text: 'bleu', isCorrect: true },
+      { text: 'vert', isCorrect: false },
+      { text: 'rouge', isCorrect: false },
+      { text: 'orange', isCorrect: false },
+    ],
   },
 ];
 
@@ -59,9 +59,9 @@ let pitchSelector = 2;
 let malusScore;
 
 // audio elements
-const correctAudio = new Audio(CorrectAudio);            
+const correctAudio = new Audio(CorrectAudio);
 const incorrectAudio1 = new Audio(IncorrectAudio1);
-const timerAudio = new Audio(TimerAudio); 
+const timerAudio = new Audio(TimerAudio);
 const backgroundAudio = new Audio(BackgroundMusic);
 const threeWinStreak = new Audio(ThreeWinningStreak);
 const sixWinStreak = new Audio(SixWinningStreak);
@@ -87,33 +87,33 @@ timeOverAudio.playbackRate = 1.6;
 timeOverAudio.preservesPitch = false;
 
 function playBackgroundMusic() {
-  backgroundAudio.loop = true; 
-// Adjust the volume as needed
+  backgroundAudio.loop = true;
+  // Adjust the volume as needed
   backgroundAudio.play();
   backgroundAudio.playbackRate = 1.1;
 }
 
 const QuestionPage = () => {
-  console.log("debut du quizz");
+  console.log('debut du quizz');
   clearPage();
   stopTimerAudio();
- // questionsArray = null;
+  // questionsArray = null;
   main = document.querySelector('main');
 
   //const timer = '<div id="timer">Temps restant : <span id="countdown">10</span> secondes</div>';
   startGame = document.createElement('button');
-  startGame.className = "start-button";
+  startGame.className = 'start-button';
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
   startGame.innerText = `${titleStartButton}`;
 
-  const timerDiv = document.createElement('div');    //container
+  const timerDiv = document.createElement('div'); //container
   timerDiv.id = 'timerModel';
-  timerDiv.className = "modal";
-  timerDiv.innerText = 'AAAAAAAAAAAA'
+  timerDiv.className = 'modal';
+  timerDiv.innerText = 'AAAAAAAAAAAA';
 
-  const timerSpan = document.createElement('span');    //span
+  const timerSpan = document.createElement('span'); //span
   timerSpan.id = 'timerSpan';
-  timerDiv.innerText = 'BBBBBBBBBBB'
+  timerDiv.innerText = 'BBBBBBBBBBB';
   timerDiv.appendChild(timerSpan);
 
   document.body.appendChild(timerDiv);
@@ -122,8 +122,7 @@ const QuestionPage = () => {
   //main.appendChild(timer);
   startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
-
-}
+};
 
 function startCountdown(secondes) {
   remainingTime = secondes;
@@ -140,15 +139,14 @@ function startCountdown(secondes) {
 
     remainingTime -= 1;
 
-    if(remainingTime<=-1)
-     timeUp=true;
+    if (remainingTime <= -1) timeUp = true;
     if (timeUp) {
       clearTimer();
       stopTimerAudio();
     }
-    if(timeUp){
-      handleTimeUp(); 
-      timeUp=false;
+    if (timeUp) {
+      handleTimeUp();
+      timeUp = false;
     }
   }, 1000);
 }
@@ -165,25 +163,21 @@ function playAudio(isCorrect) {
   incorrectAudio2.pause();
   if (isCorrect) {
     correctAudio.play();
-    console.log('BON AUDIO')
+    console.log('BON AUDIO');
   } else {
-     if(lossStreak===1){
+    if (lossStreak === 1) {
       incorrectAudio2.play();
       incorrectAudio2.playbackRate = 1.5;
-     }
-     else if(lossStreak===2){
+    } else if (lossStreak === 2) {
       incorrectAudio2.play();
       incorrectAudio2.playbackRate = 0.8;
-     }
-     else if(lossStreak===4){
+    } else if (lossStreak === 4) {
       incorrectAudio2.play();
       incorrectAudio2.playbackRate = 0.6;
-     }
-     else if(lossStreak>=5 && lossStreak !== 3){
+    } else if (lossStreak >= 5 && lossStreak !== 3) {
       incorrectAudio2.play();
       incorrectAudio2.playbackRate = 0.4;
-     }
-     
+    }
 
     /*else if(oneOrTwo===2){
       const speedMultiplier = 0.20; 
@@ -201,7 +195,7 @@ function playAudio(isCorrect) {
       console.log('MAUVAIS AUDIO');
       oneOrTwo=2;
     }*/
-    
+
     /*if(pitchSelector===1){
        incorrectAudio1.play();
        incorrectAudio1.playbackRate = 2;
@@ -215,10 +209,9 @@ function playAudio(isCorrect) {
       incorrectAudio2.play();
       pitchSelector = 4;
     }*/
-    console.log('MAUVAIS AUDIO')
+    console.log('MAUVAIS AUDIO');
   }
 }
-
 
 function playTimerAudio() {
   timerAudio.play();
@@ -230,36 +223,37 @@ function stopTimerAudio() {
 }
 
 function handleTimeUp() {
-   console.log('Temps écoulé');
-   streak=0;
-   lossStreak=0;
-   stopTimerAudio();
-   timeOverAudio.play();
-   
-   const timeoutElement = document.createElement('div');
-   timeoutElement.id = 'timeoutElement';
-   timeoutElement.innerText = 'Temps écoulé';
-   document.body.appendChild(timeoutElement);
+  console.log('Temps écoulé');
+  streak = 0;
+  lossStreak = 0;
+  stopTimerAudio();
+  timeOverAudio.play();
 
-   //timeoutElement.classList.add('slide-in');
- 
-   // Appeler la fonction pour passer à la prochaine question après 2 secondes
-   setTimeout(() => {
-    if(timeoutElement){
+  const timeoutElement = document.createElement('div');
+  timeoutElement.id = 'timeoutElement';
+  timeoutElement.innerText = 'Temps écoulé';
+  document.body.appendChild(timeoutElement);
+
+  //timeoutElement.classList.add('slide-in');
+
+  // Appeler la fonction pour passer à la prochaine question après 2 secondes
+  setTimeout(() => {
+    if (timeoutElement) {
       document.body.removeChild(timeoutElement);
     }
     //timeoutElement.classList.add('slide-out');
-     renderNextQuestion();
-     timeUp = false;
-   }, 3000);
+    renderNextQuestion();
+    timeUp = false;
+  }, 3000);
 }
 
 async function fetchQuestions() {
   const param = getParameters();
 
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/quizz/20?categorie=${param}`
-     /* method: 'GET',
+    const response = await fetch(
+      `${process.env.API_BASE_URL}/quizz/20?categorie=${param}`,
+      /* method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -267,7 +261,7 @@ async function fetchQuestions() {
         categorie: ['Géographie', 'Art'],
       }), */
     );
-      console.log(response);
+    console.log(response);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -283,41 +277,39 @@ async function fetchQuestions() {
 }
 
 async function startQuizz() {
-  console.log("début du quizz");
+  console.log('début du quizz');
   startGame.removeEventListener('click', startQuizz);
   questionsArray = await fetchQuestions();
   console.log(questionsArray);
-  started=true;
-  titleStartButton = `Continuer`
+  started = true;
+  titleStartButton = `Continuer`;
 
   //startCountdown(10);
   renderNextQuestion();
-  console.log()
+  console.log();
 }
 
 async function renderQuestion(question) {
-
   // suppression de la question précédente
   clearPage();
-  console.log("render de la question");
+  console.log('render de la question');
   try {
-
-     const answersHTML = `
+    const answersHTML = `
   <button class="answer-button" id="answer${question.id}_0">${question.answers[0].text}</button>
   <button class="answer-button" id="answer${question.id}_1">${question.answers[1].text}</button>
   <button class="answer-button" id="answer${question.id}_2">${question.answers[2].text}</button>
   <button class="answer-button" id="answer${question.id}_3">${question.answers[3].text}</button>
 `;
 
-   // Création du conteneur
+    // Création du conteneur
     const answersContainer = document.createElement('div');
     answersContainer.className = 'answers-container';
 
-     // Ajout des boutons au conteneur
-     answersContainer.innerHTML = answersHTML;
+    // Ajout des boutons au conteneur
+    answersContainer.innerHTML = answersHTML;
 
     // index de la bonne réponse
-    const correctAnswerIndex = question.answers.findIndex(answer => answer.isCorrect);
+    const correctAnswerIndex = question.answers.findIndex((answer) => answer.isCorrect);
 
     //ajout de la variable dans le main
     main.innerHTML = `
@@ -332,42 +324,42 @@ async function renderQuestion(question) {
       </container>
     `;
 
-    for (let i = -1; i <= 2; i+=1) {
-      const answerButton = document.getElementById(`answer${question.id}_${i+1}`);
-      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, i+1));
+    for (let i = -1; i <= 2; i += 1) {
+      const answerButton = document.getElementById(`answer${question.id}_${i + 1}`);
+      answerButton.addEventListener('click', () =>
+        handleAnswerClick(question.id, correctAnswerIndex, i + 1),
+      );
     }
   } catch (error) {
     // si question pas trouvée
     console.error('Render de la question échoué', error);
   }
-
 }
 
 function renderNextQuestion() {
-  console.log("envoie de la question");
+  console.log('envoie de la question');
   clearInterval(timerInterval);
-  if(!questionRendered){
+  if (!questionRendered) {
     if (currentQuestionIndex < questionsArray.length) {
-       const nextQuestion = questionsArray[currentQuestionIndex];
-        currentQuestionIndex+=1;
-       renderQuestion(nextQuestion);
-       startCountdown(10);
-       questionRendered = false;
-       return;
+      const nextQuestion = questionsArray[currentQuestionIndex];
+      currentQuestionIndex += 1;
+      renderQuestion(nextQuestion);
+      startCountdown(10);
+      questionRendered = false;
+      return;
     }
-  
-     console.log('No more questions.');
-     endQuizz();
- }
+
+    console.log('No more questions.');
+    endQuizz();
+  }
 }
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
-  if(questionAnswered)
-    return;
+  if (questionAnswered) return;
 
   clearTimer();
   questionAnswered = true;
-  timeUp=false;
+  timeUp = false;
   stopTimerAudio();
   console.log(`réponse choisie : ${selectedAnswerIndex} bonne réponse : ${correctAnswerIndex}`);
   console.log(`Question ${correctAnswerIndex} : Réponse choisie : ${selectedAnswerIndex}`);
@@ -381,7 +373,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     resetStreak(false);
     streak += 1;
 
-    const bonusScore = 10 + Math.floor(remainingTime*2.5);
+    const bonusScore = 10 + Math.floor(remainingTime * 2.5);
     score += bonusScore;
     console.log('bonne réponse!');
     // Animation pour le score
@@ -397,29 +389,27 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     setTimeout(() => {
       document.body.removeChild(scoreBonusDiv);
     }, 2000);  */
-  }
-  else {
+  } else {
     console.log('mauvaise reponse');
     console.log('streak = 0');
     console.log(lossStreak);
     //streak = 0;
 
     resetStreak(true);
-    lossStreak+=1;
-    pitchSelector -= lossStreak/10;
+    lossStreak += 1;
+    pitchSelector -= lossStreak / 10;
 
-    if(score>=0.1){
-      malusScore = Math.ceil(score * 0.15);;
+    if (score >= 0.1) {
+      malusScore = Math.ceil(score * 0.15);
       score -= malusScore;
       const scoreElement = document.getElementById('score2');
       scoreElement.classList.add('wrong');
       scoreElement.innerHTML = `<span class="score-change">-${malusScore}</span>`;
-    }  
+    }
     const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`);
     answerButton.classList.add('wrong-reply');
     console.log(`CLASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS LISTTT`);
-    
-    
+
     /*const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
     answerButton.classList.add('wrong-reply');
     const scoreElement = document.getElementById('score2');
@@ -438,7 +428,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
   }
 
-  if(streak===3){
+  if (streak === 3) {
     const bonusScore = Math.floor(score * 0.1);
     score += bonusScore;
     console.log('streak de 3');
@@ -447,7 +437,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`
+    streakBonusScore.innerText = `+${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -456,7 +446,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     document.body.appendChild(streakElement);
   }
 
-  if(lossStreak===3){
+  if (lossStreak === 3) {
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Losing Streak';
@@ -465,14 +455,14 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     losingStreakAudio.play();
   }
 
-  if(streak===6){
+  if (streak === 6) {
     const bonusScore = Math.floor(score * 0.15);
     score += bonusScore;
     sixWinStreak.play();
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`
+    streakBonusScore.innerText = `+${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -481,13 +471,13 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     document.body.appendChild(streakElement);
   }
 
-  if(streak===9){
+  if (streak === 9) {
     const bonusScore = Math.floor(score * 0.2);
     score += bonusScore;
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`
+    streakBonusScore.innerText = `+${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -498,13 +488,12 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     nineWinStreak.play();
   }
 
-  for (let i = 0; i <= 3; i+=1) {
-    const answerButton = document.getElementById(`answer${questionid}_${i}`)
+  for (let i = 0; i <= 3; i += 1) {
+    const answerButton = document.getElementById(`answer${questionid}_${i}`);
     if (i !== correctAnswerIndex) {
       answerButton.classList.add('wrong-answer');
       console.log(answerButton.classList);
-    }
-    else if (i === correctAnswerIndex) {
+    } else if (i === correctAnswerIndex) {
       answerButton.classList.add('correct-answer');
       console.log(answerButton.classList);
     }
@@ -512,10 +501,10 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
   playAudio(correctAnswerIndex === selectedAnswerIndex);
 
   setTimeout(() => {
-    if(streakElement && document.body.contains(streakElement))
-     document.body.removeChild(streakElement);
-    if(streakBonusScore && document.body.contains(streakBonusScore))
-     document.body.removeChild(streakBonusScore);
+    if (streakElement && document.body.contains(streakElement))
+      document.body.removeChild(streakElement);
+    if (streakBonusScore && document.body.contains(streakBonusScore))
+      document.body.removeChild(streakBonusScore);
     resetAnswerStyles();
     renderNextQuestion();
     timeUp = false;
@@ -525,40 +514,43 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 }
 
 function resetAnswerStyles() {
-  const scoreDiv = document.getElementById("score2");
-  if(scoreDiv)
-   scoreDiv.classList.remove('pulse3');
+  const scoreDiv = document.getElementById('score2');
+  if (scoreDiv) scoreDiv.classList.remove('pulse3');
   const answerButtons = document.querySelectorAll('.answer-button');
-  answerButtons.forEach(button => {
+  answerButtons.forEach((button) => {
     button.classList.remove('correct-answer', 'wrong-answer', 'wrong-reply');
   });
 }
 
-function endQuizz(){
-    clearPage();
-    questionsArray = null;
-    backgroundAudio.volume = 1;
+function endQuizz() {
+  clearPage();
+  questionsArray = null;
+  backgroundAudio.volume = 1;
 
-    endDiv = document.createElement('div');
-    endDiv.className = 'end';
-    endDiv.innerText = `Fin de la partie\n Score : ${score}`;
-    document.body.appendChild(endDiv);
+  endDiv = document.createElement('div');
+  endDiv.className = 'end';
+  endDiv.innerText = `Fin de la partie\n Score : ${score}`;
+  if (getAuthenticatedUser()) {
+    const bestScoreDiv = document.createElement('div');
+    bestScoreDiv.className = 'end';
+    bestScoreDiv.innerText = `Au revoir ${getAuthenticatedUser().user} `;
+  }
 
-    /*const restartButton = document.createElement('button');               marche pas encore
+  document.body.appendChild(endDiv);
+
+  /*const restartButton = document.createElement('button');               marche pas encore
     restartButton.className = "restart-button";
     restartButton.innerText = `Rejouer`;
     restartButton.addEventListener('click', startQuizz);
     document.body.appendChild(restartButton);*/
-
 }
 
-function resetStreak(resetStreakOrNot){
-  if(resetStreakOrNot){
-    streak=0;
+function resetStreak(resetStreakOrNot) {
+  if (resetStreakOrNot) {
+    streak = 0;
     console.log('Fin de streak');
-  }
-  else {
-   lossStreak=0
+  } else {
+    lossStreak = 0;
   }
 }
 
@@ -581,39 +573,32 @@ async function updateBestScore(username, nouveauScore) {
       throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);
     }
 
-    
     const data = await response.json();
     console.log('Réponse du serveur :', data);
 
-    
     return data;
   } catch (error) {
     console.error('Erreur lors de la requête PATCH :', error);
-    throw error
+    throw error;
   }
 }
 async function getBestScoreByUsername(username) {
   try {
-  
     const response = await fetch(`${process.env.API_BASE_URL}/users/getScore?username=${username}`);
-    
+
     if (!response.ok) {
       throw new Error(`Erreur de requête : ${response.status} - ${response.statusText}`);
     }
 
-    
     const data = await response.json();
     console.log('Réponse du serveur :', data);
 
-    
     return data;
   } catch (error) {
     console.error('Erreur lors de la requête GET :', error);
-    throw error
+    throw error;
   }
 }
-
-
 
 /* async function fetchQuestion(id) {
  return new Promise((resolve, reject) => {
@@ -638,16 +623,15 @@ async function getBestScoreByUsername(username) {
 // (Assuming you have a container element with id 'answers-container')
 //document.getElementById('answers-container').innerHTML = answersHTML;
 
-
 // RENDERQUESTIONOLDCODE
 
- /* const buttonId = `answer${question.id}_${index + 1}`;
+/* const buttonId = `answer${question.id}_${index + 1}`;
       const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
       answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-      return answerButton; */ 
+      return answerButton; */
 
-      //itération de l'array de réponses de la question et concaténation dans la variable answersHTML
-   /* const answersHTML = question.answers.map((answer, index) => {
+//itération de l'array de réponses de la question et concaténation dans la variable answersHTML
+/* const answersHTML = question.answers.map((answer, index) => {
   
       const buttonId = `answer${question.id}_${index + 1}`;
   
@@ -670,16 +654,14 @@ async function getBestScoreByUsername(username) {
        return answerButton.outerHTML;
     }).join('');  */
 
-  //itération des differentes réponses avec un event au click
-  /*question.answers.forEach((answer, index) => {
+//itération des differentes réponses avec un event au click
+/*question.answers.forEach((answer, index) => {
     const answerButton = document.getElementById(`answer${index + 1}`);
     console.log(`answerbutton :${answerButton}`);
     answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
   });*/
 
-
-
-  /* function renderQuestionPage() {
+/* function renderQuestionPage() {
   
     const banniere = document.createElement('div');
     banniere.className = "banner"
@@ -727,8 +709,7 @@ async function getBestScoreByUsername(username) {
    
   }*/
 
-
-  /*
+/*
   <div class="bestScore">
          <p> Meilleur score </p>
          <p> ${bestScore} </p>

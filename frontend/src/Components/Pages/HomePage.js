@@ -29,7 +29,14 @@ const HomePage = () => {
 
 function renderHomePage() {
   const main = document.querySelector('main');
-  main.innerHTML = `
+  if (getAuthenticatedUser()) {
+    main.innerHTML = `
+    <div class="row d-flex align-items-center justify-content-center row2 firstC-Row">
+    <span class="hpWelcome">Bonjour ${getAuthenticatedUser().username}! Content de vous revoir.</span>
+    </div>
+    `
+  }
+  main.innerHTML += `
   <div class="container text-center quizz-grid">
   <form id="form">
     <div class="row d-flex align-items-center justify-content-center row1 firstC-Row">
