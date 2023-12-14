@@ -15,10 +15,12 @@ router.get('/', (req, res) => {
 });
 
 router.patch('/updateBestScore', async (req, res) => {
+  console.log('entre updte score route');
   try {
     const nouveauScore = req?.body?.nouveauScore?.length !== 0 ? req.body.nouveauScore : undefined;
-    const id = req?.body?.id?.length !== 0 ? req.body.id : undefined;
-    const updatedUser = await changerScore(id, nouveauScore);
+    const username = req?.body?.username?.length !== 0 ? req.body.username : undefined;
+    console.log(username, nouveauScore);
+    const updatedUser = await changerScore(username, nouveauScore);
 
     if (updatedUser) {
       return res.json(updatedUser);

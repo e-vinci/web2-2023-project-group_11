@@ -522,21 +522,34 @@ function resetAnswerStyles() {
   });
 }
 
-function endQuizz() {
+async function endQuizz() {
   clearPage();
   questionsArray = null;
-  backgroundAudio.volume = 1;
+  backgroundAudio.volume = 0.1;
 
-  endDiv = document.createElement('div');
-  endDiv.className = 'end';
-  endDiv.innerText = `Fin de la partie\n Score : ${score}`;
   if (getAuthenticatedUser()) {
-    const bestScoreDiv = document.createElement('div');
-    bestScoreDiv.className = 'end';
-    bestScoreDiv.innerText = `Au revoir ${getAuthenticatedUser().user} `;
-  }
+    endDiv = document.createElement('div');
+    endDiv.className = 'end';
+    endDiv.innerText = `Fin de la partie\n Score : ${score}`;
+    endDiv.innerText += `\n Au revoir ${getAuthenticatedUser().username}`;
 
-  document.body.appendChild(endDiv);
+    const result = await getBestScoreByUsername(getAuthenticatedUser().username);
+
+    if (result < score) {
+      updateBestScore(getAuthenticatedUser().username, score);
+      endDiv.innerText += `\nNOUVEAU Meilleur  score ${score}`;
+    } else {
+      endDiv.innerText += `\nMeilleur  score ${result}`;
+    }
+
+    document.body.appendChild(endDiv);
+  } else {
+    endDiv = document.createElement('div');
+    endDiv.className = 'end';
+    endDiv.innerText = `Fin de la partie\n Score : ${score}`;
+
+    document.body.appendChild(endDiv);
+  }
 
   /*const restartButton = document.createElement('button');               marche pas encore
     restartButton.className = "restart-button";
@@ -559,7 +572,7 @@ async function updateBestScore(username, nouveauScore) {
     const options = {
       method: 'PATCH',
       body: JSON.stringify({
-        id: username.id,
+        username,
         nouveauScore,
       }),
       headers: {

@@ -41,13 +41,13 @@ Content-Type: application/json
 GET {{baseUrl}}/users
 
 ### Update the pizza identified by 6 with the admin token
-PATCH {{baseUrl}}/users/changerScore
+PATCH {{baseUrl}}/users/updateBestScore
 Content-Type: application/json
 
 {
-    "id":4,
-    "nouveauScore":100
+    "username":"bob",
+    "nouveauScore":-5
 }
 
 ### GET ALL USERS
-GET {{baseUrl}}/users/getScore?username=Biub
+GET {{baseUrl}}/users/getScore?username=bob

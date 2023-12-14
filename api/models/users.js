@@ -121,12 +121,12 @@ function readAllUsers() {
   const allUsers = parse(jsonDbPath, defaultUsers);
   return allUsers;
 }
-async function changerScore(id, nouveauScore) {
+async function changerScore(username, nouveauScore) {
+  console.log('entre changer score model');
   try {
-    const idNumber = parseInt(id, 10);
     const users = parse(jsonDbPath, defaultUsers);
-    const foundIndex = users.findIndex((user) => user.id === idNumber);
-
+    const foundIndex = users.findIndex((user) => user.username === username);
+    console.log(username, nouveauScore, foundIndex);
     if (foundIndex < 0) return undefined;
 
     users[foundIndex].score = nouveauScore;
