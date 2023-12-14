@@ -59,7 +59,7 @@ let pitchSelector = 2;
 //let oneOrTwo = 1;
 let malusScore;
 let isMuted = false;
-let muteText = 'mute';
+let muteButton = null;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);
@@ -91,6 +91,13 @@ losingStreakAudio.playbackRate = 0.8;
 losingStreakAudio.preservesPitch = false;
 timeOverAudio.playbackRate = 1.6;
 timeOverAudio.preservesPitch = false;
+
+/* muteButton = document.createElement('button');
+muteButton.className = 'mute-button';
+muteButton.innerText = 'Mute';
+muteButton.addEventListener('click', changeVolume);
+main = document.querySelector('main');
+main.appendChild(muteButton); */
 
 function playBackgroundMusic() {
   backgroundAudio.loop = true;
@@ -134,11 +141,9 @@ function changeVolume() {
   if (!isMuted) {
     backgroundAudio.volume = 0;
     isMuted = true;
-    muteText = 'Unmute';
   } else {
     backgroundAudio.volume = 0.03;
     isMuted = false;
-    muteText = 'Mute';
   }
 }
 
