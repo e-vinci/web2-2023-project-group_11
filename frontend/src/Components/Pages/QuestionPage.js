@@ -531,7 +531,7 @@ async function endQuizz() {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
-    endDiv.innerText += `\n Au revoir ${getAuthenticatedUser().username}`;
+    endDiv.innerText += `\n ${getAuthenticatedUser().username}`;
 
     const result = await getBestScoreByUsername(getAuthenticatedUser().username);
 
@@ -550,6 +550,8 @@ async function endQuizz() {
 
     document.body.appendChild(endDiv);
   }
+
+  
 
   /*const restartButton = document.createElement('button');               marche pas encore
     restartButton.className = "restart-button";

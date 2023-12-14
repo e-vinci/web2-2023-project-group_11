@@ -42,17 +42,17 @@ function renderHomePage() {
     <div class="row d-flex align-items-center justify-content-center row1 firstC-Row">
     <span class="hpWelcome">Vous pouvez sélectionner plusieurs catégories!</span>
       
-      <div class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
+      <div id="catDiv" class="col categorie col-6 Art" style="background-image: url(${ArtImage});">
       <input type="checkbox" value="Art" id="idArt" class="hiddenInput c-check">
         <label for="idArt" class="c-label">Art</label>
       </div>
     
-      <div class="col categorie col-6 Géographie" style="background-image: url(${GeographieImage});">
+      <div id="catDiv" class="col categorie col-6 Géographie" style="background-image: url(${GeographieImage});">
       <input type="checkbox" value="Géographie" id="idGéographie" class="hiddenInput c-check">
       <label for="idGéographie" class="c-label">Géographie</label>
       </div>
       
-      <div class="col categorie col-6 Trivia" style="background-image: url(${TriviaImage});">
+      <div id="catDiv" class="col categorie col-6 Trivia" style="background-image: url(${TriviaImage});">
       <input type="checkbox" value="Trivia" id="idTrivia" class="hiddenInput c-check">
         <label for="idTrivia" class="c-label">Trivia</label>
       </div>
@@ -60,17 +60,17 @@ function renderHomePage() {
 
 
     <div class="row d-flex align-items-center justify-content-center">
-      <div class="col categorie col-6" style="background-image: url(${LitteratureImage});">
+      <div class="col categorie col-6" id="catDiv"style="background-image: url(${LitteratureImage});">
       <input type="checkbox" value="Littérature" id="idLittérature" class="hiddenInput c-check">
         </input><label for="idLittérature" class="c-label">Littérature</label>
       </div>
 
-      <div class="col categorie col-6" style="background-image: url(${MathematicsImage});">
+      <div class="col categorie col-6" id="catDiv" style="background-image: url(${MathematicsImage});">
       <input type="checkbox" value="Mathématique" id="idMathématique" class="hiddenInput c-check"></input>
         <label for="idMathématique" class="c-label">Mathématique</label>
       </div>
 
-      <div class="col categorie col-6" style="background-image: url(${AstronomieImage});">
+      <div class="col categorie col-6" id="catDiv" style="background-image: url(${AstronomieImage});">
       <input type="checkbox" value="Astronomie" id="idAstronomie" class="hiddenInput c-check">
       <label for="idAstronomie" class="c-label">Astronomie</label>
       </div>

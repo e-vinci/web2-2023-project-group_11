@@ -34,6 +34,8 @@ body {
   font-size: 40px;
   color: white;
   background-size: 100%;
+  text-align: center;
+  font-family: 'Bangers', cursive;
 }
 label{
   display: inline;
@@ -243,16 +245,28 @@ label{
   opacity: 0;
 }
 
-.categorie .c-label {
-  width: 50%;
-  user-select: none;
-  background-size: 12px;
-}
-
 .c-check:checked~.c-label {
   color: rgba(255, 0, 0, 0);
   user-select: none;
   background-size: 12px;
+}
+
+#catDiv {                                           /* REMETTRE A .categorie .c-label POUR REMETTRE LES IMAGES ENSEMBLES */
+  width: 50%;
+  user-select: none;
+}
+
+.categorie .c-label:hover {
+  animation: scrollBackground 10s linear infinite;
+}
+
+@keyframes scrollBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 .col {
