@@ -34,10 +34,10 @@ body {
   font-size: 40px;
   color: white;
   text-shadow: 
-  -1px -1px 0 rgb(0, 0, 0), /* Top-left shadow */
-  1px -1px 0 rgb(0, 0, 0), /* Top-right shadow */
-  -1px 1px 0 rgb(0, 0, 0), /* Bottom-left shadow */
-  1px 1px 0 rgb(0, 0, 0); /* Bottom-right shadow */
+  -1px -1px 0 rgb(0, 0, 0),
+  1px -1px 0 rgb(0, 0, 0), 
+  -1px 1px 0 rgb(0, 0, 0), 
+  1px 1px 0 rgb(0, 0, 0); 
   background-size: 100%;
   text-align: center;
   font-family: 'Bangers', cursive;
@@ -247,9 +247,9 @@ label{
   font-size: 70px;
   color: white;
   text-shadow: 
-  -2px -2px 0 #000000, /* Top-left shadow for left border */
-  2px -2px 0 #000000, /* Top-right shadow for top border */
-  -2px 2px 0 #000000, /* Bottom-left shadow for left border */
+  -2px -2px 0 #000000, 
+  2px -2px 0 #000000, 
+  -2px 2px 0 #000000, 
   2px 2px 0 #000000;
   /*animation: pulsate 4s infinite;*/
 }
@@ -432,6 +432,7 @@ label{
   margin-left: 25rem;
   font-family: 'Bangers', cursive;
   user-select: none;
+  
 }
 
 .startGame:hover {
@@ -452,12 +453,17 @@ label{
   border: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-radius: 5px;
+  border-radius: 90px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   animation: pulse1 1s infinite alternate;
   background-color: rgb(62, 3, 62);
   font-family: 'Bangers', cursive;
+  text-shadow: 
+  -2px -2px 0 rgb(0, 0, 0),
+  2px -2px 0 rgb(0, 0, 0), 
+  -2px 2px 0 rgb(0, 0, 0), 
+  2px 2px 0 rgb(0, 0, 0); 
 }
 
 .answer-button {

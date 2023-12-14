@@ -122,6 +122,12 @@ const QuestionPage = () => {
   //main.appendChild(timer);
   startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
+  startGame.addEventListener('mouseover', () => {
+    startGame.innerText = 'Bon jeu =)';
+  });
+  startGame.addEventListener('mouseout', () => {
+    startGame.innerText = 'Commencer';
+  });
 };
 
 function changeVolume() {
