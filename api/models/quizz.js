@@ -258,12 +258,12 @@ const defaultQuizz = [
   },
   {
     id: 7,
-    question: 'Quelle est la capitale du Japon ?',
+    question: 'Quelle est la capitale de la Chine?',
     categorie: 'Géographie',
     answers: [
       {
         text: 'Pékin',
-        isCorrect: false,
+        isCorrect: true,
       },
       {
         text: 'Séoul',
@@ -271,7 +271,7 @@ const defaultQuizz = [
       },
       {
         text: 'Tokyo',
-        isCorrect: true,
+        isCorrect: false,
       },
       {
         text: 'Bangkok',
