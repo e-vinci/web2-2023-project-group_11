@@ -33,7 +33,7 @@ const CreateQuestion = () => {
  const submitButton = document.createElement('button');
  submitButton.textContent = 'Submit';
  submitButton.type = 'button';
- submitButton.addEventListener('click', submitForm);
+ //submitButton.addEventListener('click', submitForm); à faire la methode
 
  form.appendChild(submitButton);
 
