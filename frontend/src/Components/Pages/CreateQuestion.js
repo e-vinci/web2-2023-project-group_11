@@ -40,4 +40,7 @@ const CreateQuestion = () => {
  document.body.appendChild(form);
 }
 
+/*const submitForm = () => {
+}*/
+
 export default CreateQuestion;
