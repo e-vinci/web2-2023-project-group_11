@@ -118,18 +118,6 @@ const QuestionPage = () => {
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
   startGame.innerText = `${titleStartButton}`;
 
-  const timerDiv = document.createElement('div'); //container
-  timerDiv.id = 'timerModel';
-  timerDiv.className = 'modal';
-  timerDiv.innerText = 'AAAAAAAAAAAA';
-
-  const timerSpan = document.createElement('span'); //span
-  timerSpan.id = 'timerSpan';
-  timerDiv.innerText = 'BBBBBBBBBBB';
-  timerDiv.appendChild(timerSpan);
-
-  document.body.appendChild(timerDiv);
-
   main.appendChild(startGame);
   //main.appendChild(timer);
   startGame.addEventListener('click', playBackgroundMusic);
@@ -163,7 +151,6 @@ function startCountdown(secondes) {
       return;
     }
 
-    document.getElementById('timerSpan').innerText = remainingTime;
     countdownElement.innerText = remainingTime;
     main.appendChild(countdownElement);
 
