@@ -130,14 +130,12 @@ function startCountdown(secondes) {
   timerInterval = setInterval(() => {
     document.getElementById('timerSpan').innerText = remainingTime;
 
-    
     countdownElement = document.createElement('div');
     countdownElement.id = 'countdownElement';
     countdownElement.className = 'countdown-number';
     countdownElement.innerText = remainingTime;
 
     document.body.appendChild(countdownElement);
-   
 
     remainingTime -= 1;
 
@@ -517,7 +515,6 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
      document.body.removeChild(streakElement);
     if(streakBonusScore && document.body.contains(streakBonusScore))
      document.body.removeChild(streakBonusScore);
-    // endQuizz();
     resetAnswerStyles();
     renderNextQuestion();
     timeUp = false;
@@ -538,12 +535,19 @@ function resetAnswerStyles() {
 
 function endQuizz(){
     clearPage();
-
+    questionsArray = null;
     backgroundAudio.volume = 1;
+
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
     document.body.appendChild(endDiv);
+
+    /*const restartButton = document.createElement('button');               marche pas encore
+    restartButton.className = "restart-button";
+    restartButton.innerText = `Rejouer`;
+    restartButton.addEventListener('click', startQuizz);
+    document.body.appendChild(restartButton);*/
 
 }
 
