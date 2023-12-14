@@ -516,7 +516,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
     streakBonusScore.innerText = `+${bonusScore}`;
-    main.appendChild(streakBonusScore);
+    document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
@@ -592,11 +592,14 @@ async function endQuizz() {
   const restartButton = document.createElement('button');
   restartButton.className = 'restart-button';
   restartButton.innerText = `Rejouer`;
-  restartButton.addEventListener('click', () => {
-    Navigate('/');
-  });
-
+  restartButton.addEventListener('click', resetGame);
+  
   main.appendChild(restartButton);
+}
+
+function resetGame(){
+  backgroundAudio.pause();
+  Navigate('/');
 }
 
 function resetStreak(resetStreakOrNot) {
