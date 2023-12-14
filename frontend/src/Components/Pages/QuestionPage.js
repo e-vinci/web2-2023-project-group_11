@@ -20,7 +20,7 @@ import TwelveWinningStreak from '../../assets/audio/Recording-_17_.mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
 //import DoubleLosingStreak
-
+import Navigate from '../Router/Navigate';
 import { getParameters } from './HomePage';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auth';
 
@@ -136,41 +136,42 @@ const QuestionPage = () => {
   startGame.addEventListener('click', startQuizz);
 };
 
-function changeVolume(){
- if(!isMuted){
-   backgroundAudio.volume = 0;
-   isMuted = true;
-   muteText = 'Unmute';
- }
- else{
-   backgroundAudio.volume = 0.03;
-   isMuted = false;
-   muteText = 'Mute'
- }
- 
+function changeVolume() {
+  if (!isMuted) {
+    backgroundAudio.volume = 0;
+    isMuted = true;
+    muteText = 'Unmute';
+  } else {
+    backgroundAudio.volume = 0.03;
+    isMuted = false;
+    muteText = 'Mute';
+  }
 }
 
 function startCountdown(secondes) {
   remainingTime = secondes;
   playTimerAudio();
+  countdownElement = document.createElement('div');
+  countdownElement.id = 'countdownElement';
+  countdownElement.className = 'countdown-number';
+  main.appendChild(countdownElement);
+
   timerInterval = setInterval(() => {
+    if (window.location.pathname !== '/quizz') {
+      clearTimer();
+      stopTimerAudio();
+      return;
+    }
+
     document.getElementById('timerSpan').innerText = remainingTime;
-
-    countdownElement = document.createElement('div');
-    countdownElement.id = 'countdownElement';
-    countdownElement.className = 'countdown-number';
     countdownElement.innerText = remainingTime;
-
-    document.body.appendChild(countdownElement);
+    main.appendChild(countdownElement);
 
     remainingTime -= 1;
 
-    if (remainingTime <= -1) timeUp = true;
-    if (timeUp) {
+    if (remainingTime <= -1) {
       clearTimer();
       stopTimerAudio();
-    }
-    if (timeUp) {
       handleTimeUp();
       timeUp = false;
     }
@@ -180,7 +181,7 @@ function startCountdown(secondes) {
 function clearTimer() {
   clearInterval(timerInterval);
   if (countdownElement && document.body.contains(countdownElement)) {
-    document.body.removeChild(countdownElement);
+    main.removeChild(countdownElement);
     countdownElement = null;
   }
 }
@@ -380,7 +381,7 @@ function renderNextQuestion() {
   }
 }
 
-function pauseGame(){
+function pauseGame() {
   /* A FAIRE POTENTIELLEMENT */
 }
 
@@ -480,7 +481,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Losing Streak';
-    streakElement.style.backgroundColor = '#6d7a05'
+    streakElement.style.backgroundColor = '#6d7a05';
     document.body.appendChild(streakElement);
 
     losingStreakAudio.play();
@@ -499,7 +500,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'On Fire !';
-    streakElement.style.backgroundColor = '#bd7e1a'
+    streakElement.style.backgroundColor = '#bd7e1a';
     document.body.appendChild(streakElement);
   }
 
@@ -512,7 +513,6 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakBonusScore.innerText = `+${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
-
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Invicible';
@@ -522,14 +522,14 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     nineWinStreak.play();
   }
 
-  if(streak === 12) {
+  if (streak === 12) {
     const bonusScore = Math.floor(score * 0.25);
     score += bonusScore;
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
     streakBonusScore.innerText = `+${bonusScore}`;
-    document.body.appendChild(streakBonusScore);
+    main.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
@@ -602,11 +602,14 @@ async function endQuizz() {
 
     main.appendChild(endDiv);
   }
-  /*const restartButton = document.createElement('button');               marche pas encore
-    restartButton.className = "restart-button";
-    restartButton.innerText = `Rejouer`;
-    restartButton.addEventListener('click', startQuizz);
-    document.body.appendChild(restartButton);*/
+  const restartButton = document.createElement('button');
+  restartButton.className = 'restart-button';
+  restartButton.innerText = `Rejouer`;
+  restartButton.addEventListener('click', () => {
+    Navigate('/');
+  });
+
+  main.appendChild(restartButton);
 }
 
 function resetStreak(resetStreakOrNot) {
