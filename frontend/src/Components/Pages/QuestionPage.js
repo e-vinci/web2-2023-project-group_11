@@ -380,6 +380,10 @@ function renderNextQuestion() {
   }
 }
 
+function pauseGame(){
+  /* A FAIRE POTENTIELLEMENT */
+}
+
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
   if (questionAnswered) return;
 
