@@ -16,7 +16,8 @@ import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_pr
 import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
 import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
 import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
-import TwelveWinningStreak from '../../assets/audio/Recording-_17_.mp3';
+import TwelveWinningStreak from '../../assets/audio/Recording-_20_.mp3';
+import FifteenWinningStreak from '../../assets/audio/Recording-_21_.mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
 //import DoubleLosingStreak
@@ -72,6 +73,7 @@ const threeWinStreak = new Audio(ThreeWinningStreak);
 const sixWinStreak = new Audio(SixWinningStreak);
 const nineWinStreak = new Audio(NineWinningStreak);
 const twelveWinStreak = new Audio(TwelveWinningStreak);
+const fifteenWinStreak = new Audio(FifteenWinningStreak);
 const losingStreakAudio = new Audio(LosingStreak);
 const timeOverAudio = new Audio(TimeOver);
 const incorrectAudio2 = new Audio(IncorrectAudio2);
@@ -516,7 +518,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
-    streakElement.innerText = 'Invicible';
+    streakElement.innerText = 'Invicible !';
     streakElement.style.backgroundColor = '#a83b0f';
     document.body.appendChild(streakElement);
 
@@ -534,11 +536,29 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
-    streakElement.innerText = 'Unstoppable';
+    streakElement.innerText = 'Unstoppable !';
     streakElement.style.backgroundColor = '#e30b21';
     document.body.appendChild(streakElement);
 
     twelveWinStreak.play();
+  }
+
+  if (streak === 15) {
+    const bonusScore = Math.floor(score * 0.3);
+    score += bonusScore;
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`;
+    document.body.appendChild(streakBonusScore);
+
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Legendary !';
+    streakElement.style.backgroundColor = '#e30b21';
+    document.body.appendChild(streakElement);
+
+    fifteenWinStreak.play();
   }
 
   for (let i = 0; i <= 3; i += 1) {
