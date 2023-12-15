@@ -21,6 +21,7 @@ import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
 //import DoubleLosingStreak
 import Navigate from '../Router/Navigate';
+import RestartPicture from '../../img/fondButton.jpg'
 import { getParameters } from './HomePage';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auth';
 
@@ -59,7 +60,7 @@ let pitchSelector = 2;
 //let oneOrTwo = 1;
 let malusScore;
 let isMuted = false;
-let muteButton = null;
+//let muteButton = null;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);
@@ -371,6 +372,7 @@ function renderNextQuestion() {
       renderQuestion(nextQuestion);
       startCountdown(10);
       questionRendered = false;
+      endQuizz();
       return;
     }
 
@@ -577,6 +579,9 @@ async function endQuizz() {
   questionsArray = null;
   backgroundAudio.volume = 0.1;
 
+  const endContainer = document.createElement('container');
+  endContainer.className = 'end-container';
+
   if (getAuthenticatedUser()) {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
@@ -591,21 +596,27 @@ async function endQuizz() {
     } else {
       endDiv.innerText += `\nMeilleur  score ${result}`;
     }
-
-    main.appendChild(endDiv);
+    endContainer.appendChild(endDiv);
+    //main.appendChild(endDiv);        refonte avec le container
   } else {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
 
-    main.appendChild(endDiv);
+    endContainer.appendChild(endDiv);
+    //main.appendChild(endDiv);         //   //
   }
   const restartButton = document.createElement('button');
   restartButton.className = 'restart-button';
   restartButton.innerText = `Rejouer`;
   restartButton.addEventListener('click', resetGame);
-  
-  main.appendChild(restartButton);
+
+  restartButton.style.backgroundImage = `url('${RestartPicture}')`;
+  restartButton.style.backgroundSize = 'cover';    //a mettre en css pas ici mais frero la jai la flemme et ouvre jai envie de toi nicole moi jveux faire lamour jveux faire lamouuuurrrrrr
+
+  endContainer.appendChild(restartButton);
+  main.appendChild(endContainer);
+  //main.appendChild(restartButton);          //   //
 }
 
 function resetGame(){

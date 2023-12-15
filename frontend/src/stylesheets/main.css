@@ -280,11 +280,11 @@ label{
   font-size: 45px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 1.5);
   text-shadow: 
-    -1px -1px 0 rgb(250, 247, 247), /* Top-left shadow */
-    1px -1px 0 rgb(249, 249, 249), /* Top-right shadow */
-    -1px 1px 0 rgb(255, 254, 254), /* Bottom-left shadow */
-    1px 1px 0 rgb(255, 255, 255); /* Bottom-right shadow */
-    border: 3px solid transparent; /* Bord initial transparent */
+    -1px -1px 0 rgb(250, 247, 247), 
+    1px -1px 0 rgb(249, 249, 249),
+    -1px 1px 0 rgb(255, 254, 254), 
+    1px 1px 0 rgb(255, 255, 255); 
+    border: 3px solid transparent; 
     animation: colorChange 3s infinite, shadowChange 2s infinite;
 }
 
@@ -465,6 +465,12 @@ label{
   -2px 2px 0 rgb(0, 0, 0), 
   2px 2px 0 rgb(0, 0, 0); 
 }
+
+.end-container {
+  justify-content: center;
+  display: inline-block;
+}
+
 
 .answer-button {
   height: 100px;
@@ -700,7 +706,7 @@ score.right .score-bonus {
   color: red; 
 }
 
-.end {
+.end-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -708,6 +714,7 @@ score.right .score-bonus {
   height: 500px;
   transform: translate(-50%, -50%);
   background-color: #170118;
+  margin-top: 50px;
   color: white;
   padding: 30px;
   border-radius: 20px;
@@ -723,14 +730,21 @@ score.right .score-bonus {
 }
 
 .restart-button {
-  background-color: #3498db;
-  color: white;
-  padding: 15px 30px;
-  margin-top: 20px;
+  background-color: #9380a0;
+  color: rgb(0, 0, 0);
+  width: 500px;
+  height: 90px;
+  margin-top: 40px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  border-radius: 120px;
+  text-shadow: 
+    -1px -1px 0 rgb(250, 247, 247), 
+    1px -1px 0 rgb(249, 249, 249),
+    -1px 1px 0 rgb(255, 254, 254), 
+    1px 1px 0 rgb(255, 255, 255); 
 }
 
 .restart-button:hover {
