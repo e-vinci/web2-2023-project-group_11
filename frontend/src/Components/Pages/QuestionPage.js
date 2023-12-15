@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable spaced-comment */
 // eslint-disable-next-line no-unused-vars
+import Swal from 'sweetalert2';
 import { clearPage, renderPageTitle } from '../../utils/render';
 // eslint-disable-next-line spaced-comment
 //import Navigate from '../Router/Navigate';
@@ -293,7 +294,8 @@ async function fetchQuestions() {
     );
     console.log(response);
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      popError('Pas assez de categories selectionne')
+      throw new Error('Network response was not ok, pas assez de question');
     }
 
     const data = await response.json();
@@ -304,6 +306,15 @@ async function fetchQuestions() {
     console.error('Error fetching questions:', error);
   }
   return [];
+}
+
+function popError(message) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: message,
+    showConfirmButton: true,
+  });
 }
 
 async function startQuizz() {
