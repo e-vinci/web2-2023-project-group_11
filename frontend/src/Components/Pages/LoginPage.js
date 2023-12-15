@@ -1,7 +1,4 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line import/no-extraneous-dependencies
-//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { setAuthenticatedUser } from '../../utils/auth';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
@@ -41,7 +38,7 @@ async function onLogin(e) {
   const password = document.querySelector('#passwordLogin').value;
 
   if (!username || !password) {
-    /*popError('Il manque un champs obligatoire');*/
+    popError('Il manque un champs obligatoire');
     return;
   }
 
@@ -60,7 +57,7 @@ async function onLogin(e) {
     const response = await fetch(`${process.env.API_BASE_URL}/auths/login`, options);
 
     if (!response.ok) {
-      /*popError('Le pseudo ou le mot de passe est incorrect');*/
+      popError('Le pseudo ou le mot de passe est incorrect');
       return;
     }
     const authenticatedUser = await response.json();
@@ -73,18 +70,18 @@ async function onLogin(e) {
 
     Navigate('/');
   } catch (err) {
-    /*popError('Une erreur est survenue');*/
+    popError('Une erreur est survenue');
     console.error('Connexion Error:', err);
   }
 }
 
-/*function popError(message) {
+function popError(message) {
   Swal.fire({
     icon: 'error',
     title: 'Oops...',
     text: message,
     showConfirmButton: true,
   });
-}*/
+}
 
 export default LoginPage;
