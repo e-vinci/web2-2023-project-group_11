@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-/* eslint-disable no-unused-vars */
-import { clearPage, renderPageTitle } from '../../utils/render';
-import Navigate from '../Router/Navigate';
-=======
 import anime from 'animejs';
 import { clearPage, renderPageTitle } from '../../utils/render';
 
 
->>>>>>> 25f217654bbca95aecbf29b1fd60ed3cf0480810
 
 const QuizzPage = () => {
   clearPage();
@@ -17,10 +11,6 @@ const QuizzPage = () => {
 
 function renderQuizzPage() {
   const main = document.querySelector('main');
-<<<<<<< HEAD
-  main.innerHTML = 'quizz';
-  
-=======
 
   main.innerHTML = `<div class="animTest">
   <div class="p-5 anime-test-1">
@@ -42,7 +32,6 @@ function renderQuizzPage() {
   delay: anime.stagger(200) // increase delay by 100ms for each elements.
 });
 
->>>>>>> 25f217654bbca95aecbf29b1fd60ed3cf0480810
 }
 
 export default QuizzPage;
