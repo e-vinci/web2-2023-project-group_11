@@ -730,7 +730,6 @@ score.right .score-bonus {
 }
 
 .restart-button {
-  background-color: #9380a0;
   color: rgb(0, 0, 0);
   width: 500px;
   height: 90px;
@@ -738,7 +737,7 @@ score.right .score-bonus {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 46px;
   border-radius: 120px;
   text-shadow: 
     -1px -1px 0 rgb(250, 247, 247), 
@@ -748,7 +747,12 @@ score.right .score-bonus {
 }
 
 .restart-button:hover {
-  background-color: #2980b9;
+  animation: spin 0.01s infinite linear;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 
