@@ -32,8 +32,16 @@ function createOneQuestion(question, answers, categorie) {
     id: getNextId(),
     question: escape(question),
     categorie: escape(categorie),
-    answers: escape(answers),
+    answers: [],
   };
+
+  answers.forEach((element) => {
+    const answer = {
+      text: escape(element.text),
+      isCorrect: element.isCorrect,
+    };
+    newQuestion.answers.push(answer);
+  });
 
   quizz.push(newQuestion);
 

@@ -33,8 +33,8 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "username":"test1",
+    "password":"test1"
 }
 
 ### GET ALL USERS
@@ -45,8 +45,8 @@ PATCH {{baseUrl}}/users/updateBestScore
 Content-Type: application/json
 
 {
-    "username":"bob",
-    "nouveauScore":-5
+    "username":"raf",
+    "nouveauScore":500
 }
 
 ### GET ALL USERS

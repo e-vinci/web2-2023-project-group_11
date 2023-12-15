@@ -1,6 +1,4 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line import/no-extraneous-dependencies
+
 import Swal from 'sweetalert2';
 import { setAuthenticatedUser } from '../../utils/auth';
 import { clearPage, renderPageTitle } from '../../utils/render';

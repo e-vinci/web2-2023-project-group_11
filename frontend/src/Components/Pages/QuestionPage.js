@@ -16,11 +16,14 @@ import BackgroundMusic from '../../assets/audio/185_full_hustle-and-flow_0141_pr
 import ThreeWinningStreak from '../../assets/audio/Recording (3).mp3';
 import SixWinningStreak from '../../assets/audio/Recording (9).mp3';
 import NineWinningStreak from '../../assets/audio/Recording (14).mp3';
-import TwelveWinningStreak from '../../assets/audio/Recording-_17_.mp3';
+import TwelveWinningStreak from '../../assets/audio/Recording-_20_.mp3';
+import FifteenWinningStreak from '../../assets/audio/Recording-_21_.mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
 //import DoubleLosingStreak
-
+import Navigate from '../Router/Navigate';
+import RestartPicture from '../../img/fondButton.jpg'
+import StartPicture from '../../img/fondButton3.jpg'
 import { getParameters } from './HomePage';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auth';
 
@@ -59,7 +62,7 @@ let pitchSelector = 2;
 //let oneOrTwo = 1;
 let malusScore;
 let isMuted = false;
-let muteText = 'mute';
+//let muteButton = null;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);
@@ -70,6 +73,7 @@ const threeWinStreak = new Audio(ThreeWinningStreak);
 const sixWinStreak = new Audio(SixWinningStreak);
 const nineWinStreak = new Audio(NineWinningStreak);
 const twelveWinStreak = new Audio(TwelveWinningStreak);
+const fifteenWinStreak = new Audio(FifteenWinningStreak);
 const losingStreakAudio = new Audio(LosingStreak);
 const timeOverAudio = new Audio(TimeOver);
 const incorrectAudio2 = new Audio(IncorrectAudio2);
@@ -91,6 +95,13 @@ losingStreakAudio.playbackRate = 0.8;
 losingStreakAudio.preservesPitch = false;
 timeOverAudio.playbackRate = 1.6;
 timeOverAudio.preservesPitch = false;
+
+/* muteButton = document.createElement('button');
+muteButton.className = 'mute-button';
+muteButton.innerText = 'Mute';
+muteButton.addEventListener('click', changeVolume);
+main = document.querySelector('main');
+main.appendChild(muteButton); */
 
 function playBackgroundMusic() {
   backgroundAudio.loop = true;
@@ -117,60 +128,53 @@ const QuestionPage = () => {
   startGame.className = 'start-button';
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
   startGame.innerText = `${titleStartButton}`;
-
-  const timerDiv = document.createElement('div'); //container
-  timerDiv.id = 'timerModel';
-  timerDiv.className = 'modal';
-  timerDiv.innerText = 'AAAAAAAAAAAA';
-
-  const timerSpan = document.createElement('span'); //span
-  timerSpan.id = 'timerSpan';
-  timerDiv.innerText = 'BBBBBBBBBBB';
-  timerDiv.appendChild(timerSpan);
-
-  document.body.appendChild(timerDiv);
+  startGame.style.backgroundImage = `url('${StartPicture}')`;
 
   main.appendChild(startGame);
   //main.appendChild(timer);
   startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
+  startGame.addEventListener('mouseover', () => {
+    startGame.innerText = 'Bon jeu =)';
+  });
+  startGame.addEventListener('mouseout', () => {
+    startGame.innerText = 'Commencer';
+  });
 };
 
-function changeVolume(){
- if(!isMuted){
-   backgroundAudio.volume = 0;
-   isMuted = true;
-   muteText = 'Unmute';
- }
- else{
-   backgroundAudio.volume = 0.03;
-   isMuted = false;
-   muteText = 'Mute'
- }
- 
+function changeVolume() {
+  if (!isMuted) {
+    backgroundAudio.volume = 0;
+    isMuted = true;
+  } else {
+    backgroundAudio.volume = 0.03;
+    isMuted = false;
+  }
 }
 
 function startCountdown(secondes) {
   remainingTime = secondes;
   playTimerAudio();
+  countdownElement = document.createElement('div');
+  countdownElement.id = 'countdownElement';
+  countdownElement.className = 'countdown-number';
+  main.appendChild(countdownElement);
+
   timerInterval = setInterval(() => {
-    document.getElementById('timerSpan').innerText = remainingTime;
+    if (window.location.pathname !== '/quizz') {
+      clearTimer();
+      stopTimerAudio();
+      return;
+    }
 
-    countdownElement = document.createElement('div');
-    countdownElement.id = 'countdownElement';
-    countdownElement.className = 'countdown-number';
     countdownElement.innerText = remainingTime;
-
-    document.body.appendChild(countdownElement);
+    main.appendChild(countdownElement);
 
     remainingTime -= 1;
 
-    if (remainingTime <= -1) timeUp = true;
-    if (timeUp) {
+    if (remainingTime <= -1) {
       clearTimer();
       stopTimerAudio();
-    }
-    if (timeUp) {
       handleTimeUp();
       timeUp = false;
     }
@@ -180,7 +184,7 @@ function startCountdown(secondes) {
 function clearTimer() {
   clearInterval(timerInterval);
   if (countdownElement && document.body.contains(countdownElement)) {
-    document.body.removeChild(countdownElement);
+    main.removeChild(countdownElement);
     countdownElement = null;
   }
 }
@@ -380,7 +384,7 @@ function renderNextQuestion() {
   }
 }
 
-function pauseGame(){
+function pauseGame() {
   /* A FAIRE POTENTIELLEMENT */
 }
 
@@ -480,7 +484,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'Losing Streak';
-    streakElement.style.backgroundColor = '#6d7a05'
+    streakElement.style.backgroundColor = '#6d7a05';
     document.body.appendChild(streakElement);
 
     losingStreakAudio.play();
@@ -499,7 +503,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
     streakElement.innerText = 'On Fire !';
-    streakElement.style.backgroundColor = '#bd7e1a'
+    streakElement.style.backgroundColor = '#bd7e1a';
     document.body.appendChild(streakElement);
   }
 
@@ -512,17 +516,16 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     streakBonusScore.innerText = `+${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
-
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
-    streakElement.innerText = 'Invicible';
+    streakElement.innerText = 'Invicible !';
     streakElement.style.backgroundColor = '#a83b0f';
     document.body.appendChild(streakElement);
 
     nineWinStreak.play();
   }
 
-  if(streak === 12) {
+  if (streak === 12) {
     const bonusScore = Math.floor(score * 0.25);
     score += bonusScore;
 
@@ -533,11 +536,29 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakElement = document.createElement('div');
     streakElement.className = 'streak';
-    streakElement.innerText = 'Unstoppable';
+    streakElement.innerText = 'Unstoppable !';
     streakElement.style.backgroundColor = '#e30b21';
     document.body.appendChild(streakElement);
 
     twelveWinStreak.play();
+  }
+
+  if (streak === 15) {
+    const bonusScore = Math.floor(score * 0.3);
+    score += bonusScore;
+
+    streakBonusScore = document.createElement('div');
+    streakBonusScore.className = 'bonus';
+    streakBonusScore.innerText = `+${bonusScore}`;
+    document.body.appendChild(streakBonusScore);
+
+    streakElement = document.createElement('div');
+    streakElement.className = 'streak';
+    streakElement.innerText = 'Legendary !';
+    streakElement.style.backgroundColor = '#e30b21';
+    document.body.appendChild(streakElement);
+
+    fifteenWinStreak.play();
   }
 
   for (let i = 0; i <= 3; i += 1) {
@@ -579,6 +600,9 @@ async function endQuizz() {
   questionsArray = null;
   backgroundAudio.volume = 0.1;
 
+  const endContainer = document.createElement('container');
+  endContainer.className = 'end-container';
+
   if (getAuthenticatedUser()) {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
@@ -593,20 +617,32 @@ async function endQuizz() {
     } else {
       endDiv.innerText += `\nMeilleur  score ${result}`;
     }
-
-    main.appendChild(endDiv);
+    endContainer.appendChild(endDiv);
+    //main.appendChild(endDiv);        refonte avec le container
   } else {
     endDiv = document.createElement('div');
     endDiv.className = 'end';
     endDiv.innerText = `Fin de la partie\n Score : ${score}`;
 
-    main.appendChild(endDiv);
+    endContainer.appendChild(endDiv);
+    //main.appendChild(endDiv);         //   //
   }
-  /*const restartButton = document.createElement('button');               marche pas encore
-    restartButton.className = "restart-button";
-    restartButton.innerText = `Rejouer`;
-    restartButton.addEventListener('click', startQuizz);
-    document.body.appendChild(restartButton);*/
+  const restartButton = document.createElement('button');
+  restartButton.className = 'restart-button';
+  restartButton.innerText = `Rejouer`;
+  restartButton.addEventListener('click', resetGame);
+
+  restartButton.style.backgroundImage = `url('${RestartPicture}')`;
+  restartButton.style.backgroundSize = 'cover';    //a mettre en css pas ici mais frero la jai la flemme et ouvre jai envie de toi nicole moi jveux faire lamour jveux faire lamouuuurrrrrr
+
+  endContainer.appendChild(restartButton);
+  main.appendChild(endContainer);
+  //main.appendChild(restartButton);          //   //
+}
+
+function resetGame(){
+  backgroundAudio.pause();
+  Navigate('/');
 }
 
 function resetStreak(resetStreakOrNot) {

@@ -6,7 +6,7 @@ body {
   background-size: 2000px;
   margin: 0;
   padding: 0;
-  animation: moveBackground 9s linear infinite;
+  animation: moveBackground 9s alternate-reverse infinite ;
 }
 
 
@@ -34,10 +34,10 @@ body {
   font-size: 40px;
   color: white;
   text-shadow: 
-  -1px -1px 0 rgb(0, 0, 0), /* Top-left shadow */
-  1px -1px 0 rgb(0, 0, 0), /* Top-right shadow */
-  -1px 1px 0 rgb(0, 0, 0), /* Bottom-left shadow */
-  1px 1px 0 rgb(0, 0, 0); /* Bottom-right shadow */
+  -1px -1px 0 rgb(0, 0, 0),
+  1px -1px 0 rgb(0, 0, 0), 
+  -1px 1px 0 rgb(0, 0, 0), 
+  1px 1px 0 rgb(0, 0, 0); 
   background-size: 100%;
   text-align: center;
   font-family: 'Bangers', cursive;
@@ -247,9 +247,9 @@ label{
   font-size: 70px;
   color: white;
   text-shadow: 
-  -2px -2px 0 #000000, /* Top-left shadow for left border */
-  2px -2px 0 #000000, /* Top-right shadow for top border */
-  -2px 2px 0 #000000, /* Bottom-left shadow for left border */
+  -2px -2px 0 #000000, 
+  2px -2px 0 #000000, 
+  -2px 2px 0 #000000, 
   2px 2px 0 #000000;
   /*animation: pulsate 4s infinite;*/
 }
@@ -280,11 +280,11 @@ label{
   font-size: 45px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 1.5);
   text-shadow: 
-    -1px -1px 0 rgb(250, 247, 247), /* Top-left shadow */
-    1px -1px 0 rgb(249, 249, 249), /* Top-right shadow */
-    -1px 1px 0 rgb(255, 254, 254), /* Bottom-left shadow */
-    1px 1px 0 rgb(255, 255, 255); /* Bottom-right shadow */
-    border: 3px solid transparent; /* Bord initial transparent */
+    -1px -1px 0 rgb(250, 247, 247), 
+    1px -1px 0 rgb(249, 249, 249),
+    -1px 1px 0 rgb(255, 254, 254), 
+    1px 1px 0 rgb(255, 255, 255); 
+    border: 3px solid transparent; 
     animation: colorChange 3s infinite, shadowChange 2s infinite;
 }
 
@@ -432,6 +432,7 @@ label{
   margin-left: 25rem;
   font-family: 'Bangers', cursive;
   user-select: none;
+  
 }
 
 .startGame:hover {
@@ -452,13 +453,28 @@ label{
   border: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-radius: 5px;
+  border-radius: 90px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  animation: pulse1 1s infinite alternate;
+  animation: pulse2 1s infinite alternate;
   background-color: rgb(62, 3, 62);
   font-family: 'Bangers', cursive;
+  text-shadow: 
+  -2px -2px 0 rgb(0, 0, 0),
+  2px -2px 0 rgb(0, 0, 0), 
+  -2px 2px 0 rgb(0, 0, 0), 
+  2px 2px 0 rgb(0, 0, 0); 
 }
+
+.start-button:hover {
+  animation: moveBackground 5s alternate infinite, pulse1 1s infinite alternate;
+}
+
+.end-container {
+  justify-content: center;
+  display: inline-block;
+}
+
 
 .answer-button {
   height: 100px;
@@ -694,7 +710,7 @@ score.right .score-bonus {
   color: red; 
 }
 
-.end {
+.end-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -702,6 +718,7 @@ score.right .score-bonus {
   height: 500px;
   transform: translate(-50%, -50%);
   background-color: #170118;
+  margin-top: 50px;
   color: white;
   padding: 30px;
   border-radius: 20px;
@@ -717,18 +734,29 @@ score.right .score-bonus {
 }
 
 .restart-button {
-  background-color: #3498db;
-  color: white;
-  padding: 15px 30px;
-  margin-top: 20px;
+  color: rgb(0, 0, 0);
+  width: 500px;
+  height: 90px;
+  margin-top: 40px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 46px;
+  border-radius: 120px;
+  text-shadow: 
+    -1px -1px 0 rgb(250, 247, 247), 
+    1px -1px 0 rgb(249, 249, 249),
+    -1px 1px 0 rgb(255, 254, 254), 
+    1px 1px 0 rgb(255, 255, 255); 
 }
 
 .restart-button:hover {
-  background-color: #2980b9;
+  animation: spin 0.01s infinite linear;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .police-options{
