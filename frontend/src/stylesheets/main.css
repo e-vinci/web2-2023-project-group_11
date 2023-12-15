@@ -6,7 +6,7 @@ body {
   background-size: 2000px;
   margin: 0;
   padding: 0;
-  animation: moveBackground 9s linear infinite;
+  animation: moveBackground 9s alternate-reverse infinite ;
 }
 
 
@@ -456,7 +456,7 @@ label{
   border-radius: 90px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  animation: pulse1 1s infinite alternate;
+  animation: pulse2 1s infinite alternate;
   background-color: rgb(62, 3, 62);
   font-family: 'Bangers', cursive;
   text-shadow: 
@@ -464,6 +464,10 @@ label{
   2px -2px 0 rgb(0, 0, 0), 
   -2px 2px 0 rgb(0, 0, 0), 
   2px 2px 0 rgb(0, 0, 0); 
+}
+
+.start-button:hover {
+  animation: moveBackground 5s alternate infinite, pulse1 1s infinite alternate;
 }
 
 .end-container {

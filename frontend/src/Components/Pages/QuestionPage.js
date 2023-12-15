@@ -22,6 +22,7 @@ import TimeOver from '../../assets/audio/Recording (6).mp3';
 //import DoubleLosingStreak
 import Navigate from '../Router/Navigate';
 import RestartPicture from '../../img/fondButton.jpg'
+import StartPicture from '../../img/fondButton3.jpg'
 import { getParameters } from './HomePage';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auth';
 
@@ -125,6 +126,7 @@ const QuestionPage = () => {
   startGame.className = 'start-button';
   // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
   startGame.innerText = `${titleStartButton}`;
+  startGame.style.backgroundImage = `url('${StartPicture}')`;
 
   main.appendChild(startGame);
   //main.appendChild(timer);
@@ -372,7 +374,6 @@ function renderNextQuestion() {
       renderQuestion(nextQuestion);
       startCountdown(10);
       questionRendered = false;
-      endQuizz();
       return;
     }
 
