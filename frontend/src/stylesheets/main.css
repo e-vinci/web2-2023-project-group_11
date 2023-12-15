@@ -731,6 +731,11 @@ score.right .score-bonus {
   background-color: #2980b9;
 }
 
+.police-options{
+  color: white;
+  font-family: 'Bangers', cursive;
+}
+
 
 /* Home Page CSS */
 /* hiddenInput{
