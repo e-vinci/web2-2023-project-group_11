@@ -158,6 +158,19 @@ function readBestScore(username) {
   }
 }
 
+function deleteOneUser(id) {
+  console.log('delete one user');
+  const idNumber = parseInt(id, 10);
+  const users = parse(jsonDbPath, defaultUsers);
+  const foundIndex = users.findIndex((user) => user.id === idNumber);
+  if (foundIndex < 0) return undefined;
+  const deletedUsers = users.splice(foundIndex, 1);
+  const deletedUser = deletedUsers[0];
+  serialize(jsonDbPath, users);
+
+  return deletedUser;
+}
+
 module.exports = {
   login,
   register,
@@ -165,4 +178,5 @@ module.exports = {
   readAllUsers,
   changerScore,
   readBestScore,
+  deleteOneUser,
 };

@@ -4,10 +4,11 @@ const {
   readAllUsers,
   changerScore,
   readBestScore,
+  deleteOneUser,
 } = require('../models/users');
 
 const router = express.Router();
-
+const { authorize, isAdmin } = require('../utils/auths');
 /* GET users listing. */
 router.get('/', (req, res) => {
   const allUsers = readAllUsers();
@@ -39,6 +40,14 @@ router.get('/getScore', (req, res) => {
   const score = readBestScore(username);
   console.log('route', score);
   return res.json(score);
+});
+// Delete a user from the list of user based on its id
+router.delete('/:id', authorize, isAdmin, (req, res) => {
+  const deletedUser = deleteOneUser(req.params.id);
+
+  if (!deletedUser) return res.sendStatus(404);
+
+  return res.json(deletedUser);
 });
 
 module.exports = router;

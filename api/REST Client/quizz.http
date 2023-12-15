@@ -31,26 +31,26 @@ POST {{baseUrl}}/quizz/addQuestion
 Content-Type: application/json
 Authorization: {{admin.response.body.token}}
 
-{   "question":"Quelle couleur est la mer ?",
-    "categorie":"Géographie",
-    "answers":[
-      {
-        "text": "bleu",
-        "isCorrect": true
-      },
-      {
-        "text": "vert",
-        "isCorrect": false
-      },
-      {
-        "text": "rouge",
-        "isCorrect": false
-      },
-      {
-        "text": "orange",
-        "isCorrect": false
-      }
-    ]
+{"question": "Quelle est la capitale du Maroc ?",
+  "categorie": "Géographie",
+  "answers": [
+    {
+      "text": "Casablanca",
+      "isCorrect": false
+    },
+    {
+      "text": "Marrakech",
+      "isCorrect": false
+    },
+    {
+      "text": "Rabat",
+      "isCorrect": true
+    },
+    {
+      "text": "Agadir",
+      "isCorrect": false
+    }
+  ]
 }
 
 ### Delete question identified by 121 with the admin token
