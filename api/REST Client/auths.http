@@ -1,4 +1,5 @@
-@baseUrl = http://localhost:3000
+//@baseUrl = http://localhost:3000
+@baseUrl = https://rafael-millor-vinci-web2.azurewebsites.net/
 
 ### Try to login an unknow user
 POST {{baseUrl}}/auths/login
@@ -24,8 +25,8 @@ POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "username":"test1",
+    "password":"test1"
 }
 
 ### Login the manager user
@@ -33,6 +34,36 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "username":"test1",
+    "password":"test1"
 }
+
+### GET ALL USERS
+GET {{baseUrl}}/users
+
+### Update the pizza identified by 6 with the admin token
+PATCH {{baseUrl}}/users/updateBestScore
+Content-Type: application/json
+
+{
+    "username":"raf",
+    "nouveauScore":500
+}
+
+### GET ALL USERS
+GET {{baseUrl}}/users/getScore?username=bob
+
+### Delete user identified by 3 with the admin token
+#### First login as the admin
+##### Define a request variable nammed admin
+# @name admin
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin"
+}
+### Delete user identified by 3 with the admin token
+DELETE {{baseUrl}}/users/3
+Authorization: {{admin.response.body.token}}

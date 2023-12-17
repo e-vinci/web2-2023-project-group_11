@@ -23,17 +23,21 @@
     "html-webpack-plugin": "^5.5.0",
     "prettier-airbnb-config": "^1.0.0",
     "style-loader": "^2.0.0",
+    "sweetalert2": "^11.10.1",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "animejs": "^3.2.1",
     "bootstrap": "^5.0.1",
     "clean-webpack-plugin": "^4.0.0",
-    "phaser": "^3.55.2",
+    "cookie-session": "^2.0.0",
     "gh-pages": "^4.0.0",
+    "phaser": "^3.55.2",
     "terser-webpack-plugin": "^5.3.6",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "sweetalert2": "^11.10.1"
   }
 }

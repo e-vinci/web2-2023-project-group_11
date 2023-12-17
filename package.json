@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "animejs": "^3.2.1",
+    "bootstrap": "^5.3.2",
+    "cookie-session": "^2.0.0",
+    "escape-html": "^1.0.3",
+    "sweetalert2": "^11.10.1"
+  }
+}
