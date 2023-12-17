@@ -397,19 +397,10 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     scoreElement.classList.add('right');
     scoreElement.innerHTML = `<span class="score-change">+${bonusScore}</span>`;
 
-    /*const scoreBonusDiv = document.createElement('div');
-    scoreBonusDiv.className = 'score-bonus';
-    scoreBonusDiv.innerHTML = `+${10 + remainingTime * 2.5}`;
-    document.body.appendChild(scoreBonusDiv);
-
-    setTimeout(() => {
-      document.body.removeChild(scoreBonusDiv);
-    }, 2000);  */
   } else {
     console.log('mauvaise reponse');
     console.log('streak = 0');
     console.log(lossStreak);
-    //streak = 0;
 
     resetStreak(true);
     lossStreak += 1;
@@ -426,22 +417,6 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     answerButton.classList.add('wrong-reply');
     console.log(`CLASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS LISTTT`);
 
-    /*const answerButton = document.getElementById(`answer${questionid}_${selectedAnswerIndex}`)
-    answerButton.classList.add('wrong-reply');
-    const scoreElement = document.getElementById('score2');
-    scoreElement.classList.add('wrong');
-    scoreElement.innerHTML = `<span class="score-change">-${retrait}</span>`;*/
-
-    /*const scoreMalusDiv = document.createElement('div');
-    scoreMalusDiv.className = 'score-malus';
-    scoreMalusDiv.innerHTML = `-${score / 10}`;
-    document.body.appendChild(scoreMalusDiv);
-
-
-    setTimeout(() => {
-      document.body.removeChild(scoreMalusDiv);
-    }, 2000); */
-    //document.getElementById(`answer${questionid}_${selectedAnswerIndex}`).style.backgroundColor = 'red';
   }
 
   if (streak === 3) {
@@ -479,7 +454,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`;
+    streakBonusScore.innerText = `BONUS +${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -525,7 +500,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     twelveWinStreak.play();
   }
 
-  if (streak === 15) {
+  if (streak > 0 && streak !== 3 && streak !== 6) {
     const bonusScore = Math.floor(score * 0.3);
     score += bonusScore;
 
@@ -564,8 +539,8 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     renderNextQuestion();
     timeUp = false;
     questionAnswered = false;
-    // Call the function to render the next question here
-  }, 2000); // Adjust the delay time as needed
+    
+  }, 2000); 
 }
 
 function resetAnswerStyles() {
@@ -615,11 +590,10 @@ async function endQuizz() {
   restartButton.addEventListener('click', resetGame);
 
   restartButton.style.backgroundImage = `url('${RestartPicture}')`;
-  restartButton.style.backgroundSize = 'cover';    //a mettre en css pas ici mais frero la jai la flemme et ouvre jai envie de toi nicole moi jveux faire lamour jveux faire lamouuuurrrrrr
+  restartButton.style.backgroundSize = 'cover'; 
 
   endContainer.appendChild(restartButton);
   main.appendChild(endContainer);
-  //main.appendChild(restartButton);          //   //
 }
 
 function resetGame(){
