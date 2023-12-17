@@ -447,9 +447,10 @@ label{
 }
 
 .start-button {
-  font-size: 36px;
-  margin-top: 300px;
-  margin-left: 700px;
+  font-size: 36px;     
+  position: absolute;
+  top: 50%;
+  left: 37%;
   padding: 40px 130px;
   background-color: black;
   color: white;
