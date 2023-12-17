@@ -144,6 +144,7 @@ function startCountdown(secondes) {
 
   timerInterval = setInterval(() => {
     if (window.location.pathname !== '/quizz') {
+      backgroundAudio.pause();
       clearTimer();
       stopTimerAudio();
       return;
