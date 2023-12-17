@@ -168,22 +168,22 @@ label{
     transform: translateX(100%) scaleX(0);
   }
   10% {
-    transform: translateX(50%) scaleX(1);
+    transform: translateX(-50%) scaleX(1);
   }
   50% {
     transform: translateX(-50%) scaleX(1);
   }
   60% {
-    transform: translateX(-50%) scaleX(1);
+    transform: translateX(-100%) scaleX(1);
   }
   70% {
-    transform: translateX(-60%) scaleX(0.9);
+    transform: translateX(200%) scaleX(0.9);
   }
   80% {
-    transform: translateX(-80%) scaleX(0.7);
+    transform: translateX(200%) scaleX(0.7);
   }
   100% {
-    transform: translateX(-100%) scaleX(0);
+    transform: translateX(300%) scaleX(0);
   }
 }
 
@@ -198,10 +198,13 @@ label{
     transform: translateX(-50%) scaleX(1);
   }
   60% {
-    transform: translateX(50%) scaleX(1);
+    transform: translateX(-80%) scaleX(1);
+  }
+  70%{
+    transform: translateX(200%) scaleX(1);
   }
   100% {
-    transform: translateX(100%) scaleX(0);
+    transform: translateX(300%) scaleX(0);
   }
 }
 
@@ -444,9 +447,10 @@ label{
 }
 
 .start-button {
-  font-size: 36px;
-  margin-top: 300px;
-  margin-left: 700px;
+  font-size: 36px;     
+  position: absolute;
+  top: 50%;
+  left: 37%;
   padding: 40px 130px;
   background-color: black;
   color: white;
@@ -708,6 +712,37 @@ score.right .score-bonus {
 
 .score.wrong .score-malus {
   color: red; 
+}
+
+.bonus{
+  top: 60%;
+  position: absolute;
+  color: rgb(23, 82, 17);
+  font-size: 40px;
+  animation: slideAndDisappear3 3s;
+
+}
+
+
+@keyframes slideAndDisappear3 {
+  0% {
+    transform: translateX(200%) scaleX(0);
+  }
+  10% {
+    transform: translateX(25%) scaleX(1);
+  }
+  50% {
+    transform: translateX(25%) scaleX(1);
+  }
+  60% {
+    transform: translateX(55%) scaleX(0.9);
+  }
+  80% {
+    transform: translateX(-200%) scaleX(0.7);
+  }
+  100% {
+    transform: translateX(-200%) scaleX(0);
+  }
 }
 
 .end-container {
