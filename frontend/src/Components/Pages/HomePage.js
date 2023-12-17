@@ -99,23 +99,6 @@ function getParameters() {
   return parameterValues;
 }
 
-
-/* function updateForm(parameters) {
-  document.getElementById('idArt').checked = parameters.Art === 'true';
-  document.getElementById('idGéographie').checked = parameters['Géographie'] === 'true';
-  document.getElementById('idLittérature').checked = parameters['Littérature'] === 'true';
-  document.getElementById('idMathématique').checked = parameters['Mathématique'] === 'true';
-  document.getElementById('idAstronomie').checked = parameters.Astronomie === 'true';
-}
-
-
-function initializeFormFromURL() {
-  const parameters = getParameters();
-  updateForm(parameters);
-}
-
-*/
-
 const parameters = getParameters();
 console.log('URL Parameters:', parameters);
 
@@ -161,60 +144,6 @@ async function onFormSubmit(e) {
   window.location.href = newUrl;
 
 }
-
-/* function getParameters() {
-    const queryParams = new URLSearchParams(window.location.search);
-    const parameters = {};
-  
-    for (const [key, value] of queryParams.entries()) {
-      parameters[key] = value;
-    }
-  
-    return parameters;
-  }
-  function updateForm(parameters) {
-    // Assuming your checkboxes have the following IDs
-    document.getElementById('idArt').checked = parameters['Art'] === 'true';
-    document.getElementById('idGéographie').checked = parameters['Géographie'] === 'true';
-    document.getElementById('idLittérature').checked = parameters['Littérature'] === 'true';
-    document.getElementById('idMathématique').checked = parameters['Mathématique'] === 'true';
-    document.getElementById('idAstronomie').checked = parameters['Astronomie'] === 'true';
-  }
-  
-  // Call this function when your page loads to initialize the form based on URL parameters
-  function initializeFormFromURL() {
-    const parameters = getParameters();
-    updateForm(parameters);
-  }
-  
-  // Example usage in someone else's code
-  const parameters = getParameters();
-  console.log('URL Parameters:', parameters);
-  // You can now use the parameters in their code as needed. */
-
-
-
-
-
-
-/*
-Si je veux direct aller sur le lien 
-const queryParams = new URLSearchParams();
-queryParams.set('Art', Art.toString());
-queryParams.set('Géographie', Géographie.toString());
-queryParams.set('Littérature', Littérature.toString());
-queryParams.set('Mathématique', Mathématique.toString());
-queryParams.set('Astronomie', Astronomie.toString());
-
-const currentUrl = window.location.href.split('?')[0]; 
-const newUrl = `${currentUrl}?${queryParams.toString()}`;
-
-console.log('New URL with parameters:', newUrl);
-
-window.location.href = newUrl;
-
-clearPage();
-*/
 
 
 export { HomePage, getParameters };

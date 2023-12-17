@@ -21,7 +21,6 @@ import TwelveWinningStreak from '../../assets/audio/Recording-_20_.mp3';
 import FifteenWinningStreak from '../../assets/audio/Recording-_21_.mp3';
 import LosingStreak from '../../assets/audio/Recording (4)(1).mp3';
 import TimeOver from '../../assets/audio/Recording (6).mp3';
-//import DoubleLosingStreak
 import Navigate from '../Router/Navigate';
 import RestartPicture from '../../img/fondButton.jpg'
 import StartPicture from '../../img/fondButton3.jpg'
@@ -46,7 +45,6 @@ let currentQuestionIndex = 0;
 let score = 0;
 let startGame = null;
 let main = null;
-let started = false;
 let questionAnswered = false;
 let titleStartButton = 'Commencer';
 let timerInterval = null;
@@ -60,10 +58,8 @@ let streakElement;
 let streakBonusScore;
 let endDiv;
 let pitchSelector = 2;
-//let oneOrTwo = 1;
 let malusScore;
 let isMuted = false;
-//let muteButton = null;
 
 // audio elements
 const correctAudio = new Audio(CorrectAudio);
@@ -78,7 +74,6 @@ const fifteenWinStreak = new Audio(FifteenWinningStreak);
 const losingStreakAudio = new Audio(LosingStreak);
 const timeOverAudio = new Audio(TimeOver);
 const incorrectAudio2 = new Audio(IncorrectAudio2);
-// const doublelosingstreak = new Audio(DoubleLosingStreak);
 
 timerAudio.volume = 0.2;
 losingStreakAudio.volume = 1;
@@ -99,16 +94,8 @@ losingStreakAudio.preservesPitch = false;
 timeOverAudio.playbackRate = 1.6;
 timeOverAudio.preservesPitch = false;
 
-/* muteButton = document.createElement('button');
-muteButton.className = 'mute-button';
-muteButton.innerText = 'Mute';
-muteButton.addEventListener('click', changeVolume);
-main = document.querySelector('main');
-main.appendChild(muteButton); */
-
 function playBackgroundMusic() {
   backgroundAudio.loop = true;
-  // Adjust the volume as needed
   backgroundAudio.play();
   backgroundAudio.playbackRate = 1.1;
 }
@@ -117,24 +104,16 @@ const QuestionPage = () => {
   console.log('debut du quizz');
   clearPage();
   stopTimerAudio();
-  // questionsArray = null;
   main = document.querySelector('main');
 
-  /*const muteButton = document.createElement('button');
-  muteButton.className = 'mute-button';
-  muteButton.innerText = `${muteText}`;
-  muteButton.addEventListener('click', changeVolume);
-  document.body.appendChild(muteButton);*/
-
-  //const timer = '<div id="timer">Temps restant : <span id="countdown">10</span> secondes</div>';
   startGame = document.createElement('button');
   startGame.className = 'start-button';
-  // ! si 'titleDiv is null, changer startGame.innerText = "Commencer";
+  
   startGame.innerText = `${titleStartButton}`;
   startGame.style.backgroundImage = `url('${StartPicture}')`;
 
   main.appendChild(startGame);
-  //main.appendChild(timer);
+
   startGame.addEventListener('click', playBackgroundMusic);
   startGame.addEventListener('click', startQuizz);
   startGame.addEventListener('mouseover', () => {
@@ -236,14 +215,11 @@ function handleTimeUp() {
   timeoutElement.innerText = 'Temps écoulé';
   document.body.appendChild(timeoutElement);
 
-  //timeoutElement.classList.add('slide-in');
-
   // Appeler la fonction pour passer à la prochaine question après 2 secondes
   setTimeout(() => {
     if (timeoutElement) {
       document.body.removeChild(timeoutElement);
     }
-    //timeoutElement.classList.add('slide-out');
     renderNextQuestion();
     timeUp = false;
   }, 3000);
@@ -255,13 +231,6 @@ async function fetchQuestions() {
   try {
     const response = await fetch(
       `${process.env.API_BASE_URL}/quizz/20?categorie=${param}`,
-      /* method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        categorie: ['Géographie', 'Art'],
-      }), */
     );
     console.log(response);
     if (!response.ok) {
@@ -271,7 +240,7 @@ async function fetchQuestions() {
 
     const data = await response.json();
     console.log('Tableau de 20 questions:', data);
-    // Process the data here
+    
     return data;
   } catch (error) {
     console.error('Error fetching questions:', error);
@@ -293,7 +262,6 @@ async function startQuizz() {
   startGame.removeEventListener('click', startQuizz);
   questionsArray = await fetchQuestions();
   console.log(questionsArray);
-  started = true;
   titleStartButton = `Continuer`;
 
   //startCountdown(10);
@@ -366,9 +334,6 @@ function renderNextQuestion() {
   }
 }
 
-function pauseGame() {
-  /* A FAIRE POTENTIELLEMENT */
-}
 
 function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) {
   if (questionAnswered) return;
@@ -470,7 +435,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`;
+    streakBonusScore.innerText = `BONUS +${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -500,7 +465,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
     twelveWinStreak.play();
   }
 
-  if (streak > 0 && streak !== 3 && streak !== 6) {
+  if (streak === 15) {
     const bonusScore = Math.floor(score * 0.3);
     score += bonusScore;
 
@@ -655,121 +620,5 @@ async function getBestScoreByUsername(username) {
     throw error;
   }
 }
-
-/* async function fetchQuestion(id) {
- return new Promise((resolve, reject) => {
-   // délai pour trouver la question
-   setTimeout(() => {
-     const question = questions.find(q => q.id === id);
-     if (question) {
-       resolve(question);
-     } else {
-       reject(new Error('Question non existante'));
-     }
-   }, 500);
- }); */
-
-//const answersHTML = questions[questionId].answers.map((answer, index) => {
-// const isCorrect = index === correctAnswerIndex;
-// const buttonClass = isCorrect ? 'correct-answer' : 'incorrect-answer';
-// return `<button class="answer-button ${buttonClass}" data-index="${index}">${index + 1}. ${answer.text}</button>`;
-//}).join('');
-
-// Append the HTML to your container
-// (Assuming you have a container element with id 'answers-container')
-//document.getElementById('answers-container').innerHTML = answersHTML;
-
-// RENDERQUESTIONOLDCODE
-
-/* const buttonId = `answer${question.id}_${index + 1}`;
-      const answerButton = `<button class="answer-button" id="${buttonId}">${index + 1}. ${answer.text}</button>`;
-      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-      return answerButton; */
-
-//itération de l'array de réponses de la question et concaténation dans la variable answersHTML
-/* const answersHTML = question.answers.map((answer, index) => {
-  
-      const buttonId = `answer${question.id}_${index + 1}`;
-  
-      // création d'un bouton
-      const answerButton = document.createElement('button');
-      answerButton.className = 'answer-button';
-      answerButton.id = buttonId;
-      answerButton.innerHTML = `${index + 1}. ${answer.text}`;
-  
-      console.log(`question id : ${question.id}`);
-      console.log('Correct answer index:', correctAnswerIndex);
-      console.log('Selected answer index:', index + 1);
-   
-      // ajout d'un gestionnaire d'événements au bouton
-      answerButton.addEventListener('click', () => console.log('Button clicked!'));
-      answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-      
-
-      // retourne l'élément DOM sous forme de chaîne
-       return answerButton.outerHTML;
-    }).join('');  */
-
-//itération des differentes réponses avec un event au click
-/*question.answers.forEach((answer, index) => {
-    const answerButton = document.getElementById(`answer${index + 1}`);
-    console.log(`answerbutton :${answerButton}`);
-    answerButton.addEventListener('click', () => handleAnswerClick(question.id, correctAnswerIndex, index + 1));
-  });*/
-
-/* function renderQuestionPage() {
-  
-    const banniere = document.createElement('div');
-    banniere.className = "banner"
-    
-  
-    const textElement = document.createElement('span');
-    textElement.className = "text-element";
-  
-    //const startGame = document.createElement('button');
-    //startGame.className = "start-button";
-   // startGame.innerText = "Commencer";
-  
-    const questionDiv = document.createElement("div");
-    questionDiv.className = "question-div";
-  
-    const titleDiv = document.createElement('div');
-    titleDiv.className = "question-container";
-  
-    const answer1Div = document.createElement('div');
-    answer1Div.className = "answer1-container";
-    //answer1Div.id = 
-  
-    const answer2Div = document.createElement('div');
-    answer2Div.className = "answer2-container";
-  
-    const answer3Div = document.createElement('div');
-    answer3Div.className = "answer3-container";
-  
-    const answer4Div = document.createElement('div');
-    answer4Div.className = "answer4-container";
-  
-    const titleQuestion = document.createElement('h1');
-    titleQuestion.className = "question-title";
-  
-    titleQuestion.appendChild(textElement);
-    titleDiv.appendChild(titleQuestion);
-    questionDiv.appendChild(titleDiv);
-    banniere.appendChild(questionDiv);
-    main.appendChild(banniere);
-    main.appendChild(answer1Div);
-    main.appendChild(answer2Div);
-    main.appendChild(answer3Div);
-    main.appendChild(answer4Div);
-    main.innerHTML = '<canvas />';
-   
-  }*/
-
-/*
-  <div class="bestScore">
-         <p> Meilleur score </p>
-         <p> ${bestScore} </p>
-       </div>
-       */
 
 export default QuestionPage;
