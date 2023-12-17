@@ -11,6 +11,13 @@ async function fetchUsers() {
     }
 
     const data = await response.json();
+    // eslint-disable-next-line no-plusplus
+    for (let i = data.length - 1; i >= 0; i--) {
+      if (data[i].username === 'admin') {
+        data.splice(i, 1);
+      }
+    }
+
     return data;
   } catch (error) {
     console.error('Error fetching questions:', error);
