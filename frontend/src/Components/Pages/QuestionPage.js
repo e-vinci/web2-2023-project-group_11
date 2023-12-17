@@ -92,6 +92,8 @@ nineWinStreak.playbackRate = 1.6;
 nineWinStreak.preservesPitch = false;
 twelveWinStreak.playbackRate = 1.6;
 twelveWinStreak.preservesPitch = false;
+fifteenWinStreak.playbackRate = 1.6;
+fifteenWinStreak.preservesPitch = false;
 losingStreakAudio.playbackRate = 0.8;
 losingStreakAudio.preservesPitch = false;
 timeOverAudio.playbackRate = 1.6;
@@ -209,37 +211,6 @@ function playAudio(isCorrect) {
       incorrectAudio2.play();
       incorrectAudio2.playbackRate = 0.4;
     }
-
-    /*else if(oneOrTwo===2){
-      const speedMultiplier = 0.20; 
-      /*if(lossStreak>2)
-       speedMultiplier = 0.12;
-             incorrectAudio2.play();
-      incorrectAudio2.playbackRate = Math.max(0.2, 2 - lossStreak * speedMultiplier);
-      console.log('MAUVAIS AUDIO');
-      oneOrTwo=1;
-
-      if(lossStreak>1)
-       speedMultiplier = 0.25;
-      incorrectAudio2.play();
-      incorrectAudio2.playbackRate = Math.max(0.2, 1.5 - lossStreak * speedMultiplier);
-      console.log('MAUVAIS AUDIO');
-      oneOrTwo=2;
-    }*/
-
-    /*if(pitchSelector===1){
-       incorrectAudio1.play();
-       incorrectAudio1.playbackRate = 2;
-       pitchSelector = 2;
-    }
-    else if(pitchSelector===2){
-      incorrectAudio2.play();
-      pitchSelector = 3;
-    }
-    else if(pitchSelector===3){
-      incorrectAudio2.play();
-      pitchSelector = 4;
-    }*/
     console.log('MAUVAIS AUDIO');
   }
 }
@@ -482,7 +453,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`;
+    streakBonusScore.innerText = `BONUS +${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -542,7 +513,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`;
+    streakBonusScore.innerText = `BONUS +${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
@@ -560,7 +531,7 @@ function handleAnswerClick(questionid, correctAnswerIndex, selectedAnswerIndex) 
 
     streakBonusScore = document.createElement('div');
     streakBonusScore.className = 'bonus';
-    streakBonusScore.innerText = `+${bonusScore}`;
+    streakBonusScore.innerText = `BONUS +${bonusScore}`;
     document.body.appendChild(streakBonusScore);
 
     streakElement = document.createElement('div');
